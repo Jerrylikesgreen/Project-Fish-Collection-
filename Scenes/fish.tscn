@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dsp6pyx71vaj4"]
 
-[ext_resource type="Script" uid="uid://c37wotvnystf1" path="res://fish_body.gd" id="1_hgn23"]
+[ext_resource type="Script" uid="uid://c37wotvnystf1" path="res://Scripts/fish_body.gd" id="1_hgn23"]
 [ext_resource type="Texture2D" uid="uid://g4afb1q70jwk" path="res://icon.svg" id="1_xu20i"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hgn23"]

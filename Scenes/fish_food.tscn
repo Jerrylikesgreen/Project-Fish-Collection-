@@ -1,21 +1,21 @@
 [gd_scene load_steps=4 format=3 uid="uid://yi52n4fhyjlq"]
 
-[ext_resource type="Script" uid="uid://bxk2j45yi3skj" path="res://apple_body.gd" id="1_1hav4"]
-[ext_resource type="Texture2D" uid="uid://rpy75iushcle" path="res://apple.png" id="2_q8vtk"]
+[ext_resource type="Script" uid="uid://bxk2j45yi3skj" path="res://Scripts/fish_food.gd" id="1_7pthg"]
+[ext_resource type="Texture2D" uid="uid://rpy75iushcle" path="res://Assets/PNG/Food/apple.png" id="2_wdvxh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sb12i"]
 radius = 7.84346
 
-[node name="AppleBody" type="RigidBody2D"]
+[node name="FishFood" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 33
 input_pickable = true
 gravity_scale = 0.5
-script = ExtResource("1_1hav4")
+script = ExtResource("1_7pthg")
 
-[node name="AppleSprite" type="Sprite2D" parent="."]
+[node name="FishFoodSprite" type="Sprite2D" parent="."]
 scale = Vector2(5, 5)
-texture = ExtResource("2_q8vtk")
+texture = ExtResource("2_wdvxh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-8.00001, 13)

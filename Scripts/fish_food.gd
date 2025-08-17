@@ -1,4 +1,4 @@
-class_name Apple extends RigidBody2D
+class_name FishFood extends RigidBody2D
 
 @export var drift_force: float = 5.0             # How strong the side-to-side drift is
 @export var drift_frequency: float = 3.0         # How fast it wobbles
