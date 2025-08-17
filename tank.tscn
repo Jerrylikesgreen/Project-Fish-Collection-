@@ -1,0 +1,121 @@
+[gd_scene load_steps=8 format=3 uid="uid://dhjcycauy7mci"]
+
+[ext_resource type="PackedScene" uid="uid://dsp6pyx71vaj4" path="res://fish.tscn" id="1_6lwfj"]
+[ext_resource type="Script" uid="uid://b0mig54hhns30" path="res://fish.gd" id="2_1ealj"]
+[ext_resource type="Texture2D" uid="uid://rpy75iushcle" path="res://apple.png" id="3_a62es"]
+[ext_resource type="Script" uid="uid://bxk2j45yi3skj" path="res://apple_body.gd" id="3_yfqcd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a62es"]
+radius = 7.84346
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ealj"]
+size = Vector2(10, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a62es"]
+size = Vector2(1265, 8)
+
+[node name="Tank" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TankVisuals" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.533333, 1, 1)
+
+[node name="Wall" type="Panel" parent="TankVisuals"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_right = 11.0
+offset_bottom = 722.0
+
+[node name="Wall2" type="Panel" parent="TankVisuals"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -361.0
+offset_bottom = 361.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Wall3" type="Panel" parent="TankVisuals"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -639.0
+offset_top = -9.0
+offset_right = 640.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Fish" parent="." instance=ExtResource("1_6lwfj")]
+position = Vector2(737, 332)
+script = ExtResource("2_1ealj")
+
+[node name="AppleBody" type="RigidBody2D" parent="."]
+position = Vector2(410, 224)
+collision_layer = 2
+collision_mask = 33
+script = ExtResource("3_yfqcd")
+
+[node name="AppleSprite" type="Sprite2D" parent="AppleBody"]
+scale = Vector2(5, 5)
+texture = ExtResource("3_a62es")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AppleBody"]
+position = Vector2(-8.00001, 13)
+shape = SubResource("CircleShape2D_a62es")
+
+[node name="WallLeft" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallLeft"]
+position = Vector2(6, 356)
+shape = SubResource("RectangleShape2D_1ealj")
+
+[node name="WallRight" type="Area2D" parent="."]
+position = Vector2(1269, -1)
+collision_layer = 32
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallRight"]
+position = Vector2(6, 356)
+shape = SubResource("RectangleShape2D_1ealj")
+
+[node name="WallBottom" type="Area2D" parent="."]
+position = Vector2(1, 711)
+collision_layer = 32
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallBottom"]
+position = Vector2(632.5, 4)
+shape = SubResource("RectangleShape2D_a62es")
+
+[node name="WallTop" type="Area2D" parent="."]
+position = Vector2(15, -2)
+collision_layer = 32
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallTop"]
+position = Vector2(632.5, 4)
+shape = SubResource("RectangleShape2D_a62es")
+
+[editable path="Fish"]

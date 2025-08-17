@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsp6pyx71vaj4"]
+
+[ext_resource type="Script" uid="uid://c37wotvnystf1" path="res://fish_body.gd" id="1_hgn23"]
+[ext_resource type="Texture2D" uid="uid://g4afb1q70jwk" path="res://icon.svg" id="1_xu20i"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hgn23"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_xu20i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xu20i"]
+radius = 62.514
+
+[node name="Fish" type="Node2D"]
+
+[node name="FishBody" type="CharacterBody2D" parent="."]
+scale = Vector2(0.5, 0.5)
+collision_mask = 38
+input_pickable = true
+script = ExtResource("1_hgn23")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="FishBody"]
+sprite_frames = SubResource("SpriteFrames_hgn23")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FishBody"]
+shape = SubResource("CircleShape2D_xu20i")

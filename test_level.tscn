@@ -1,0 +1,185 @@
+[gd_scene load_steps=9 format=3 uid="uid://0epxcm5d0bqp"]
+
+[ext_resource type="Script" uid="uid://cyqiplgu6dlnn" path="res://food_spawner.gd" id="1_4ptq8"]
+[ext_resource type="PackedScene" uid="uid://dsp6pyx71vaj4" path="res://fish.tscn" id="1_gojnm"]
+[ext_resource type="Script" uid="uid://c48pwl472ti4m" path="res://food.gd" id="2_f7g2b"]
+[ext_resource type="Texture2D" uid="uid://g4afb1q70jwk" path="res://icon.svg" id="3_4ptq8"]
+[ext_resource type="Script" uid="uid://bogxsy2tcltcy" path="res://food_inventory.gd" id="4_sb12i"]
+[ext_resource type="Script" uid="uid://c2frm46fryv2j" path="res://pop_up.gd" id="5_gbhdq"]
+[ext_resource type="Script" uid="uid://5c3wh5t2h7m5" path="res://inventory_button.gd" id="6_y646j"]
+[ext_resource type="Script" uid="uid://da5lphkv0x6bq" path="res://feed.gd" id="7_lnbra"]
+
+[node name="TestLevel" type="Node2D"]
+
+[node name="FoodSpawner" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_4ptq8")
+
+[node name="GUI" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="TankVisuals" type="ColorRect" parent="GUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0.533333, 1, 1)
+
+[node name="Wall" type="Panel" parent="GUI/TankVisuals"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_right = 11.0
+offset_bottom = 722.0
+mouse_filter = 2
+
+[node name="Wall2" type="Panel" parent="GUI/TankVisuals"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -361.0
+offset_bottom = 361.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Wall3" type="Panel" parent="GUI/TankVisuals"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -639.0
+offset_top = -9.0
+offset_right = 640.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="PlayerButtons" type="HBoxContainer" parent="GUI"]
+offset_left = 1145.0
+offset_top = 29.0
+offset_right = 1247.0
+offset_bottom = 69.0
+
+[node name="Food" type="Button" parent="GUI/PlayerButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Food Gatcha"
+script = ExtResource("2_f7g2b")
+
+[node name="FoodInventory" type="ItemList" parent="GUI"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -208.0
+offset_top = -58.0
+offset_right = 208.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+max_text_lines = 2
+auto_width = true
+auto_height = true
+text_overrun_behavior = 4
+item_count = 2
+max_columns = 2
+same_column_width = true
+fixed_column_width = 200
+icon_mode = 0
+icon_scale = 0.5
+fixed_icon_size = Vector2i(100, 100)
+item_0/text = "Regular Food x 0"
+item_0/icon = ExtResource("3_4ptq8")
+item_1/text = "Good Food x 0"
+item_1/icon = ExtResource("3_4ptq8")
+script = ExtResource("4_sb12i")
+
+[node name="PopUp" type="Label" parent="GUI"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "TEst"
+script = ExtResource("5_gbhdq")
+
+[node name="Timer" type="Timer" parent="GUI/PopUp"]
+unique_name_in_owner = true
+
+[node name="PanelContainer" type="PanelContainer" parent="GUI/PopUp"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -95.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Feed" type="Button" parent="GUI/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Feed"
+script = ExtResource("7_lnbra")
+
+[node name="InventoryButton" type="Button" parent="GUI/HBoxContainer/Feed"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = -87.0
+offset_right = -4.0
+offset_bottom = 40.0
+text = "Inventory"
+script = ExtResource("6_y646j")
+
+[node name="Feeding" type="ColorRect" parent="GUI"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0.286275, 1, 0.384314)
+
+[node name="Fish" parent="." instance=ExtResource("1_gojnm")]
+position = Vector2(944, 341)
