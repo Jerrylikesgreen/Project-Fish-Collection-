@@ -1,7 +1,8 @@
 class_name food_button
 extends Button
 
-@onready var pop_up: PopUp = $"../../PopUp"
+
+@onready var pop_up: PopUp = %PopUp
 
 func _ready() -> void:
 	pressed.connect(_on_button_pressed)
