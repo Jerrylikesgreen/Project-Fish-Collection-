@@ -21,8 +21,12 @@ Events="*res://Scripts/events.gd"
 
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=720
+window/size/viewport_width=640
+window/size/viewport_height=480
+
+[gui]
+
+theme/custom_font="uid://cqpwig5h8jfo4"
 
 [input]
 
