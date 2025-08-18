@@ -1,15 +1,22 @@
-[gd_scene load_steps=9 format=3 uid="uid://0epxcm5d0bqp"]
+[gd_scene load_steps=12 format=3 uid="uid://0epxcm5d0bqp"]
 
 [ext_resource type="Script" uid="uid://cyqiplgu6dlnn" path="res://Scripts/food_spawner.gd" id="1_2yvf5"]
+[ext_resource type="Script" uid="uid://c1ubmt1jik6qq" path="res://Scenes/fish_spawner.gd" id="1_8v7by"]
 [ext_resource type="Script" uid="uid://c48pwl472ti4m" path="res://Scripts/food_button.gd" id="2_3ihge"]
+[ext_resource type="Script" uid="uid://cdgj263ww2sy7" path="res://Scenes/fish_gacha.gd" id="3_8v7by"]
 [ext_resource type="Texture2D" uid="uid://g4afb1q70jwk" path="res://icon.svg" id="3_akkqd"]
 [ext_resource type="Script" uid="uid://bogxsy2tcltcy" path="res://Scripts/food_inventory.gd" id="4_8v7by"]
 [ext_resource type="Script" uid="uid://c2frm46fryv2j" path="res://Scripts/pop_up.gd" id="5_1rqgg"]
 [ext_resource type="Script" uid="uid://da5lphkv0x6bq" path="res://Scripts/feed.gd" id="6_mwmob"]
 [ext_resource type="Script" uid="uid://5c3wh5t2h7m5" path="res://Scripts/inventory_button.gd" id="7_so54a"]
 [ext_resource type="PackedScene" uid="uid://dsp6pyx71vaj4" path="res://Scenes/fish.tscn" id="8_sw8nc"]
+[ext_resource type="Script" uid="uid://5woyao7aputs" path="res://Scenes/bubble_count.gd" id="9_3ihge"]
 
 [node name="TestLevel" type="Node2D"]
+
+[node name="FishSpawner" type="Node2D" parent="."]
+position = Vector2(126, 48)
+script = ExtResource("1_8v7by")
 
 [node name="Fish" parent="." instance=ExtResource("8_sw8nc")]
 position = Vector2(126, 140)
@@ -80,6 +87,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Fish Gacha"
+script = ExtResource("3_8v7by")
 
 [node name="Padding" type="Control" parent="GUI/Gachas"]
 layout_mode = 2
@@ -205,9 +213,16 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 0.286275, 1, 0.384314)
 
-[node name="Bubbles" type="Label" parent="GUI"]
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="BubbleCount" type="Label" parent="GUI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 24.0
+grow_horizontal = 2
+text = "Bubble Count: "
+script = ExtResource("9_3ihge")
 
 [node name="Camera" type="Camera2D" parent="."]
 offset = Vector2(320, 240)
