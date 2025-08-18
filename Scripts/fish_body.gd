@@ -16,11 +16,12 @@ extends CharacterBody2D
 @export var evade_turn_multiplier: float = 3.0         # turn faster while evading
 @export var min_evade_pause: float = 0.3               # pause wander retargeting while evading (sec)
 @export var jitter_strength: float = 0.05              # tiny randomness to avoid perfect orbits
-
+@export var bubble_tick_value: int = 1
 # ── Visuals ────────────────────────────────────────────────
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
-
+@onready var bubble_tick: Timer = %BubbleTick
 # ── State ──────────────────────────────────────────────────
+
 var direction: Vector2 = Vector2.RIGHT
 var target_direction: Vector2 = Vector2.RIGHT
 var change_timer: float = 0.0
@@ -28,6 +29,12 @@ var change_timer: float = 0.0
 func _ready() -> void:
 	randomize()
 	_set_new_direction()
+	bubble_tick.timeout.connect(_on_timeout)
+
+func _on_timeout()->void:
+	Events.bubble_count_changed(bubble_tick_value)
+	print(bubble_tick_value, " Fish Tick")
+	pass
 
 func _physics_process(delta: float) -> void:
 	# Count down until next wander retarget

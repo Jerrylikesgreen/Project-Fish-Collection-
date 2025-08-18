@@ -127,3 +127,7 @@ frame_progress = 0.834785
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FishBody"]
 shape = SubResource("CircleShape2D_xu20i")
+
+[node name="BubbleTick" type="Timer" parent="FishBody"]
+unique_name_in_owner = true
+autostart = true
