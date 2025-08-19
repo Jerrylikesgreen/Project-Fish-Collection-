@@ -1,0 +1,70 @@
+[gd_scene load_steps=12 format=3 uid="uid://cu3h8r4da4y8"]
+
+[ext_resource type="Texture2D" uid="uid://ebq77tnok2fm" path="res://Assets/PNG/Bubbles/bubble_1.png" id="1_mher7"]
+[ext_resource type="Texture2D" uid="uid://hpnm1s65quob" path="res://Assets/PNG/Bubbles/bubble_0.png" id="2_sqrnf"]
+[ext_resource type="Texture2D" uid="uid://bew4q3ephxg61" path="res://Assets/PNG/Bubbles/bubble_2.png" id="3_x6cym"]
+[ext_resource type="Texture2D" uid="uid://clnva8ojvf68f" path="res://Assets/PNG/Bubbles/pop_0.png" id="4_pksoc"]
+[ext_resource type="Texture2D" uid="uid://q6y0xocdi3cj" path="res://Assets/PNG/Bubbles/pop_1.png" id="5_8kbcx"]
+[ext_resource type="Texture2D" uid="uid://cyxjyqcbtumiv" path="res://Assets/PNG/Bubbles/pop_2.png" id="6_ympl2"]
+[ext_resource type="Texture2D" uid="uid://ynbmcwf64qvf" path="res://Assets/PNG/Bubbles/pop_3.png" id="7_6oidi"]
+[ext_resource type="Texture2D" uid="uid://bw27kwcqlskvd" path="res://Assets/PNG/Bubbles/pop_4.png" id="8_juj35"]
+[ext_resource type="Script" uid="uid://bhul7j2dujh6q" path="res://Scripts/bubble.gd" id="9_sqrnf"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6vhsv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_mher7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_sqrnf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_mher7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_x6cym")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_pksoc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_8kbcx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ympl2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_6oidi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_juj35")
+}],
+"loop": false,
+"name": &"Pop",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_il1fm"]
+radius = 8.0
+
+[node name="Bubble" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_6vhsv")
+animation = &"Pop"
+autoplay = "Idle"
+frame = 4
+frame_progress = 1.0
+script = ExtResource("9_sqrnf")
+
+[node name="Area2D" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_il1fm")

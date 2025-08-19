@@ -1,7 +1,34 @@
-[gd_scene load_steps=17 format=3 uid="uid://dsp6pyx71vaj4"]
+[gd_scene load_steps=21 format=3 uid="uid://dsp6pyx71vaj4"]
 
 [ext_resource type="Script" uid="uid://c37wotvnystf1" path="res://Scripts/fish_body.gd" id="1_hgn23"]
+[ext_resource type="Script" uid="uid://lggwoh4bq3qj" path="res://Scenes/fish.gd" id="1_jdl8t"]
 [ext_resource type="Texture2D" uid="uid://qn531b6iw287" path="res://Assets/PNG/Fish/RED Compacted.png" id="2_c4ibo"]
+[ext_resource type="Shader" uid="uid://d4c5lyffn1qtv" path="res://Resources/fish_rarity_shader.gdshader" id="2_urn1o"]
+[ext_resource type="Texture2D" uid="uid://bp2rvtfi23vx1" path="res://Assets/PNG/Fish/glitter_3.png" id="3_jdl8t"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_21uvr"]
+shader = ExtResource("2_urn1o")
+shader_parameter/use_texture = true
+shader_parameter/base_color = Color(1, 1, 1, 1)
+shader_parameter/glitter_color = Color(1, 1, 0, 1)
+shader_parameter/glitter_density = 16.545
+shader_parameter/sparkle_intensity = 2.669
+shader_parameter/edge_boost = 0.3
+shader_parameter/fall_speed_uv = -0.00999991
+shader_parameter/twinkle_speed = 2.0
+shader_parameter/twinkle_sharpness = 8.0
+shader_parameter/active_fraction = 0.3
+shader_parameter/shape_tex = ExtResource("3_jdl8t")
+shader_parameter/shape_channel = 3
+shader_parameter/invert_shape = false
+shader_parameter/shape_min_scale = 0.2
+shader_parameter/shape_max_scale = 0.8
+shader_parameter/random_rotate = true
+shader_parameter/shape_padding = 0.08
+shader_parameter/apply_on_transparent = false
+shader_parameter/opaque_threshold = 0.05
+shader_parameter/opaque_softness = 0.02
+shader_parameter/transparent_sparkle_alpha = 0.6
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fll1f"]
 atlas = ExtResource("2_c4ibo")
@@ -106,9 +133,11 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xu20i"]
-radius = 62.514
+radius = 12.1655
 
 [node name="Fish" type="Node2D"]
+script = ExtResource("1_jdl8t")
+spawn_every = 2.3
 
 [node name="FishBody" type="CharacterBody2D" parent="."]
 scale = Vector2(0.5, 0.5)
@@ -120,6 +149,7 @@ avoid_distance = 50.0
 avoid_strength = 2.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="FishBody"]
+material = SubResource("ShaderMaterial_21uvr")
 sprite_frames = SubResource("SpriteFrames_clm4a")
 animation = &"Idle"
 autoplay = "Idle"
@@ -128,6 +158,10 @@ frame_progress = 0.834785
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FishBody"]
 shape = SubResource("CircleShape2D_xu20i")
 
-[node name="BubbleTick" type="Timer" parent="FishBody"]
+[node name="BubbleSpawner" type="Timer" parent="FishBody"]
 unique_name_in_owner = true
 autostart = true
+
+[node name="Marker2D" type="Marker2D" parent="FishBody"]
+unique_name_in_owner = true
+position = Vector2(8, 2)

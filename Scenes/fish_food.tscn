@@ -16,9 +16,9 @@ drift_force = 50.0
 drift_frequency = 20.0
 
 [node name="FishFoodSprite" type="Sprite2D" parent="."]
-scale = Vector2(5, 5)
 texture = ExtResource("2_7pthg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-8.00001, 13)
+scale = Vector2(0.2, 0.2)
 shape = SubResource("CircleShape2D_sb12i")
