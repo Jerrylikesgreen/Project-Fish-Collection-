@@ -38,7 +38,7 @@ func _ready() -> void:
 
 func _on_button_pressed() -> void:
 	# manual test: clicking the Food button will show a popup
-	_on_player_message("You got a food.")
+	_on_player_message("Fish Food!")
 
 func _on_player_message(msg: String) -> void:
 	if _typing:

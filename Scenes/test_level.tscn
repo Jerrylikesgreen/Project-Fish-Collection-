@@ -1,18 +1,82 @@
-[gd_scene load_steps=16 format=3 uid="uid://0epxcm5d0bqp"]
+[gd_scene load_steps=30 format=3 uid="uid://0epxcm5d0bqp"]
 
 [ext_resource type="Script" uid="uid://cyqiplgu6dlnn" path="res://Scripts/food_spawner.gd" id="1_2yvf5"]
 [ext_resource type="Script" uid="uid://c1ubmt1jik6qq" path="res://Scripts/fish_spawner.gd" id="1_8v7by"]
+[ext_resource type="Script" uid="uid://b6yvkgbh8t8bo" path="res://Scenes/test_level.gd" id="1_260qw"]
 [ext_resource type="Script" uid="uid://c48pwl472ti4m" path="res://Scripts/food_button.gd" id="2_3ihge"]
 [ext_resource type="Script" uid="uid://cdgj263ww2sy7" path="res://Scripts/fish_gacha.gd" id="3_8v7by"]
 [ext_resource type="Texture2D" uid="uid://g4afb1q70jwk" path="res://icon.svg" id="3_akkqd"]
 [ext_resource type="Script" uid="uid://bogxsy2tcltcy" path="res://Scripts/food_inventory.gd" id="4_8v7by"]
+[ext_resource type="Texture2D" uid="uid://dc2meyqrbsics" path="res://Assets/PNG/FishTank/fish tank v1.png" id="4_so54a"]
 [ext_resource type="Script" uid="uid://c2frm46fryv2j" path="res://Scripts/pop_up.gd" id="5_1rqgg"]
 [ext_resource type="Script" uid="uid://da5lphkv0x6bq" path="res://Scripts/feed.gd" id="6_mwmob"]
+[ext_resource type="Texture2D" uid="uid://c6x46bsx8qw5g" path="res://Assets/PNG/Gatcha/GotchaPond 1-2-6.png" id="6_sw8nc"]
 [ext_resource type="Script" uid="uid://5c3wh5t2h7m5" path="res://Scripts/inventory_button.gd" id="7_so54a"]
+[ext_resource type="Texture2D" uid="uid://7e13eadbe4q4" path="res://Assets/PNG/Gatcha/GotchaPond sheet.png" id="7_x6ft1"]
+[ext_resource type="Script" uid="uid://40mmacxanvxw" path="res://Scripts/food_gacha_sprite.gd" id="8_fbmvr"]
+[ext_resource type="PackedScene" uid="uid://bc8slijdgrva5" path="res://Scenes/pod.tscn" id="8_p51s7"]
 [ext_resource type="PackedScene" uid="uid://dsp6pyx71vaj4" path="res://Scenes/fish.tscn" id="8_sw8nc"]
 [ext_resource type="Script" uid="uid://5woyao7aputs" path="res://Scripts/bubble_count.gd" id="9_3ihge"]
-[ext_resource type="Script" uid="uid://dv5qgi4jgpise" path="res://Scenes/menu~.gd" id="11_1rqgg"]
-[ext_resource type="Script" uid="uid://l3rag6qnq8f2" path="res://Scenes/debug_lable.gd" id="13_mwmob"]
+[ext_resource type="Script" uid="uid://dv5qgi4jgpise" path="res://Scripts/menu~.gd" id="11_1rqgg"]
+[ext_resource type="LabelSettings" uid="uid://bdtu6hxgh8exf" path="res://Resources/new_label_settings.tres" id="11_7alf0"]
+[ext_resource type="Script" uid="uid://l3rag6qnq8f2" path="res://Scripts/debug_lable.gd" id="13_mwmob"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p51s7"]
+atlas = ExtResource("7_x6ft1")
+region = Rect2(0, 0, 80, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbmvr"]
+atlas = ExtResource("7_x6ft1")
+region = Rect2(80, 0, 80, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7alf0"]
+atlas = ExtResource("7_x6ft1")
+region = Rect2(0, 89, 80, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_260qw"]
+atlas = ExtResource("7_x6ft1")
+region = Rect2(80, 89, 80, 89)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x6ft1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_sw8nc")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p51s7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fbmvr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7alf0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_260qw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p51s7")
+}],
+"loop": false,
+"name": &"Spawn",
+"speed": 5.0
+}]
+
+[sub_resource type="Curve2D" id="Curve2D_x6ft1"]
+bake_interval = 20.21
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 273, 197, 0, 0, 0, 0, 386, 204, 0, 0, 0, 0, 408, 26, 0, 0, 0, 0, 384, -127, 0, 0, 0, 0, 411, -241)
+}
+point_count = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_so54a"]
+font_size = 30
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1rqgg"]
 bg_color = Color(0.530836, 0.602884, 0.735092, 1)
@@ -21,93 +85,162 @@ bg_color = Color(0.530836, 0.602884, 0.735092, 1)
 Panel/styles/panel = SubResource("StyleBoxFlat_1rqgg")
 
 [node name="TestLevel" type="Node2D"]
+script = ExtResource("1_260qw")
 
 [node name="FishSpawner" type="Node2D" parent="."]
-position = Vector2(126, 48)
+position = Vector2(431, 190)
 script = ExtResource("1_8v7by")
 
 [node name="Fish" parent="." instance=ExtResource("8_sw8nc")]
-position = Vector2(126, 140)
+position = Vector2(637, 282)
 
-[node name="FoodSpawner" type="Node" parent="."]
+[node name="FoodSpawner" type="Node2D" parent="."]
 unique_name_in_owner = true
+position = Vector2(950, 628)
 script = ExtResource("1_2yvf5")
+
+[node name="Camera" type="Camera2D" parent="."]
+offset = Vector2(640, 360)
+
+[node name="FoodSpawn1" type="Marker2D" parent="."]
+position = Vector2(950, 630)
 
 [node name="GUI" type="CanvasLayer" parent="."]
 layer = -1
 
-[node name="TankVisuals" type="ColorRect" parent="GUI"]
+[node name="TankVisuals" type="TextureRect" parent="GUI"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = -1.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0, 0.533333, 1, 1)
+texture = ExtResource("4_so54a")
 
-[node name="Wall" type="Panel" parent="GUI/TankVisuals"]
-modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_right = 11.0
-offset_bottom = 722.0
-mouse_filter = 2
+[node name="Gachas" type="Control" parent="GUI"]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -300.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 6
 
-[node name="Wall2" type="Panel" parent="GUI/TankVisuals"]
-modulate = Color(0, 0, 0, 1)
+[node name="Food" type="Button" parent="GUI/Gachas"]
+unique_name_in_owner = true
+z_index = -1
+custom_minimum_size = Vector2(300, 300)
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -11.0
-offset_top = -361.0
-offset_bottom = 361.0
+offset_left = -300.0
+offset_top = -150.0
+offset_bottom = 150.0
 grow_horizontal = 0
 grow_vertical = 2
-mouse_filter = 2
-
-[node name="Wall3" type="Panel" parent="GUI/TankVisuals"]
-modulate = Color(0, 0, 0, 1)
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -639.0
-offset_top = -9.0
-offset_right = 640.0
-grow_horizontal = 2
-grow_vertical = 0
-mouse_filter = 2
-
-[node name="Gachas" type="HBoxContainer" parent="GUI"]
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 31.0
-grow_horizontal = 2
 size_flags_horizontal = 4
-alignment = 1
+flat = true
+script = ExtResource("2_3ihge")
+
+[node name="FoodGachaSprite" type="AnimatedSprite2D" parent="GUI/Gachas/Food"]
+unique_name_in_owner = true
+top_level = true
+z_index = 1
+position = Vector2(1080, 498)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_x6ft1")
+animation = &"Spawn"
+autoplay = "Idle"
+frame = 4
+frame_progress = 1.0
+flip_h = true
+script = ExtResource("8_fbmvr")
 
 [node name="Fish" type="Button" parent="GUI/Gachas"]
 unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 8
-text = "Fish Gacha"
-script = ExtResource("3_8v7by")
-
-[node name="Padding" type="Control" parent="GUI/Gachas"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Food" type="Button" parent="GUI/Gachas"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
+z_index = -1
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 0
+offset_left = 56.0
+offset_top = -52.0
+offset_right = 356.0
+offset_bottom = 248.0
 size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 1
+flat = true
+icon_alignment = 1
+script = ExtResource("3_8v7by")
+path_duration = 5.0
+
+[node name="FishGachaSprite" type="AnimatedSprite2D" parent="GUI/Gachas/Fish"]
+unique_name_in_owner = true
+top_level = true
+z_index = 1
+position = Vector2(202, 491)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_x6ft1")
+animation = &"Spawn"
+autoplay = "Idle"
+frame = 4
+frame_progress = 1.0
+
+[node name="Path" type="Path2D" parent="GUI/Gachas/Fish/FishGachaSprite"]
+unique_name_in_owner = true
+top_level = true
+position = Vector2(8, 420)
+curve = SubResource("Curve2D_x6ft1")
+
+[node name="Follow" type="PathFollow2D" parent="GUI/Gachas/Fish/FishGachaSprite/Path"]
+unique_name_in_owner = true
+position = Vector2(273, 197)
+rotation = 0.0618678
+rotates = false
+
+[node name="Pod" parent="GUI/Gachas/Fish/FishGachaSprite/Path/Follow" instance=ExtResource("8_p51s7")]
+unique_name_in_owner = true
+position = Vector2(28.5029, 7.25159)
+scale = Vector2(2, 2)
+
+[node name="Fish Gacha" type="Label" parent="GUI/Gachas"]
+z_index = 4
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 101.0
+offset_top = 65.0
+offset_right = 281.0
+offset_bottom = 116.0
+grow_vertical = 2
+text = "Fish Gacha"
+label_settings = ExtResource("11_7alf0")
+
+[node name="Food Gacha" type="Label" parent="GUI/Gachas"]
+z_index = 4
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -282.0
+offset_top = 70.0
+offset_right = -92.0
+offset_bottom = 121.0
+grow_horizontal = 0
+grow_vertical = 2
 text = "Food Gacha"
-script = ExtResource("2_3ihge")
+label_settings = ExtResource("11_7alf0")
 
 [node name="FoodInventory" type="ItemList" parent="GUI"]
 unique_name_in_owner = true
@@ -179,27 +312,30 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PlayerButton" type="GridContainer" parent="GUI"]
+visible = false
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -160.0
-offset_top = -75.0
-offset_right = -11.0
-offset_bottom = -9.0
+offset_left = -177.0
+offset_top = -191.0
+offset_right = -28.0
+offset_bottom = -125.0
 grow_horizontal = 0
 grow_vertical = 0
 columns = 2
 
 [node name="Feed" type="Button" parent="GUI/PlayerButton"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 text = "Feed"
 script = ExtResource("6_mwmob")
 
 [node name="InventoryButton" type="Button" parent="GUI/PlayerButton"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 text = "Inventory"
 script = ExtResource("7_so54a")
@@ -217,11 +353,13 @@ text = "Button"
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 24.0
+offset_left = -53.0
+offset_top = 116.0
+offset_right = 59.0
+offset_bottom = 140.0
 grow_horizontal = 2
 text = "Bubble Count: "
+label_settings = SubResource("LabelSettings_so54a")
 script = ExtResource("9_3ihge")
 
 [node name="Menu" type="Panel" parent="GUI"]
@@ -254,13 +392,11 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -24.0
-offset_right = 20.0
+offset_left = -45.0
+offset_top = -86.0
+offset_right = 49.0
+offset_bottom = -62.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Debug Lable"
 script = ExtResource("13_mwmob")
-
-[node name="Camera" type="Camera2D" parent="."]
-offset = Vector2(320, 240)

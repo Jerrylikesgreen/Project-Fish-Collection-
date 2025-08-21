@@ -1,46 +1,64 @@
 class_name FishBody
 extends CharacterBody2D
 
+@export var fish_sprite_frames: SpriteFrames
+
+@onready var fish_sensor: FishSensor = %FishSensor
+
 # ── Movement / Wander ───────────────────────────────────────
 @export var speed: float = 60.0
-@export var change_direction_interval: float = 3.0     # seconds between random headings
-@export var turn_smoothness: float = 5.0               # higher = slower to turn (more smoothing)
+@export var change_direction_interval: float = 3.0     ## seconds between random headings
+@export var turn_smoothness: float = 5.0               ## higher = slower to turn (more smoothing)
 
 # ── Edge Handling ───────────────────────────────────────────
-@export var padding: float = 20.0                      # keep this far from screen edges
-@export var body_radius: float = 12.0                  # half-size of the sprite/body to avoid clipping
-@export var avoid_distance: float = 120.0              # start steering away when within this distance
-@export var avoid_strength: float = 3.0                # how hard to steer away from edges
-@export var center_pull: float = 0.8                   # mild bias toward view center while evading
-@export var corner_boost: float = 1.5                  # extra push when near two edges (a corner)
-@export var evade_turn_multiplier: float = 3.0         # turn faster while evading
-@export var min_evade_pause: float = 0.3               # pause wander retargeting while evading (sec)
-@export var jitter_strength: float = 0.05              # tiny randomness to avoid perfect orbits
+@export var padding: float = 20.0                      ## keep this far from screen edges
+@export var body_radius: float = 12.0                  ## half-size of the sprite/body to avoid clipping
+@export var avoid_distance: float = 120.0              ## start steering away when within this distance
+@export var avoid_strength: float = 3.0                ## how hard to steer away from edges
+@export var center_pull: float = 0.8                   ## mild bias toward view center while evading
+@export var corner_boost: float = 1.5                  ## extra push when near two edges (a corner)
+@export var evade_turn_multiplier: float = 3.0         ## turn faster while evading
+@export var min_evade_pause: float = 0.3               ## pause wander retargeting while evading (sec)
+@export var jitter_strength: float = 0.05              ## tiny randomness to avoid perfect orbits
+@export var _is_hungry: bool = false 
 # ── Visuals ────────────────────────────────────────────────
-@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+
 @onready var marker_2d: Marker2D = %Marker2D
+@onready var fish_sprite: AnimatedSprite2D = %FishSprite
+@onready var hunger_tick: Timer = %HungerTick
 
 var direction: Vector2 = Vector2.RIGHT
 var target_direction: Vector2 = Vector2.RIGHT
 var change_timer: float = 0.0
+var _consumed_food_value: int = 0
+var _evolved:bool = false
+
 
 func _ready() -> void:
 	randomize()
 	_set_new_direction()
+	hunger_tick.timeout.connect(_on_hunger_tick)
 
 
 
 
 func _physics_process(delta: float) -> void:
-	# Count down until next wander retarget
 	change_timer -= delta
 
-	# Apply edge-avoid steering; returns true if near edges
 	var evading := _apply_edge_avoidance(delta)
 
 	# Only pick a new random heading if we’re NOT evading
 	if change_timer <= 0.0 and not evading:
 		_set_new_direction()
+	
+	var seeking := false
+	if _is_hungry and not evading and fish_sensor:
+		var t := fish_sensor.get_target()
+		if t and is_instance_valid(t):
+			var to_food := (t.global_position - global_position)
+			if to_food.length() > 0.001:
+				target_direction = to_food.normalized()
+				seeking = true
 
 	# Turn faster when evading
 	var turn := turn_smoothness * (evade_turn_multiplier if evading else 1.0)
@@ -50,15 +68,19 @@ func _physics_process(delta: float) -> void:
 	# Move
 	velocity = direction * speed
 	move_and_slide()
+	_eat_fish()
+	_check_hunger_value()
+
+
 
 	# Safety net: clamp & reflect if we somehow touched the bounds
 	_reflect_if_clamped()
 
 	# Face movement direction
 	if direction.length() > 0.001:
-		sprite.rotation = direction.angle()
+		fish_sprite.rotation = direction.angle()
 
-# Calculate safe rect in WORLD space (camera-aware)
+## Calculate safe rect in WORLD space (camera-aware)
 func _get_safe_rect() -> Rect2:
 	var vp_size: Vector2 = get_viewport().get_visible_rect().size
 	var world_from_screen: Transform2D = get_canvas_transform().affine_inverse()
@@ -155,3 +177,34 @@ func _reflect_if_clamped() -> void:
 func _set_new_direction() -> void:
 	target_direction = Vector2(randf() * 2.0 - 1.0, randf() * 2.0 - 1.0).normalized()
 	change_timer = randf_range(change_direction_interval * 0.5, change_direction_interval * 1.5)
+	
+	
+func _eat_fish():
+	if !_is_hungry:
+		return	
+	for i in range(get_slide_collision_count()):
+		var c := get_slide_collision(i)
+		var hit := c.get_collider()
+		if hit:	
+			print("Fish ate:", hit)
+			hit.call_deferred("queue_free")
+			fish_sensor.consume_food(hit)
+			_consumed_food_value = _consumed_food_value + 1
+			fish_sprite.play("Eat")
+			_is_hungry = false
+
+
+func _on_hunger_tick()->void:
+	if !_is_hungry:
+		_is_hungry = true
+		fish_sprite.play("Cry")
+
+
+func _check_hunger_value()->void:
+	if _evolved == true:
+		return
+	if _consumed_food_value > 3:
+		fish_sprite.set_sprite_frames(fish_sprite_frames)
+		fish_sprite.play("Evolve")
+		_evolved = true 
+		

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dhjcycauy7mci"]
 
 [ext_resource type="PackedScene" uid="uid://dsp6pyx71vaj4" path="res://Scenes/fish.tscn" id="1_6lwfj"]
-[ext_resource type="Script" uid="uid://b0mig54hhns30" path="res://Scripts/fish.gd" id="2_1ealj"]
+[ext_resource type="Script" uid="uid://b0mig54hhns30" path="res://Scripts/error.gd" id="2_1ealj"]
 [ext_resource type="Texture2D" uid="uid://rpy75iushcle" path="res://Assets/PNG/Food/apple.png" id="3_a62es"]
 [ext_resource type="Script" uid="uid://bxk2j45yi3skj" path="res://Scripts/fish_food.gd" id="3_yfqcd"]
 

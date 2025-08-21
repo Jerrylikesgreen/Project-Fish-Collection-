@@ -1,7 +1,6 @@
 class_name Feed
 extends Button
 
-@onready var feeding: ColorRect = %Feeding
 
 var _is_feed_mode: bool = false  # Track toggle state
 

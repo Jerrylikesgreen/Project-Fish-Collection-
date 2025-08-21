@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cu3h8r4da4y8"]
+[gd_scene load_steps=13 format=3 uid="uid://cu3h8r4da4y8"]
 
 [ext_resource type="Texture2D" uid="uid://ebq77tnok2fm" path="res://Assets/PNG/Bubbles/bubble_1.png" id="1_mher7"]
 [ext_resource type="Texture2D" uid="uid://hpnm1s65quob" path="res://Assets/PNG/Bubbles/bubble_0.png" id="2_sqrnf"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://ynbmcwf64qvf" path="res://Assets/PNG/Bubbles/pop_3.png" id="7_6oidi"]
 [ext_resource type="Texture2D" uid="uid://bw27kwcqlskvd" path="res://Assets/PNG/Bubbles/pop_4.png" id="8_juj35"]
 [ext_resource type="Script" uid="uid://bhul7j2dujh6q" path="res://Scripts/bubble.gd" id="9_sqrnf"]
+[ext_resource type="Script" uid="uid://c7g35akfmxon" path="res://Scripts/bubble_body.gd" id="10_x6cym"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6vhsv"]
 animations = [{
@@ -51,9 +52,20 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_il1fm"]
-radius = 8.0
+radius = 41.4367
 
-[node name="Bubble" type="AnimatedSprite2D"]
+[node name="Bubble" type="RigidBody2D"]
+collision_layer = 8
+collision_mask = 0
+input_pickable = true
+gravity_scale = -0.5
+script = ExtResource("10_x6cym")
+top_padding = 100.0
+life_after_top = 2.0
+
+[node name="BubbleSprite" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_6vhsv")
 animation = &"Pop"
 autoplay = "Idle"
@@ -61,10 +73,5 @@ frame = 4
 frame_progress = 1.0
 script = ExtResource("9_sqrnf")
 
-[node name="Area2D" type="Area2D" parent="."]
-unique_name_in_owner = true
-collision_layer = 8
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_il1fm")

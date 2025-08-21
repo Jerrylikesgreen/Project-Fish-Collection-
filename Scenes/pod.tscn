@@ -1,0 +1,150 @@
+[gd_scene load_steps=22 format=3 uid="uid://bc8slijdgrva5"]
+
+[ext_resource type="Texture2D" uid="uid://g8itduhpyr4e" path="res://Assets/PNG/Pod/Pod.png" id="1_h3x3r"]
+[ext_resource type="Texture2D" uid="uid://nbo0ckl88tso" path="res://Assets/PNG/Pod/Pod Movement.png" id="2_m6rhs"]
+[ext_resource type="Texture2D" uid="uid://bum13vjjrxubt" path="res://Assets/PNG/Pod/Pod transformation.png" id="3_22n3q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aevy3"]
+atlas = ExtResource("2_m6rhs")
+region = Rect2(0, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jf4w7"]
+atlas = ExtResource("2_m6rhs")
+region = Rect2(21, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_slnsv"]
+atlas = ExtResource("2_m6rhs")
+region = Rect2(42, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2a7j8"]
+atlas = ExtResource("2_m6rhs")
+region = Rect2(0, 21, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkd0j"]
+atlas = ExtResource("2_m6rhs")
+region = Rect2(21, 21, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53pii"]
+atlas = ExtResource("2_m6rhs")
+region = Rect2(42, 21, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7f0t"]
+atlas = ExtResource("2_m6rhs")
+region = Rect2(0, 42, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nob7m"]
+atlas = ExtResource("2_m6rhs")
+region = Rect2(21, 42, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rh1rh"]
+atlas = ExtResource("3_22n3q")
+region = Rect2(0, 3, 24, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3hj7"]
+atlas = ExtResource("3_22n3q")
+region = Rect2(24, 3, 24, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gysws"]
+atlas = ExtResource("3_22n3q")
+region = Rect2(48, 3, 24, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s42lr"]
+atlas = ExtResource("3_22n3q")
+region = Rect2(72, 3, 24, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gn4k8"]
+atlas = ExtResource("3_22n3q")
+region = Rect2(0, 27, 32, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eg4lu"]
+atlas = ExtResource("3_22n3q")
+region = Rect2(32, 27, 32, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iic5k"]
+atlas = ExtResource("3_22n3q")
+region = Rect2(64, 27, 32, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0qbi"]
+atlas = ExtResource("3_22n3q")
+region = Rect2(48, 50, 27, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtopu"]
+atlas = ExtResource("3_22n3q")
+region = Rect2(18, 50, 26, 25)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_trevy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_h3x3r")
+}],
+"loop": false,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aevy3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jf4w7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_slnsv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2a7j8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rkd0j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_53pii")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p7f0t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nob7m")
+}],
+"loop": true,
+"name": &"Spin",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rh1rh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m3hj7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gysws")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s42lr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gn4k8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eg4lu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iic5k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t0qbi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rtopu")
+}],
+"loop": false,
+"name": &"Transform",
+"speed": 7.0
+}]
+
+[node name="Pod" type="AnimatedSprite2D"]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_trevy")
+animation = &"Idle"
