@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hkph3ve1titp"
-path="res://.godot/imported/Knob 4.png-8efc44d88117ee8970f5703f59205415.ctex"
+uid="uid://b2f27fbel4gja"
+path="res://.godot/imported/GotchaFeeder Sheet.png-a5c7e94e488ebb155d66198af931ac43.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/PNG/Gacha/Knob 4.png"
-dest_files=["res://.godot/imported/Knob 4.png-8efc44d88117ee8970f5703f59205415.ctex"]
+source_file="res://Assets/PNG/Gacha/Food Gacha/GotchaFeeder Sheet.png"
+dest_files=["res://.godot/imported/GotchaFeeder Sheet.png-a5c7e94e488ebb155d66198af931ac43.ctex"]
 
 [params]
 

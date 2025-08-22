@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c48wt0c5fgwax"
-path="res://.godot/imported/Knobs.png-37c4eabc9b27f3daf1fa2b9271f87eac.ctex"
+uid="uid://fa3l5m47tofw"
+path="res://.godot/imported/Knob 3.png-a847b60270b78d1998d78a3eadc676c4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/PNG/Gacha/Knobs.png"
-dest_files=["res://.godot/imported/Knobs.png-37c4eabc9b27f3daf1fa2b9271f87eac.ctex"]
+source_file="res://Assets/PNG/Gacha/Fish Gacha/Knob 3.png"
+dest_files=["res://.godot/imported/Knob 3.png-a847b60270b78d1998d78a3eadc676c4.ctex"]
 
 [params]
 

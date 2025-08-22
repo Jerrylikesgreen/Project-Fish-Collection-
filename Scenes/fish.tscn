@@ -37,13 +37,13 @@ avoid_strength = 2.0
 [node name="FishSprite" type="AnimatedSprite2D" parent="FishBody"]
 unique_name_in_owner = true
 sprite_frames = ExtResource("4_21uvr")
-animation = &"Idle"
+animation = &"Cry"
 autoplay = "Idle"
+frame_progress = 0.653571
 script = ExtResource("6_csmc7")
 rarity_shader_pool = Array[ShaderMaterial]([ExtResource("5_csmc7"), ExtResource("7_fl3e6"), ExtResource("8_clm4a")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FishBody"]
-visible = false
 shape = SubResource("CircleShape2D_xu20i")
 
 [node name="BubbleSpawner" type="Timer" parent="FishBody"]

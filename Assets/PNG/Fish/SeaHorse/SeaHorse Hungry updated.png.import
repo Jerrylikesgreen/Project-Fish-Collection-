@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://x57pb452hqku"
-path="res://.godot/imported/GotchaPond sheet.png-af3da9ef90d613a945b5bb3f5bb30e23.ctex"
+uid="uid://bpq8m75g2lk5e"
+path="res://.godot/imported/SeaHorse Hungry updated.png-c297d8135edbc733992f20e086d1ebc1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/PNG/Fish/GotchaPond sheet.png"
-dest_files=["res://.godot/imported/GotchaPond sheet.png-af3da9ef90d613a945b5bb3f5bb30e23.ctex"]
+source_file="res://Assets/PNG/Fish/SeaHorse/SeaHorse Hungry updated.png"
+dest_files=["res://.godot/imported/SeaHorse Hungry updated.png-c297d8135edbc733992f20e086d1ebc1.ctex"]
 
 [params]
 

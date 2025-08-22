@@ -13,6 +13,7 @@ script = ExtResource("1_7pthg")
 drift_force = 200.0
 drift_frequency = 2.0
 top_padding = 100.0
+launch_duration = 0.4
 
 [node name="FishFoodSprite" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)

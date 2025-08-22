@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6x46bsx8qw5g"
-path="res://.godot/imported/GotchaPond 1-2-6.png-611a51443ee400c1bc86b83ba3505fad.ctex"
+uid="uid://hkph3ve1titp"
+path="res://.godot/imported/Knob 4.png-20bd0501bb4e82c0de4a8c1815807625.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/PNG/Gacha/GotchaPond 1-2-6.png"
-dest_files=["res://.godot/imported/GotchaPond 1-2-6.png-611a51443ee400c1bc86b83ba3505fad.ctex"]
+source_file="res://Assets/PNG/Gacha/Fish Gacha/Knob 4.png"
+dest_files=["res://.godot/imported/Knob 4.png-20bd0501bb4e82c0de4a8c1815807625.ctex"]
 
 [params]
 

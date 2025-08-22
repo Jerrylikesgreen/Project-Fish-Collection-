@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://0epxcm5d0bqp"]
+[gd_scene load_steps=53 format=3 uid="uid://0epxcm5d0bqp"]
 
 [ext_resource type="Script" uid="uid://cyqiplgu6dlnn" path="res://Scripts/food_spawner.gd" id="1_2yvf5"]
 [ext_resource type="Script" uid="uid://c1ubmt1jik6qq" path="res://Scripts/fish_spawner.gd" id="1_8v7by"]
@@ -10,10 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://dc2meyqrbsics" path="res://Assets/PNG/FishTank/fish tank v1.png" id="4_so54a"]
 [ext_resource type="Script" uid="uid://c2frm46fryv2j" path="res://Scripts/pop_up.gd" id="5_1rqgg"]
 [ext_resource type="Script" uid="uid://da5lphkv0x6bq" path="res://Scripts/feed.gd" id="6_mwmob"]
-[ext_resource type="Texture2D" uid="uid://c6x46bsx8qw5g" path="res://Assets/PNG/Gacha/GotchaPond 1-2-6.png" id="6_sw8nc"]
+[ext_resource type="Texture2D" uid="uid://c6x46bsx8qw5g" path="res://Assets/PNG/Gacha/Fish Gacha/GotchaPond 1-2-6.png" id="6_sw8nc"]
+[ext_resource type="Texture2D" uid="uid://b2f27fbel4gja" path="res://Assets/PNG/Gacha/Food Gacha/GotchaFeeder Sheet.png" id="7_3qleg"]
 [ext_resource type="Script" uid="uid://5c3wh5t2h7m5" path="res://Scripts/inventory_button.gd" id="7_so54a"]
-[ext_resource type="Texture2D" uid="uid://7e13eadbe4q4" path="res://Assets/PNG/Gacha/GotchaPond sheet.png" id="7_x6ft1"]
-[ext_resource type="Script" uid="uid://40mmacxanvxw" path="res://Scripts/food_gacha_sprite.gd" id="8_fbmvr"]
+[ext_resource type="Texture2D" uid="uid://7e13eadbe4q4" path="res://Assets/PNG/Gacha/Fish Gacha/GotchaPond sheet.png" id="7_x6ft1"]
 [ext_resource type="PackedScene" uid="uid://bc8slijdgrva5" path="res://Scenes/pod.tscn" id="8_p51s7"]
 [ext_resource type="PackedScene" uid="uid://dsp6pyx71vaj4" path="res://Scenes/fish.tscn" id="8_sw8nc"]
 [ext_resource type="Script" uid="uid://5woyao7aputs" path="res://Scripts/bubble_count.gd" id="9_3ihge"]
@@ -23,18 +23,52 @@
 [ext_resource type="Resource" uid="uid://bdqmy0hu5r4c" path="res://Resources/FishPack/b_pack.tres" id="13_375gp"]
 [ext_resource type="Script" uid="uid://l3rag6qnq8f2" path="res://Scripts/debug_lable.gd" id="13_mwmob"]
 [ext_resource type="Resource" uid="uid://c2y214dyh212h" path="res://Resources/FishPack/c_pack.tres" id="14_hvg4u"]
-[ext_resource type="Texture2D" uid="uid://dk3ajxatnw8s6" path="res://Assets/PNG/Gacha/Knob 1-5.png" id="16_3g43l"]
+[ext_resource type="Texture2D" uid="uid://dk3ajxatnw8s6" path="res://Assets/PNG/Gacha/Fish Gacha/Knob 1-5.png" id="16_3g43l"]
 [ext_resource type="Shader" uid="uid://d4c5lyffn1qtv" path="res://Resources/Shader/fish_rarity_shader.gdshader" id="16_3qleg"]
-[ext_resource type="Texture2D" uid="uid://dqyq1iy66g73q" path="res://Assets/PNG/Gacha/Knob 2.png" id="17_3qleg"]
-[ext_resource type="Texture2D" uid="uid://fa3l5m47tofw" path="res://Assets/PNG/Gacha/Knob 3.png" id="18_u02th"]
-[ext_resource type="Texture2D" uid="uid://hkph3ve1titp" path="res://Assets/PNG/Gacha/Knob 4.png" id="19_mf1sy"]
+[ext_resource type="Texture2D" uid="uid://dqyq1iy66g73q" path="res://Assets/PNG/Gacha/Fish Gacha/Knob 2.png" id="17_3qleg"]
+[ext_resource type="Texture2D" uid="uid://fa3l5m47tofw" path="res://Assets/PNG/Gacha/Fish Gacha/Knob 3.png" id="18_u02th"]
+[ext_resource type="Texture2D" uid="uid://hkph3ve1titp" path="res://Assets/PNG/Gacha/Fish Gacha/Knob 4.png" id="19_mf1sy"]
 [ext_resource type="Script" uid="uid://dq1gmtaladmn7" path="res://Scripts/fish_pack_menu.gd" id="21_0j4h4"]
 [ext_resource type="Theme" uid="uid://cthsnn82p74vp" path="res://Resources/UI/default_theme.tres" id="21_pkn5o"]
-[ext_resource type="Texture2D" uid="uid://ck3324o5dff0f" path="res://Assets/PNG/Gacha/InsidePods.png" id="21_u02th"]
+[ext_resource type="Texture2D" uid="uid://ck3324o5dff0f" path="res://Assets/PNG/Gacha/Fish Gacha/InsidePods.png" id="21_u02th"]
 [ext_resource type="Texture2D" uid="uid://g8itduhpyr4e" path="res://Assets/PNG/Pod/Pod.png" id="21_y42of"]
 [ext_resource type="Script" uid="uid://dedfil08onxhl" path="res://Scripts/a_pack.gd" id="23_v608p"]
 [ext_resource type="Script" uid="uid://cyrkq5ltycipq" path="res://Scripts/b_pack.gd" id="24_0212m"]
 [ext_resource type="Script" uid="uid://csp2bq3gqvmkm" path="res://Scripts/c_pack.gd" id="25_0212m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u02th"]
+atlas = ExtResource("7_3qleg")
+region = Rect2(0, 0, 86, 102)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27kub"]
+atlas = ExtResource("7_3qleg")
+region = Rect2(2, 0, 80, 102)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ocp4"]
+atlas = ExtResource("7_3qleg")
+region = Rect2(92, 0, 80, 102)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iskje"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u02th")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27kub")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ocp4")
+}],
+"loop": false,
+"name": &"Spawn",
+"speed": 2.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p51s7"]
 atlas = ExtResource("7_x6ft1")
@@ -171,24 +205,21 @@ font_size = 30
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_260qw")
 
-[node name="FishSpawner" type="Node2D" parent="."]
-position = Vector2(431, 190)
-script = ExtResource("1_8v7by")
-
 [node name="Bubbles" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 layer = 100
 
+[node name="FishSpawner" type="Node2D" parent="."]
+position = Vector2(431, 190)
+script = ExtResource("1_8v7by")
+
 [node name="Fish" parent="." instance=ExtResource("8_sw8nc")]
-position = Vector2(637, 282)
+position = Vector2(642, 281)
 
 [node name="FoodSpawner" type="Node2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(950, 628)
+position = Vector2(1076, 577)
 script = ExtResource("1_2yvf5")
-
-[node name="Camera" type="Camera2D" parent="."]
-offset = Vector2(640, 360)
 
 [node name="FoodSpawn1" type="Marker2D" parent="."]
 position = Vector2(950, 630)
@@ -230,29 +261,25 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -166.0
-offset_top = -19.0
-offset_right = -66.0
-offset_bottom = 81.0
+offset_left = -264.0
+offset_top = -47.0
+offset_right = -164.0
+offset_bottom = 53.0
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 4
 flat = true
 script = ExtResource("2_3ihge")
 
-[node name="FoodGachaSprite" type="AnimatedSprite2D" parent="Tank/Gachas/Food"]
-unique_name_in_owner = true
-top_level = true
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Tank/Gachas/Food"]
 z_index = 1
-position = Vector2(1080, 498)
+position = Vector2(53, -53)
 scale = Vector2(4, 4)
-sprite_frames = SubResource("SpriteFrames_x6ft1")
+sprite_frames = SubResource("SpriteFrames_iskje")
 animation = &"Spawn"
 autoplay = "Idle"
-frame = 4
+frame = 1
 frame_progress = 1.0
-flip_h = true
-script = ExtResource("8_fbmvr")
 
 [node name="Fish" type="Button" parent="Tank/Gachas"]
 unique_name_in_owner = true
@@ -284,7 +311,6 @@ scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_x6ft1")
 animation = &"Spawn"
 autoplay = "Idle"
-frame = 4
 frame_progress = 1.0
 
 [node name="Path" type="Path2D" parent="Tank/Gachas/Fish/FishGachaSprite"]
@@ -541,3 +567,6 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Camera" type="Camera2D" parent="."]
+offset = Vector2(640, 360)

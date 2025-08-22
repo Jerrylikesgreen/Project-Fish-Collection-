@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqyq1iy66g73q"
-path="res://.godot/imported/Knob 2.png-92829cb910984e5260737c47c3519cfd.ctex"
+uid="uid://uxvni6ijx770"
+path="res://.godot/imported/HELLOCATfish Hungry.png-b6cce9b392b583d018d1ce6f1501ee7f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/PNG/Gacha/Knob 2.png"
-dest_files=["res://.godot/imported/Knob 2.png-92829cb910984e5260737c47c3519cfd.ctex"]
+source_file="res://Assets/PNG/Fish/HelloCatfish/HELLOCATfish Hungry.png"
+dest_files=["res://.godot/imported/HELLOCATfish Hungry.png-b6cce9b392b583d018d1ce6f1501ee7f.ctex"]
 
 [params]
 

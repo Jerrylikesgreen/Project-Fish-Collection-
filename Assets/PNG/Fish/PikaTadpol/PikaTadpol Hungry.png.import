@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://fa3l5m47tofw"
-path="res://.godot/imported/Knob 3.png-4a271192d022f43506e59899b68c44ff.ctex"
+uid="uid://y4m3lj3a8o5f"
+path="res://.godot/imported/PikaTadpol Hungry.png-d1a39c642ea998a08fce945511c0d287.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/PNG/Gacha/Knob 3.png"
-dest_files=["res://.godot/imported/Knob 3.png-4a271192d022f43506e59899b68c44ff.ctex"]
+source_file="res://Assets/PNG/Fish/PikaTadpol/PikaTadpol Hungry.png"
+dest_files=["res://.godot/imported/PikaTadpol Hungry.png-d1a39c642ea998a08fce945511c0d287.ctex"]
 
 [params]
 

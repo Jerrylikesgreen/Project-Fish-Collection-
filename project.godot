@@ -25,6 +25,7 @@ Globals="*res://Autoloads/globals.gd"
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/size/resizable=false
+window/stretch/mode="canvas_items"
 
 [global_group]
 
@@ -56,3 +57,4 @@ Tap={
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true

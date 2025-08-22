@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ceogwxd3tcqr8"
-path="res://.godot/imported/GotchaPond 1-2-6.png-255e7d423b17372e14b3b4120d0ab22c.ctex"
+uid="uid://c6x46bsx8qw5g"
+path="res://.godot/imported/GotchaPond 1-2-6.png-3fa0260e0578cf1166a14e1d5c9589a7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/PNG/Fish/GotchaPond 1-2-6.png"
-dest_files=["res://.godot/imported/GotchaPond 1-2-6.png-255e7d423b17372e14b3b4120d0ab22c.ctex"]
+source_file="res://Assets/PNG/Gacha/Fish Gacha/GotchaPond 1-2-6.png"
+dest_files=["res://.godot/imported/GotchaPond 1-2-6.png-3fa0260e0578cf1166a14e1d5c9589a7.ctex"]
 
 [params]
 
