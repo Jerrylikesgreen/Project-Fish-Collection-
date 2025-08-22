@@ -4,32 +4,69 @@ extends Button
 @onready var fish_gacha_sprite: AnimatedSprite2D = %FishGachaSprite
 @onready var follow: PathFollow2D = %Follow
 @onready var pod: AnimatedSprite2D = %Pod
+@onready var pods: AnimatedSprite2D = %Pods
+@onready var knob: AnimatedSprite2D = %Knob
 
 @export var cost_bubbles: int = 5
 @export var path_duration: float = 1.5
 @export var from_ratio: float = 0.0
 @export var to_ratio: float = 1.0
 @export var wait_for_spawn_anim: bool = false
+@export var fish_pack_pool: Array[FishPackResource]
+
+var fish_selected_frames:SpriteFrames
 
 var _tween: Tween
-
+var _sv: bool = true
 func _ready() -> void:
+	
 	pressed.connect(_on_pressed)
+	Events.fish_pack_selected_signal.connect(_on_fish_pack_selected)
 
 func _on_pressed() -> void:
 	if Globals.current_bubble_count < cost_bubbles:
 		return
-
+	pods.play("Running")
+	knob.set_visible(true)
+	knob.play("Running")
 	disabled = true
 	Events.bubble_count_changed(-cost_bubbles)
+	Events.fish_pack_button()
+	
+func _on_fish_pack_selected(fish_pack: String)->void:	
+	var fpr: FishPackResource
+	var new_frames: SpriteFrames
+	if fish_pack == "A":
+		
+		fpr = fish_pack_pool[0]
+		new_frames = fpr.fish_pool.get("Blob")        ## Todo, to pick a fish at random.
+		print("On Fish Pack Selected", new_frames )
+		
+	if fish_pack == "B":
+		
+		fpr = fish_pack_pool[0]
+		new_frames = fpr.fish_pool.get("Betta")
+		print("On Fish Pack Selected", fpr )
+		
+	if fish_pack == "C":
+		
+		fpr = fish_pack_pool[0]
+		new_frames = fpr.fish_pool.get("Jiggly Puffish")        ## Todo, to pick a fish at random.
+		print("On Fish Pack Selected", new_frames )
+	
+	pods.pause()
+	knob.pause()
+	knob.set_visible(false)
 	fish_gacha_sprite.play("Spawn")
+	
 	pod.play("Spin")
 	await _run_path(from_ratio, to_ratio, path_duration)
 	pod.play("Transform")
 	await pod.animation_finished
-	Events.spawn_fish()
+	Events.spawn_fish(new_frames)
 	follow.progress_ratio = from_ratio
 	disabled = false
+	
 
 func _run_path(from: float, to: float, dur: float) -> void:
 	if _tween:

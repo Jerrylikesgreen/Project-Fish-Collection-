@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="FishPackResource" load_steps=2 format=3 uid="uid://ccivfrevw104s"]
+
+[ext_resource type="Script" uid="uid://bv67m0lje1mhq" path="res://Scripts/fish_pack_resource_script.gd" id="1_184kn"]
+
+[resource]
+script = ExtResource("1_184kn")
+pack_name = ""
+fish_pool = Dictionary[String, SpriteFrames]({})

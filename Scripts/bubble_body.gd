@@ -82,7 +82,6 @@ func _on_pop_input(_viewport: Viewport, event: InputEvent, _shape_idx: int) -> v
 
 func _do_pop() -> void:
 	_popping = true
-	input_pickable = false     
 	bubble_sprite.play("Pop")
 	print("Pop")
 	Events.bubble_count_changed(bubble_value)

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://2ywt6nrsrjmv"]
+
+[ext_resource type="Texture2D" uid="uid://ufo8jk6hj5iw" path="res://Resources/UI/ButtonPressed.tres" id="1_qblqf"]
+
+[node name="ButtonHover" type="Sprite2D"]
+position = Vector2(0, 13)
+texture = ExtResource("1_qblqf")
+region_enabled = true
+region_rect = Rect2(43.8662, 0, 22.0811, 22.5338)

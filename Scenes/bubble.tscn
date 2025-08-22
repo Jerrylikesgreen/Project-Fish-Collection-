@@ -55,8 +55,10 @@ animations = [{
 radius = 41.4367
 
 [node name="Bubble" type="RigidBody2D"]
+z_index = 20
 collision_layer = 8
 collision_mask = 0
+collision_priority = 100.0
 input_pickable = true
 gravity_scale = -0.5
 script = ExtResource("10_x6cym")

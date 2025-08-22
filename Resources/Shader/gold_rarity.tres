@@ -1,0 +1,28 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://c3q6aaqt4pny4"]
+
+[ext_resource type="Shader" uid="uid://d4c5lyffn1qtv" path="res://Resources/Shader/fish_rarity_shader.gdshader" id="1_yqeoj"]
+[ext_resource type="Texture2D" uid="uid://bp2rvtfi23vx1" path="res://Assets/PNG/Fish/glitter_3.png" id="2_xa3il"]
+
+[resource]
+shader = ExtResource("1_yqeoj")
+shader_parameter/use_texture = true
+shader_parameter/base_color = Color(1, 1, 1, 1)
+shader_parameter/glitter_color = Color(0.965127, 0.957542, 7.70092e-07, 1)
+shader_parameter/glitter_density = 17.833
+shader_parameter/sparkle_intensity = 2.383
+shader_parameter/edge_boost = 1.154
+shader_parameter/fall_speed_uv = 0.0090001
+shader_parameter/twinkle_speed = 2.5
+shader_parameter/twinkle_sharpness = 6.82
+shader_parameter/active_fraction = 0.5
+shader_parameter/shape_tex = ExtResource("2_xa3il")
+shader_parameter/shape_channel = 3
+shader_parameter/invert_shape = false
+shader_parameter/shape_min_scale = 0.1
+shader_parameter/shape_max_scale = 1.0
+shader_parameter/random_rotate = true
+shader_parameter/shape_padding = 0.08
+shader_parameter/apply_on_transparent = false
+shader_parameter/opaque_threshold = 0.05
+shader_parameter/opaque_softness = 0.02
+shader_parameter/transparent_sparkle_alpha = 0.6

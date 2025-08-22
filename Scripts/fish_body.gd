@@ -2,7 +2,7 @@ class_name FishBody
 extends CharacterBody2D
 
 @export var fish_sprite_frames: SpriteFrames
-
+@export var evolution_frames: SpriteFrames
 @onready var fish_sensor: FishSensor = %FishSensor
 
 # ── Movement / Wander ───────────────────────────────────────
@@ -204,7 +204,7 @@ func _check_hunger_value()->void:
 	if _evolved == true:
 		return
 	if _consumed_food_value > 3:
-		fish_sprite.set_sprite_frames(fish_sprite_frames)
+		fish_sprite.set_sprite_frames(evolution_frames)
 		fish_sprite.play("Evolve")
 		_evolved = true 
 		

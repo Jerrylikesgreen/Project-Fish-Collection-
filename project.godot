@@ -10,15 +10,15 @@ config_version=5
 
 [application]
 
-config/name="Gacha Fish 8/19"
+config/name="Gacha Fish 08/21"
 run/main_scene="uid://0epxcm5d0bqp"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Events="*res://Scripts/events.gd"
-Globals="*res://Scripts/globals.gd"
+Events="*res://Autoloads/events.gd"
+Globals="*res://Autoloads/globals.gd"
 
 [display]
 
@@ -33,7 +33,7 @@ World="container"
 
 [gui]
 
-theme/custom_font="uid://cqpwig5h8jfo4"
+theme/custom_font="uid://b0pnvxy3ibar"
 
 [input]
 

@@ -1,8 +1,8 @@
-[gd_scene load_steps=30 format=3 uid="uid://0epxcm5d0bqp"]
+[gd_scene load_steps=49 format=3 uid="uid://0epxcm5d0bqp"]
 
 [ext_resource type="Script" uid="uid://cyqiplgu6dlnn" path="res://Scripts/food_spawner.gd" id="1_2yvf5"]
 [ext_resource type="Script" uid="uid://c1ubmt1jik6qq" path="res://Scripts/fish_spawner.gd" id="1_8v7by"]
-[ext_resource type="Script" uid="uid://b6yvkgbh8t8bo" path="res://Scenes/test_level.gd" id="1_260qw"]
+[ext_resource type="Script" uid="uid://b6yvkgbh8t8bo" path="res://Scripts/test_level.gd" id="1_260qw"]
 [ext_resource type="Script" uid="uid://c48pwl472ti4m" path="res://Scripts/food_button.gd" id="2_3ihge"]
 [ext_resource type="Script" uid="uid://cdgj263ww2sy7" path="res://Scripts/fish_gacha.gd" id="3_8v7by"]
 [ext_resource type="Texture2D" uid="uid://g4afb1q70jwk" path="res://icon.svg" id="3_akkqd"]
@@ -10,16 +10,31 @@
 [ext_resource type="Texture2D" uid="uid://dc2meyqrbsics" path="res://Assets/PNG/FishTank/fish tank v1.png" id="4_so54a"]
 [ext_resource type="Script" uid="uid://c2frm46fryv2j" path="res://Scripts/pop_up.gd" id="5_1rqgg"]
 [ext_resource type="Script" uid="uid://da5lphkv0x6bq" path="res://Scripts/feed.gd" id="6_mwmob"]
-[ext_resource type="Texture2D" uid="uid://c6x46bsx8qw5g" path="res://Assets/PNG/Gatcha/GotchaPond 1-2-6.png" id="6_sw8nc"]
+[ext_resource type="Texture2D" uid="uid://c6x46bsx8qw5g" path="res://Assets/PNG/Gacha/GotchaPond 1-2-6.png" id="6_sw8nc"]
 [ext_resource type="Script" uid="uid://5c3wh5t2h7m5" path="res://Scripts/inventory_button.gd" id="7_so54a"]
-[ext_resource type="Texture2D" uid="uid://7e13eadbe4q4" path="res://Assets/PNG/Gatcha/GotchaPond sheet.png" id="7_x6ft1"]
+[ext_resource type="Texture2D" uid="uid://7e13eadbe4q4" path="res://Assets/PNG/Gacha/GotchaPond sheet.png" id="7_x6ft1"]
 [ext_resource type="Script" uid="uid://40mmacxanvxw" path="res://Scripts/food_gacha_sprite.gd" id="8_fbmvr"]
 [ext_resource type="PackedScene" uid="uid://bc8slijdgrva5" path="res://Scenes/pod.tscn" id="8_p51s7"]
 [ext_resource type="PackedScene" uid="uid://dsp6pyx71vaj4" path="res://Scenes/fish.tscn" id="8_sw8nc"]
 [ext_resource type="Script" uid="uid://5woyao7aputs" path="res://Scripts/bubble_count.gd" id="9_3ihge"]
-[ext_resource type="Script" uid="uid://dv5qgi4jgpise" path="res://Scripts/menu~.gd" id="11_1rqgg"]
-[ext_resource type="LabelSettings" uid="uid://bdtu6hxgh8exf" path="res://Resources/new_label_settings.tres" id="11_7alf0"]
+[ext_resource type="LabelSettings" uid="uid://bdtu6hxgh8exf" path="res://Resources/UI/new_label_settings.tres" id="11_7alf0"]
+[ext_resource type="Script" uid="uid://bv67m0lje1mhq" path="res://Scripts/fish_pack_resource_script.gd" id="11_27ncn"]
+[ext_resource type="Resource" uid="uid://sd2s2lgpqgit" path="res://Resources/FishPack/a_pack.tres" id="12_b0tfs"]
+[ext_resource type="Resource" uid="uid://bdqmy0hu5r4c" path="res://Resources/FishPack/b_pack.tres" id="13_375gp"]
 [ext_resource type="Script" uid="uid://l3rag6qnq8f2" path="res://Scripts/debug_lable.gd" id="13_mwmob"]
+[ext_resource type="Resource" uid="uid://c2y214dyh212h" path="res://Resources/FishPack/c_pack.tres" id="14_hvg4u"]
+[ext_resource type="Texture2D" uid="uid://dk3ajxatnw8s6" path="res://Assets/PNG/Gacha/Knob 1-5.png" id="16_3g43l"]
+[ext_resource type="Shader" uid="uid://d4c5lyffn1qtv" path="res://Resources/Shader/fish_rarity_shader.gdshader" id="16_3qleg"]
+[ext_resource type="Texture2D" uid="uid://dqyq1iy66g73q" path="res://Assets/PNG/Gacha/Knob 2.png" id="17_3qleg"]
+[ext_resource type="Texture2D" uid="uid://fa3l5m47tofw" path="res://Assets/PNG/Gacha/Knob 3.png" id="18_u02th"]
+[ext_resource type="Texture2D" uid="uid://hkph3ve1titp" path="res://Assets/PNG/Gacha/Knob 4.png" id="19_mf1sy"]
+[ext_resource type="Script" uid="uid://dq1gmtaladmn7" path="res://Scripts/fish_pack_menu.gd" id="21_0j4h4"]
+[ext_resource type="Theme" uid="uid://cthsnn82p74vp" path="res://Resources/UI/default_theme.tres" id="21_pkn5o"]
+[ext_resource type="Texture2D" uid="uid://ck3324o5dff0f" path="res://Assets/PNG/Gacha/InsidePods.png" id="21_u02th"]
+[ext_resource type="Texture2D" uid="uid://g8itduhpyr4e" path="res://Assets/PNG/Pod/Pod.png" id="21_y42of"]
+[ext_resource type="Script" uid="uid://dedfil08onxhl" path="res://Scripts/a_pack.gd" id="23_v608p"]
+[ext_resource type="Script" uid="uid://cyrkq5ltycipq" path="res://Scripts/b_pack.gd" id="24_0212m"]
+[ext_resource type="Script" uid="uid://csp2bq3gqvmkm" path="res://Scripts/c_pack.gd" id="25_0212m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p51s7"]
 atlas = ExtResource("7_x6ft1")
@@ -75,14 +90,83 @@ _data = {
 }
 point_count = 5
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u02th"]
+shader = ExtResource("16_3qleg")
+shader_parameter/use_texture = true
+shader_parameter/base_color = Color(1, 0.027451, 1, 1)
+shader_parameter/glitter_color = Color(1, 0, 0.905882, 1)
+shader_parameter/glitter_density = 8.0
+shader_parameter/sparkle_intensity = 0.989
+shader_parameter/edge_boost = 0.3
+shader_parameter/fall_speed_uv = 0.0150001
+shader_parameter/twinkle_speed = 5.236
+shader_parameter/twinkle_sharpness = 16.0
+shader_parameter/active_fraction = 0.234
+shader_parameter/shape_channel = 3
+shader_parameter/invert_shape = false
+shader_parameter/shape_min_scale = 1.0
+shader_parameter/shape_max_scale = 1.0
+shader_parameter/random_rotate = true
+shader_parameter/shape_padding = 0.071
+shader_parameter/apply_on_transparent = false
+shader_parameter/opaque_threshold = 0.056
+shader_parameter/opaque_softness = 0.02
+shader_parameter/transparent_sparkle_alpha = 0.6
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u02th"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_3g43l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_3qleg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_u02th")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_mf1sy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_3g43l")
+}],
+"loop": true,
+"name": &"Running",
+"speed": 6.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mf1sy"]
+atlas = ExtResource("21_u02th")
+region = Rect2(0, 0, 66, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmu1o"]
+atlas = ExtResource("21_u02th")
+region = Rect2(66, 0, 66, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jv8m2"]
+atlas = ExtResource("21_u02th")
+region = Rect2(132, 0, 66, 35)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_27kub"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mf1sy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gmu1o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jv8m2")
+}],
+"loop": true,
+"name": &"Running",
+"speed": 5.0
+}]
+
 [sub_resource type="LabelSettings" id="LabelSettings_so54a"]
 font_size = 30
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1rqgg"]
-bg_color = Color(0.530836, 0.602884, 0.735092, 1)
-
-[sub_resource type="Theme" id="Theme_mwmob"]
-Panel/styles/panel = SubResource("StyleBoxFlat_1rqgg")
 
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_260qw")
@@ -90,6 +174,10 @@ script = ExtResource("1_260qw")
 [node name="FishSpawner" type="Node2D" parent="."]
 position = Vector2(431, 190)
 script = ExtResource("1_8v7by")
+
+[node name="Bubbles" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+layer = 100
 
 [node name="Fish" parent="." instance=ExtResource("8_sw8nc")]
 position = Vector2(637, 282)
@@ -105,10 +193,10 @@ offset = Vector2(640, 360)
 [node name="FoodSpawn1" type="Marker2D" parent="."]
 position = Vector2(950, 630)
 
-[node name="GUI" type="CanvasLayer" parent="."]
+[node name="Tank" type="CanvasLayer" parent="."]
 layer = -1
 
-[node name="TankVisuals" type="TextureRect" parent="GUI"]
+[node name="TankVisuals" type="TextureRect" parent="Tank"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -121,7 +209,7 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("4_so54a")
 
-[node name="Gachas" type="Control" parent="GUI"]
+[node name="Gachas" type="Control" parent="Tank"]
 layout_mode = 3
 anchors_preset = 12
 anchor_top = 1.0
@@ -132,26 +220,27 @@ grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 6
 
-[node name="Food" type="Button" parent="GUI/Gachas"]
+[node name="Food" type="Button" parent="Tank/Gachas"]
 unique_name_in_owner = true
 z_index = -1
-custom_minimum_size = Vector2(300, 300)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -300.0
-offset_top = -150.0
-offset_bottom = 150.0
+offset_left = -166.0
+offset_top = -19.0
+offset_right = -66.0
+offset_bottom = 81.0
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 4
 flat = true
 script = ExtResource("2_3ihge")
 
-[node name="FoodGachaSprite" type="AnimatedSprite2D" parent="GUI/Gachas/Food"]
+[node name="FoodGachaSprite" type="AnimatedSprite2D" parent="Tank/Gachas/Food"]
 unique_name_in_owner = true
 top_level = true
 z_index = 1
@@ -165,15 +254,18 @@ frame_progress = 1.0
 flip_h = true
 script = ExtResource("8_fbmvr")
 
-[node name="Fish" type="Button" parent="GUI/Gachas"]
+[node name="Fish" type="Button" parent="Tank/Gachas"]
 unique_name_in_owner = true
 z_index = -1
-custom_minimum_size = Vector2(300, 300)
-layout_mode = 0
-offset_left = 56.0
-offset_top = -52.0
-offset_right = 356.0
-offset_bottom = 248.0
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 70.0
+offset_top = -178.0
+offset_right = 170.0
+offset_bottom = -78.0
+grow_vertical = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 1
@@ -181,8 +273,9 @@ flat = true
 icon_alignment = 1
 script = ExtResource("3_8v7by")
 path_duration = 5.0
+fish_pack_pool = Array[ExtResource("11_27ncn")]([ExtResource("12_b0tfs"), ExtResource("13_375gp"), ExtResource("14_hvg4u")])
 
-[node name="FishGachaSprite" type="AnimatedSprite2D" parent="GUI/Gachas/Fish"]
+[node name="FishGachaSprite" type="AnimatedSprite2D" parent="Tank/Gachas/Fish"]
 unique_name_in_owner = true
 top_level = true
 z_index = 1
@@ -194,38 +287,54 @@ autoplay = "Idle"
 frame = 4
 frame_progress = 1.0
 
-[node name="Path" type="Path2D" parent="GUI/Gachas/Fish/FishGachaSprite"]
+[node name="Path" type="Path2D" parent="Tank/Gachas/Fish/FishGachaSprite"]
 unique_name_in_owner = true
 top_level = true
 position = Vector2(8, 420)
 curve = SubResource("Curve2D_x6ft1")
 
-[node name="Follow" type="PathFollow2D" parent="GUI/Gachas/Fish/FishGachaSprite/Path"]
+[node name="Follow" type="PathFollow2D" parent="Tank/Gachas/Fish/FishGachaSprite/Path"]
 unique_name_in_owner = true
 position = Vector2(273, 197)
 rotation = 0.0618678
 rotates = false
 
-[node name="Pod" parent="GUI/Gachas/Fish/FishGachaSprite/Path/Follow" instance=ExtResource("8_p51s7")]
+[node name="Pod" parent="Tank/Gachas/Fish/FishGachaSprite/Path/Follow" instance=ExtResource("8_p51s7")]
 unique_name_in_owner = true
 position = Vector2(28.5029, 7.25159)
 scale = Vector2(2, 2)
 
-[node name="Fish Gacha" type="Label" parent="GUI/Gachas"]
+[node name="Knob" type="AnimatedSprite2D" parent="Tank/Gachas/Fish/FishGachaSprite"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_u02th")
+position = Vector2(-20.75, 25.5)
+sprite_frames = SubResource("SpriteFrames_u02th")
+animation = &"Running"
+frame = 4
+frame_progress = 1.0
+
+[node name="Pods" type="AnimatedSprite2D" parent="Tank/Gachas/Fish/FishGachaSprite"]
+unique_name_in_owner = true
+show_behind_parent = true
+position = Vector2(-5.75, 3.75)
+sprite_frames = SubResource("SpriteFrames_27kub")
+animation = &"Running"
+
+[node name="Fish Gacha" type="Label" parent="Tank/Gachas"]
 z_index = 4
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 101.0
-offset_top = 65.0
-offset_right = 281.0
-offset_bottom = 116.0
+offset_left = 75.0
+offset_top = 60.0
+offset_right = 345.0
+offset_bottom = 111.0
 grow_vertical = 2
 text = "Fish Gacha"
 label_settings = ExtResource("11_7alf0")
 
-[node name="Food Gacha" type="Label" parent="GUI/Gachas"]
+[node name="Food Gacha" type="Label" parent="Tank/Gachas"]
 z_index = 4
 layout_mode = 1
 anchors_preset = 6
@@ -233,16 +342,16 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -282.0
-offset_top = 70.0
-offset_right = -92.0
-offset_bottom = 121.0
+offset_left = -335.0
+offset_top = 56.0
+offset_right = -65.0
+offset_bottom = 107.0
 grow_horizontal = 0
 grow_vertical = 2
 text = "Food Gacha"
 label_settings = ExtResource("11_7alf0")
 
-[node name="FoodInventory" type="ItemList" parent="GUI"]
+[node name="FoodInventory" type="ItemList" parent="Tank"]
 unique_name_in_owner = true
 visible = false
 anchors_preset = 8
@@ -275,26 +384,148 @@ item_1/text = "Good Food x 0"
 item_1/icon = ExtResource("3_akkqd")
 script = ExtResource("4_8v7by")
 
-[node name="PopUp" type="Label" parent="GUI"]
+[node name="PlayerButton" type="GridContainer" parent="Tank"]
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -177.0
+offset_top = -191.0
+offset_right = -28.0
+offset_bottom = -125.0
+grow_horizontal = 0
+grow_vertical = 0
+columns = 2
+
+[node name="Feed" type="Button" parent="Tank/PlayerButton"]
 unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Feed"
+script = ExtResource("6_mwmob")
+
+[node name="InventoryButton" type="Button" parent="Tank/PlayerButton"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Inventory"
+script = ExtResource("7_so54a")
+
+[node name="Menu" type="Button" parent="Tank/PlayerButton"]
+layout_mode = 2
+text = "Menu~"
+
+[node name="Button2" type="Button" parent="Tank/PlayerButton"]
+layout_mode = 2
+text = "Button"
+
+[node name="BubbleCount" type="Label" parent="Tank"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -53.0
+offset_top = 116.0
+offset_right = 59.0
+offset_bottom = 140.0
+grow_horizontal = 2
+text = "Bubble Count: "
+label_settings = SubResource("LabelSettings_so54a")
+script = ExtResource("9_3ihge")
+
+[node name="Debug" type="Label" parent="Tank"]
+unique_name_in_owner = true
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_top = -86.0
+offset_right = 49.0
+offset_bottom = -62.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Debug Lable"
+script = ExtResource("13_mwmob")
+
+[node name="PlayerGUI" type="CanvasLayer" parent="."]
+
+[node name="FishPackMenu" type="Panel" parent="PlayerGUI"]
+unique_name_in_owner = true
+visible = false
+top_level = true
+offset_left = 440.0
+offset_top = 210.0
+offset_right = 840.0
+offset_bottom = 510.0
+theme = ExtResource("21_pkn5o")
+script = ExtResource("21_0j4h4")
+
+[node name="GridContainer" type="VBoxContainer" parent="PlayerGUI/FishPackMenu"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -20.0
-offset_top = -11.5
+offset_top = -20.0
 offset_right = 20.0
-offset_bottom = 11.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="APack" type="Button" parent="PlayerGUI/FishPackMenu/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Pack A"
+icon = ExtResource("21_y42of")
+alignment = 0
+icon_alignment = 2
+script = ExtResource("23_v608p")
+
+[node name="BPack" type="Button" parent="PlayerGUI/FishPackMenu/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Pack B"
+icon = ExtResource("21_y42of")
+alignment = 0
+icon_alignment = 2
+script = ExtResource("24_0212m")
+
+[node name="CPack" type="Button" parent="PlayerGUI/FishPackMenu/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Pack C"
+icon = ExtResource("21_y42of")
+alignment = 0
+icon_alignment = 2
+expand_icon = true
+script = ExtResource("25_0212m")
+
+[node name="PopUp" type="Label" parent="PlayerGUI"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -185.0
+offset_right = 22.0
+offset_bottom = -162.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "TEst"
 script = ExtResource("5_1rqgg")
+metadata/_edit_use_anchors_ = true
 
-[node name="Timer" type="Timer" parent="GUI/PopUp"]
+[node name="Timer" type="Timer" parent="PlayerGUI/PopUp"]
 unique_name_in_owner = true
 
-[node name="PanelContainer" type="PanelContainer" parent="GUI/PopUp"]
+[node name="PanelContainer" type="PanelContainer" parent="PlayerGUI/PopUp"]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(200, 200)
@@ -310,93 +541,3 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="PlayerButton" type="GridContainer" parent="GUI"]
-visible = false
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -177.0
-offset_top = -191.0
-offset_right = -28.0
-offset_bottom = -125.0
-grow_horizontal = 0
-grow_vertical = 0
-columns = 2
-
-[node name="Feed" type="Button" parent="GUI/PlayerButton"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-text = "Feed"
-script = ExtResource("6_mwmob")
-
-[node name="InventoryButton" type="Button" parent="GUI/PlayerButton"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-text = "Inventory"
-script = ExtResource("7_so54a")
-
-[node name="Menu~" type="Button" parent="GUI/PlayerButton"]
-layout_mode = 2
-text = "Menu~"
-script = ExtResource("11_1rqgg")
-
-[node name="Button2" type="Button" parent="GUI/PlayerButton"]
-layout_mode = 2
-text = "Button"
-
-[node name="BubbleCount" type="Label" parent="GUI"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -53.0
-offset_top = 116.0
-offset_right = 59.0
-offset_bottom = 140.0
-grow_horizontal = 2
-text = "Bubble Count: "
-label_settings = SubResource("LabelSettings_so54a")
-script = ExtResource("9_3ihge")
-
-[node name="Menu" type="Panel" parent="GUI"]
-unique_name_in_owner = true
-visible = false
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -234.0
-offset_top = -196.0
-offset_bottom = 159.0
-grow_horizontal = 0
-grow_vertical = 2
-theme = SubResource("Theme_mwmob")
-
-[node name="Settings" type="VBoxContainer" parent="GUI/Menu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Debug" type="Label" parent="GUI"]
-unique_name_in_owner = true
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -45.0
-offset_top = -86.0
-offset_right = 49.0
-offset_bottom = -62.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "Debug Lable"
-script = ExtResource("13_mwmob")

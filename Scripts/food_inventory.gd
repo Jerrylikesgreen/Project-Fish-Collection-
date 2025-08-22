@@ -26,6 +26,7 @@ func add_item_to_inventory(base_name: String) -> void:
 		inventory[full_name] = 1
 
 	_refresh_list()
+	print(full_name)
 
 func _refresh_list() -> void:
 	clear()
@@ -46,8 +47,6 @@ func get_random_rarity() -> String:
 		return "Epic"
 	else:
 		return "Legendary"
-
-
 
 func has_food_available() -> bool:
 	for key in inventory.keys():

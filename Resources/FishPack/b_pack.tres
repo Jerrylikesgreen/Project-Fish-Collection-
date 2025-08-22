@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="FishPackResource" load_steps=3 format=3 uid="uid://bdqmy0hu5r4c"]
+
+[ext_resource type="Script" uid="uid://bv67m0lje1mhq" path="res://Scripts/fish_pack_resource_script.gd" id="1_cskt0"]
+[ext_resource type="SpriteFrames" uid="uid://dtu8k7xa4dat2" path="res://Resources/FishResources/betta.tres" id="1_mrf80"]
+
+[resource]
+script = ExtResource("1_cskt0")
+pack_name = "B Pack"
+fish_pool = Dictionary[String, SpriteFrames]({
+"Betta": ExtResource("1_mrf80")
+})
+metadata/_custom_type_script = "uid://bv67m0lje1mhq"

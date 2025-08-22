@@ -1,11 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://dsp6pyx71vaj4"]
+[gd_scene load_steps=12 format=3 uid="uid://dsp6pyx71vaj4"]
 
 [ext_resource type="Script" uid="uid://c37wotvnystf1" path="res://Scripts/fish_body.gd" id="1_hgn23"]
 [ext_resource type="Script" uid="uid://lggwoh4bq3qj" path="res://Scripts/fish.gd" id="1_jdl8t"]
-[ext_resource type="SpriteFrames" uid="uid://dble86scfuhx8" path="res://Scenes/Blob.tres" id="3_jdl8t"]
-[ext_resource type="SpriteFrames" uid="uid://d04n5or4127m4" path="res://Resources/base_fish.tres" id="4_21uvr"]
+[ext_resource type="SpriteFrames" uid="uid://d04n5or4127m4" path="res://Resources/FishResources/base_fish.tres" id="4_21uvr"]
+[ext_resource type="SpriteFrames" uid="uid://dble86scfuhx8" path="res://Resources/FishResources/blob.tres" id="4_csmc7"]
+[ext_resource type="Material" uid="uid://c3q6aaqt4pny4" path="res://Resources/Shader/gold_rarity.tres" id="5_csmc7"]
 [ext_resource type="Script" uid="uid://c6v32cq3nqm46" path="res://Scripts/fish_sensor.gd" id="6_21uvr"]
 [ext_resource type="Script" uid="uid://ib6ko08ss8v1" path="res://Scripts/fish_sprite.gd" id="6_csmc7"]
+[ext_resource type="Material" uid="uid://cjdp5n0gwwarp" path="res://Resources/Shader/green_rarity.tres" id="7_fl3e6"]
+[ext_resource type="Material" uid="uid://dxh1vmoehjm6v" path="res://Resources/Shader/pink_rarity.tres" id="8_clm4a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xu20i"]
 radius = 12.1655
@@ -16,15 +19,17 @@ radius = 753.573
 [node name="Fish" type="Node2D"]
 scale = Vector2(4, 4)
 script = ExtResource("1_jdl8t")
-spawn_every = 2.3
+spawn_every = 3.0
 
 [node name="FishBody" type="CharacterBody2D" parent="."]
+unique_name_in_owner = true
 scale = Vector2(0.5, 0.5)
 collision_mask = 38
 input_pickable = true
 motion_mode = 1
 script = ExtResource("1_hgn23")
-fish_sprite_frames = ExtResource("3_jdl8t")
+fish_sprite_frames = ExtResource("4_21uvr")
+evolution_frames = ExtResource("4_csmc7")
 speed = 70.0
 avoid_distance = 50.0
 avoid_strength = 2.0
@@ -35,8 +40,10 @@ sprite_frames = ExtResource("4_21uvr")
 animation = &"Idle"
 autoplay = "Idle"
 script = ExtResource("6_csmc7")
+rarity_shader_pool = Array[ShaderMaterial]([ExtResource("5_csmc7"), ExtResource("7_fl3e6"), ExtResource("8_clm4a")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FishBody"]
+visible = false
 shape = SubResource("CircleShape2D_xu20i")
 
 [node name="BubbleSpawner" type="Timer" parent="FishBody"]
@@ -50,6 +57,7 @@ position = Vector2(8, 2)
 
 [node name="FishSensor" type="Area2D" parent="FishBody"]
 unique_name_in_owner = true
+visible = false
 collision_layer = 16
 collision_mask = 2
 input_pickable = false
@@ -60,5 +68,5 @@ shape = SubResource("CircleShape2D_21uvr")
 
 [node name="HungerTick" type="Timer" parent="FishBody"]
 unique_name_in_owner = true
-wait_time = 15.0
+wait_time = 20.0
 autostart = true
