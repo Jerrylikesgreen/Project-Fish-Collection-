@@ -7,6 +7,7 @@ const BUBBLE := preload("res://Scenes/bubble.tscn")
 @onready var bubble_spawner: Timer = %BubbleSpawner
 @onready var fish_body: FishBody = $FishBody
 @onready var mouth: Marker2D = %Marker2D
+@onready var sell_button: Button = %SellButton
 
 @export var spawn_every: float = 1.0
 
@@ -26,8 +27,9 @@ const RARITY_WEIGHTS := [55, 25, 15, 5]
 var _rng := RandomNumberGenerator.new()
 
 func _ready() -> void:
+	sell_button.pressed.connect(_on_sell_button_pressed)
 	_rng.randomize()
-
+	Events.selling_fish_signal.connect(_on_selling_fish_signal)
 	bubble_spawner.wait_time = spawn_every
 	bubble_spawner.one_shot = false
 	if not bubble_spawner.timeout.is_connected(self._spawn_one):
@@ -61,3 +63,12 @@ func _apply_rarity_to_sprite() -> void:
 	var rarity_name = RARITIES[_rarity]
 	if fish_sprite:
 		fish_sprite.add_rarity(rarity_name)
+
+func _on_selling_fish_signal(enabled: bool) -> void:
+	sell_button.visible = enabled
+
+func _on_sell_button_pressed() -> void:
+	if not Events.selling_fish:
+		return
+	Events.bubble_count_changed(3)
+	queue_free()

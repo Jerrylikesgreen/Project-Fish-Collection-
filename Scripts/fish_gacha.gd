@@ -16,7 +16,8 @@ extends Button
 @export var a_cost: int = -5
 @export var b_cost: int = -20
 @export var c_cost: int = -175
-
+@export var max_fish_count:int = 3
+@export var active_fish: int = 0
 
 var fish_selected_frames:SpriteFrames
 
@@ -30,12 +31,14 @@ func _ready() -> void:
 func _on_pressed() -> void:
 	if Globals.current_bubble_count < cost_bubbles:
 		return
-		
-	pods.play("Running")
-	knob.set_visible(true)
-	knob.play("Running")
-	disabled = true
-	Events.fish_pack_button()
+	if active_fish < max_fish_count: 
+		pods.play("Running")
+		knob.set_visible(true)
+		knob.play("Running")
+		disabled = true
+		Events.fish_pack_button()
+	else:
+		return
 	
 func _on_fish_pack_selected(fish_pack: String) -> void:
 	var fpr: FishPackResource

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dsp6pyx71vaj4"]
+[gd_scene load_steps=19 format=3 uid="uid://dsp6pyx71vaj4"]
 
 [ext_resource type="Script" uid="uid://c37wotvnystf1" path="res://Scripts/fish_body.gd" id="1_hgn23"]
 [ext_resource type="Script" uid="uid://lggwoh4bq3qj" path="res://Scripts/fish.gd" id="1_jdl8t"]
@@ -9,12 +9,43 @@
 [ext_resource type="Script" uid="uid://ib6ko08ss8v1" path="res://Scripts/fish_sprite.gd" id="6_csmc7"]
 [ext_resource type="Material" uid="uid://cjdp5n0gwwarp" path="res://Resources/Shader/green_rarity.tres" id="7_fl3e6"]
 [ext_resource type="Material" uid="uid://dxh1vmoehjm6v" path="res://Resources/Shader/pink_rarity.tres" id="8_clm4a"]
+[ext_resource type="FontFile" uid="uid://b0pnvxy3ibar" path="res://Assets/Font/Better VCR 9.0.1.ttf" id="10_sd48r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xu20i"]
 radius = 12.1655
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_21uvr"]
 radius = 753.573
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vgji2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wwu4r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_clm4a"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_clm4a"]
+bg_color = Color(0.944488, 0.333754, 0.674334, 1)
+
+[sub_resource type="Theme" id="Theme_sd48r"]
+default_font = ExtResource("10_sd48r")
+default_font_size = 10
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(1, 0, 1, 1)
+Button/styles/focus = SubResource("StyleBoxEmpty_vgji2")
+Button/styles/hover = SubResource("StyleBoxEmpty_wwu4r")
+Button/styles/normal = SubResource("StyleBoxEmpty_clm4a")
+Button/styles/pressed = SubResource("StyleBoxFlat_clm4a")
+
+[sub_resource type="LabelSettings" id="LabelSettings_fll1f"]
+font_color = Color(0, 0.00613519, 0.126417, 1)
+outline_size = 1
+outline_color = Color(1, 1, 1, 0.760784)
+shadow_color = Color(0.858824, 0, 0.576471, 0.494118)
+shadow_offset = Vector2(0.5, 0.5)
 
 [node name="Fish" type="Node2D"]
 scale = Vector2(4, 4)
@@ -23,8 +54,7 @@ spawn_every = 3.0
 
 [node name="FishBody" type="CharacterBody2D" parent="."]
 unique_name_in_owner = true
-scale = Vector2(0.5, 0.5)
-collision_mask = 38
+collision_mask = 42
 input_pickable = true
 motion_mode = 1
 script = ExtResource("1_hgn23")
@@ -44,6 +74,7 @@ script = ExtResource("6_csmc7")
 rarity_shader_pool = Array[ShaderMaterial]([ExtResource("5_csmc7"), ExtResource("7_fl3e6"), ExtResource("8_clm4a")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FishBody"]
+position = Vector2(-0.75, -0.5)
 shape = SubResource("CircleShape2D_xu20i")
 
 [node name="BubbleSpawner" type="Timer" parent="FishBody"]
@@ -57,7 +88,6 @@ position = Vector2(8, 2)
 
 [node name="FishSensor" type="Area2D" parent="FishBody"]
 unique_name_in_owner = true
-visible = false
 collision_layer = 16
 collision_mask = 2
 input_pickable = false
@@ -70,3 +100,40 @@ shape = SubResource("CircleShape2D_21uvr")
 unique_name_in_owner = true
 wait_time = 20.0
 autostart = true
+
+[node name="SellButton" type="Button" parent="FishBody"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.25
+offset_top = -27.25
+offset_right = 6.75
+offset_bottom = -13.25
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_sd48r")
+action_mode = 0
+icon_alignment = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="FishBody/SellButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.25
+offset_top = -9.5
+offset_right = 20.75
+offset_bottom = 10.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "$"
+label_settings = SubResource("LabelSettings_fll1f")
+horizontal_alignment = 1
+vertical_alignment = 1

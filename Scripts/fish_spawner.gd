@@ -5,7 +5,6 @@ const FISH = preload("res://Scenes/fish.tscn")
 var fish_instance: Node2D
 
 
-
 func _ready() -> void:
 	Events.spawn_fish_signal.connect(_on_fish_spawn)
 	

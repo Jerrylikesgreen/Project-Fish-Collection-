@@ -6,8 +6,9 @@ signal bubble_count_changed_signal(bubble_count:int)
 signal spawn_fish_signal(new_frames:SpriteFrames)
 signal fish_pack_button_pressed
 signal fish_pack_selected_signal(fish_pack: String)
+signal selling_fish_signal(enabled:bool)
 
-
+var selling_fish := false
 var _sv: int = 0
 var _sv2: int = 0 
 func spawn_food_button_pressed() -> void:
@@ -45,3 +46,7 @@ func fish_pack_button()->void:
 func fish_pack_selected(fish_pack: String)->void:
 	emit_signal("fish_pack_selected_signal", fish_pack)
 	display_player_message("You got a " + fish_pack  )
+	
+func sell_fish_button_pressed(value: bool) -> void:
+	selling_fish = value
+	emit_signal("selling_fish_signal", value)

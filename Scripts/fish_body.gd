@@ -69,7 +69,7 @@ func _physics_process(delta: float) -> void:
 	velocity = direction * speed
 	move_and_slide()
 	_eat_fish()
-	_check_hunger_value()
+	
 
 
 
@@ -192,6 +192,7 @@ func _eat_fish():
 			_consumed_food_value = _consumed_food_value + 1
 			fish_sprite.play("Eat")
 			_is_hungry = false
+			_check_hunger_value()
 
 
 func _on_hunger_tick()->void:
@@ -207,4 +208,8 @@ func _check_hunger_value()->void:
 		fish_sprite.set_sprite_frames(evolution_frames)
 		fish_sprite.play("Evolve")
 		_evolved = true 
+		var old_hunger_tick = hunger_tick.get_wait_time()
+		
+		hunger_tick.set_wait_time(old_hunger_tick * 1.5 )
+
 		
