@@ -7,107 +7,129 @@ extends Button
 @onready var pods: AnimatedSprite2D = %Pods
 @onready var knob: AnimatedSprite2D = %Knob
 
-@export var cost_bubbles: int = 5
 @export var path_duration: float = 1.5
 @export var from_ratio: float = 0.0
 @export var to_ratio: float = 1.0
 @export var wait_for_spawn_anim: bool = false
 @export var fish_pack_pool: Array[FishPackResource]
-@export var a_cost: int = -5
-@export var b_cost: int = -20
-@export var c_cost: int = -175
+
+# ✅ make costs POSITIVE
+@export var entry_cost: int = 5          # gate to press button
+@export var cost_pack_a: int = 5
+@export var cost_pack_b: int = 20
+@export var cost_pack_c: int = 175
+
 @export var max_fish_count:int = 3
 @export var active_fish: int = 0
 
-var fish_selected_frames:SpriteFrames
-
 var _tween: Tween
-var _sv: bool = true
+
 func _ready() -> void:
-	
 	pressed.connect(_on_pressed)
+	# Listen for the simple pack selection (1 arg)
 	Events.fish_pack_selected_signal.connect(_on_fish_pack_selected)
 
 func _on_pressed() -> void:
-	if Globals.current_bubble_count < cost_bubbles:
+	if Globals.current_bubble_count < entry_cost:
 		return
-
-	if active_fish < max_fish_count: 
-		pods.play("Running")
-		knob.set_visible(true)
-		knob.play("Running")
-		disabled = true
-		Events.fish_pack_button()
-	else:
+	if active_fish >= max_fish_count:
 		return
 
 	pods.play("Running")
-	knob.set_visible(true)
+	knob.visible = true
 	knob.play("Running")
 	disabled = true
-	Events.fish_pack_button()
-	
+	Events.fish_pack_button()  # opens the pack choice UI elsewhere
+
 func _on_fish_pack_selected(fish_pack: String) -> void:
 	var fpr: FishPackResource
-	var new_frames: SpriteFrames
-
-
+	var cost := 0
 	match fish_pack:
 		"A":
 			fpr = fish_pack_pool[0]
-			if Globals.current_bubble_count < a_cost:
-				return
-			Events.bubble_count_changed(a_cost)
+			cost = cost_pack_a
 		"B":
-			if Globals.current_bubble_count < b_cost:
-				return
 			fpr = fish_pack_pool[1]
-			Events.bubble_count_changed(b_cost)
+			cost = cost_pack_b
 		"C":
-			if Globals.current_bubble_count < c_cost:
-				return
 			fpr = fish_pack_pool[2]
-			Events.bubble_count_changed(c_cost)
+			cost = cost_pack_c
 		_:
-			return 
-			
-	## Step 1: grab all keys from the fish_pool dictionary
+			disabled = false
+			return
+
+	if Globals.current_bubble_count < cost:
+		disabled = false
+		return
+	Events.bubble_count_changed(-cost)  # ✅ subtract
+
 	var fish_keys: Array = fpr.fish_pool.keys()
-	
-	## Step 2: pick one key randomly
-	var random_key: String = fish_keys.pick_random()
-	
-	## Step 3: fetch that fish’s frames
-	new_frames = fpr.fish_pool[random_key]
-	print("Selected Pack:", fish_pack, " | Random Fish:", random_key, " | Frames:", new_frames)
+	if fish_keys.is_empty():
+		disabled = false
+		return
+
+	var species_id: String = fish_keys.pick_random()
+	var frames: SpriteFrames = fpr.fish_pool[species_id]
+
+	print("Selected Pack:", fish_pack, " | Random Fish:", species_id, " | Frames:", frames)
 
 	pods.pause()
 	knob.pause()
-	knob.set_visible(false)
+	knob.visible = false
 	fish_gacha_sprite.play("Spawn")
 	pod.play("Spin")
-	
+
 	await _run_path(from_ratio, to_ratio, path_duration)
 	
 	pod.play("Transform")
-	
+	await _pop_in(pod, 0.6, 4.0, 1.02, true, 0.18)
 	await pod.animation_finished
-	
-	Events.spawn_fish(new_frames)
+
+	Events.fish_rolled_signal.emit(fish_pack, species_id, frames)
+
+	var display_name := species_id  
+	Events.spawn_fish(frames, species_id, display_name)
+
 	follow.progress_ratio = from_ratio
 	disabled = false
-	
 
 func _run_path(from: float, to: float, dur: float) -> void:
-	if _tween:
-		_tween.kill()
+	if _tween: _tween.kill()
 	follow.loop = false
 	follow.progress_ratio = from
-	_tween = create_tween()
-	_tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	_tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	_tween.tween_property(follow, "progress_ratio", to, dur)
 	await _tween.finished
-	
+
 func _notification(what):
 	if what == NOTIFICATION_TRANSFORM_CHANGED and scale != Vector2.ONE:
 		scale = Vector2.ONE
+
+func _pop_in(node: Node, from_s: float = 0.6, to_s: float = 1.0, overshoot: float = 1.08, fade: bool = true, t: float = 0.22) -> void:
+	var ci := node as CanvasItem
+	if fade and ci:
+		ci.modulate.a = 0.0
+
+	if node is Node2D:
+		# If your sprite isn’t centered at its middle, set its pivot here:
+		# (For Sprite2D/AnimatedSprite2D: ensure centered=true, or set pivot_offset)
+		(node as Node2D).scale = Vector2(from_s, from_s)
+	elif node is Control:
+		(node as Control).pivot_offset = (node as Control).size * 0.5
+		(node as Control).scale = Vector2(from_s, from_s)
+
+	var tw := create_tween()
+
+	# 1) Fade runs in parallel (optional)
+	if fade and ci:
+		tw.set_parallel(true)
+		tw.tween_property(ci, "modulate:a", 1.0, t).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		tw.set_parallel(false)
+
+	# 2) Scale overshoot then settle (sequential!)
+	tw.tween_property(node, "scale", Vector2(to_s * overshoot, to_s * overshoot), t)\
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tw.tween_property(node, "scale", Vector2(to_s, to_s), 0.10)\
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	await tw.finished

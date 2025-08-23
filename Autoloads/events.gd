@@ -1,12 +1,26 @@
 extends Node
 
 signal spawn_fish_food
+
 signal player_message(new_message:String)
+
 signal bubble_count_changed_signal(bubble_count:int)
+
 signal spawn_fish_signal(new_frames:SpriteFrames)
+signal fish_spawned(fish: Fish)  # emitted by your spawner AFTER instancing
+
 signal fish_pack_button_pressed
-signal fish_pack_selected_signal(fish_pack: String)
+signal fish_pack_selected_signal(pack: String)  # UI chose A/B/C
+signal fish_rolled_signal(pack: String, species_id: String, frames: SpriteFrames)
+
 signal selling_fish_signal(enabled:bool)
+
+signal add_fish_to_collection_signal(fish:Fish)
+
+signal collection_discover(species_id: String, display_name: String, icon: Texture2D)
+signal collection_add(species_id: String)  # for increments when “caught”
+
+
 
 var selling_fish := false
 var _sv: int = 0
@@ -14,8 +28,8 @@ var _sv2: int = 0
 func spawn_food_button_pressed() -> void:
 	emit_signal("spawn_fish_food")  # pass TRUE here!
 
-func spawn_fish(new_frames:SpriteFrames):
-	emit_signal("spawn_fish_signal", new_frames)
+func spawn_fish(frames: SpriteFrames, species_id: String, display_name: String):
+	emit_signal("spawn_fish_signal", frames, species_id, display_name)
 	display_player_message("What did you get?")
 
 func display_player_message(new_message:String)-> void:
@@ -52,3 +66,9 @@ func fish_pack_selected(fish_pack: String)->void:
 func sell_fish_button_pressed(value: bool) -> void:
 	selling_fish = value
 	emit_signal("selling_fish_signal", value)
+
+
+
+
+func add_fish_to_collection(fish:Fish)->void:
+	emit_signal("add_fish_to_collection_signal", fish)

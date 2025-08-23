@@ -15,7 +15,7 @@
 radius = 12.1655
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_21uvr"]
-radius = 753.573
+radius = 250.144
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vgji2"]
 
@@ -60,7 +60,7 @@ motion_mode = 1
 script = ExtResource("1_hgn23")
 fish_sprite_frames = ExtResource("4_21uvr")
 evolution_frames = ExtResource("4_csmc7")
-speed = 70.0
+speed = 90.0
 avoid_distance = 50.0
 avoid_strength = 2.0
 
@@ -69,7 +69,6 @@ unique_name_in_owner = true
 sprite_frames = ExtResource("4_21uvr")
 animation = &"Cry"
 autoplay = "Idle"
-frame_progress = 0.653571
 script = ExtResource("6_csmc7")
 rarity_shader_pool = Array[ShaderMaterial]([ExtResource("5_csmc7"), ExtResource("7_fl3e6"), ExtResource("8_clm4a")])
 

@@ -3,11 +3,16 @@ extends Node2D
 
 const BUBBLE := preload("res://Scenes/bubble.tscn")
 
+@export var species_id: String = ""      # e.g. "Clownfish"
+@export var display_name: String = ""    # e.g. "Clownfish"
 @onready var fish_sprite: Fish_Sprite = %FishSprite
 @onready var bubble_spawner: Timer = %BubbleSpawner
 @onready var fish_body: FishBody = $FishBody
 @onready var mouth: Marker2D = %Marker2D
 @onready var sell_button: Button = %SellButton
+@export var icon_override: Texture2D
+
+@onready var anim: Fish_Sprite = %FishSprite
 
 @export var spawn_every: float = 1.0
 
@@ -72,3 +77,35 @@ func _on_sell_button_pressed() -> void:
 		return
 	Events.bubble_count_changed(3)
 	queue_free()
+
+func get_collection_key() -> String:
+	return species_id
+
+func get_collection_name() -> String:
+	return display_name if display_name != "" else species_id
+
+func get_icon_texture() -> Texture2D:
+	if icon_override != null:
+		return icon_override
+	
+	if anim and anim.sprite_frames:
+		var frames := anim.sprite_frames
+		var anim_name := anim.animation
+		if anim_name == "" and frames.get_animation_names().size() > 0:
+			return
+		
+		if frames.has_animation("idle"):
+			anim_name = "idle"
+		else:
+			anim_name = frames.get_animation_names()[0]
+
+		if frames.has_animation(anim_name) and frames.get_frame_count(anim_name) > 0:
+			return frames.get_frame_texture(anim_name, 0)
+
+	if has_node("Sprite2D"):
+		var spr := $Sprite2D as Sprite2D
+		if spr.texture:
+
+			return spr.texture
+
+	return null

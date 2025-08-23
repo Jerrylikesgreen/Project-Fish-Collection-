@@ -1,10 +1,11 @@
-[gd_scene load_steps=52 format=3 uid="uid://0epxcm5d0bqp"]
+[gd_scene load_steps=53 format=3 uid="uid://0epxcm5d0bqp"]
 
 [ext_resource type="Script" uid="uid://cyqiplgu6dlnn" path="res://Scripts/food_spawner.gd" id="1_2yvf5"]
 [ext_resource type="Script" uid="uid://c1ubmt1jik6qq" path="res://Scripts/fish_spawner.gd" id="1_8v7by"]
 [ext_resource type="Script" uid="uid://b6yvkgbh8t8bo" path="res://Scripts/test_level.gd" id="1_260qw"]
 [ext_resource type="Script" uid="uid://c48pwl472ti4m" path="res://Scripts/food_button.gd" id="2_3ihge"]
 [ext_resource type="Script" uid="uid://cdgj263ww2sy7" path="res://Scripts/fish_gacha.gd" id="3_8v7by"]
+[ext_resource type="Texture2D" uid="uid://g4afb1q70jwk" path="res://icon.svg" id="3_akkqd"]
 [ext_resource type="Script" uid="uid://bogxsy2tcltcy" path="res://Scripts/food_inventory.gd" id="4_8v7by"]
 [ext_resource type="Texture2D" uid="uid://dc2meyqrbsics" path="res://Assets/PNG/FishTank/fish tank v1.png" id="4_so54a"]
 [ext_resource type="Script" uid="uid://c2frm46fryv2j" path="res://Scripts/pop_up.gd" id="5_1rqgg"]
@@ -209,7 +210,6 @@ layer = 100
 [node name="FishSpawner" type="Node2D" parent="."]
 position = Vector2(431, 190)
 script = ExtResource("1_8v7by")
-fish_scene = ExtResource("8_sw8nc")
 
 [node name="Fish" parent="." instance=ExtResource("8_sw8nc")]
 position = Vector2(642, 281)
@@ -327,6 +327,7 @@ rotates = false
 [node name="Pod" parent="Tank/Gachas/Fish/FishGachaSprite/Path/Follow" instance=ExtResource("8_p51s7")]
 unique_name_in_owner = true
 position = Vector2(28.5029, 7.25159)
+scale = Vector2(2, 2)
 
 [node name="Knob" type="AnimatedSprite2D" parent="Tank/Gachas/Fish/FishGachaSprite"]
 unique_name_in_owner = true
@@ -395,12 +396,17 @@ max_text_lines = 2
 auto_width = true
 auto_height = true
 text_overrun_behavior = 4
+item_count = 2
 max_columns = 2
 same_column_width = true
 fixed_column_width = 200
 icon_mode = 0
 icon_scale = 0.5
 fixed_icon_size = Vector2i(100, 100)
+item_0/text = "Regular Food x 0"
+item_0/icon = ExtResource("3_akkqd")
+item_1/text = "Good Food x 0"
+item_1/icon = ExtResource("3_akkqd")
 script = ExtResource("4_8v7by")
 
 [node name="PlayerButton" type="GridContainer" parent="Tank"]
