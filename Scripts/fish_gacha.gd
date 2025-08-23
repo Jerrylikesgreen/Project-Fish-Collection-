@@ -45,6 +45,11 @@ func _on_pressed() -> void:
 	knob.set_visible(true)
 	knob.play("Running")
 	disabled = true
+<<<<<<< Updated upstream
+=======
+	
+	Events.fish_pack_button()
+>>>>>>> Stashed changes
 	
 	Events.fish_pack_button()
 >>>>>>> Stashed changes
