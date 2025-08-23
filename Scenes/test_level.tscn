@@ -507,7 +507,7 @@ grow_vertical = 2
 [node name="APack" type="Button" parent="PlayerGUI/FishPackMenu/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Pack A"
+text = "Pack A : 5 Bubbles"
 icon = ExtResource("21_y42of")
 alignment = 0
 icon_alignment = 2
@@ -516,7 +516,9 @@ script = ExtResource("23_v608p")
 [node name="BPack" type="Button" parent="PlayerGUI/FishPackMenu/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Pack B"
+text = "Pack B : 10 Bubbles
+
+"
 icon = ExtResource("21_y42of")
 alignment = 0
 icon_alignment = 2
@@ -525,7 +527,8 @@ script = ExtResource("24_0212m")
 [node name="CPack" type="Button" parent="PlayerGUI/FishPackMenu/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Pack C"
+text = "Pack C : 20 Bubbles
+"
 icon = ExtResource("21_y42of")
 alignment = 0
 icon_alignment = 2

@@ -18,10 +18,20 @@ func _on_button_pressed()->void:
 func _on_a()->void:
 	Events.fish_pack_selected("A")
 	set_visible(false)
+	Events.bubble_count_changed(-5)
 	
 func _on_b()->void:
+	if Globals.current_bubble_count < 10:
+		Events.display_player_message("You need 10 Bubbles!")
+		return
 	Events.fish_pack_selected("B")
 	set_visible(false)
+	Events.bubble_count_changed(-10)
+
 func _on_c()->void:
+	if Globals.current_bubble_count < 20:
+		Events.display_player_message("You need 20 Bubbles! Keep Popping!")
+		return
 	Events.fish_pack_selected("C")
 	set_visible(false)
+	Events.bubble_count_changed(-20)

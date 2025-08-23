@@ -34,9 +34,11 @@ func bubble_count_changed(bubble_count:int)->void:
 			display_player_message("Pop the Bubbles!")
 		display_player_message("You need more Bubbles!")
 		_sv = 1 + _sv
+		print(new_bubble_count)
 		return
 	Globals.current_bubble_count = new_bubble_count
 	emit_signal("bubble_count_changed_signal", new_bubble_count)
+	print("End")
 
 
 func fish_pack_button()->void:
