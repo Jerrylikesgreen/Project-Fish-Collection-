@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b3h8ki2hwmy32"
+path="res://.godot/imported/fish click.ogg-5c658d5de17560bd42e16b8fdc9d030f.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/OGG/SFX/fish click.ogg"
+dest_files=["res://.godot/imported/fish click.ogg-5c658d5de17560bd42e16b8fdc9d030f.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

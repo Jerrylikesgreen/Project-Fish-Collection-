@@ -13,7 +13,6 @@ extends Button
 @export var wait_for_spawn_anim: bool = false
 @export var fish_pack_pool: Array[FishPackResource]
 
-# ✅ make costs POSITIVE
 @export var entry_cost: int = 5          # gate to press button
 @export var cost_pack_a: int = 5
 @export var cost_pack_b: int = 20
@@ -23,113 +22,213 @@ extends Button
 @export var active_fish: int = 0
 
 var _tween: Tween
+var _dbg_id := "GACHA"
 
 func _ready() -> void:
+	print("[%s] _ready" % _dbg_id)
+	print("[%s] nodes: gacha_sprite=%s follow=%s pod=%s pods=%s knob=%s" %
+		[_dbg_id, fish_gacha_sprite, follow, pod, pods, knob])
+	print("[%s] config: pool_size=%d  costs={entry:%d, A:%d, B:%d, C:%d}  path{from:%f,to:%f,dur:%f}  limits live<=%d" %
+		[_dbg_id, fish_pack_pool.size(), entry_cost, cost_pack_a, cost_pack_b, cost_pack_c, from_ratio, to_ratio, path_duration, max_fish_count])
+
 	pressed.connect(_on_pressed)
-	# Listen for the simple pack selection (1 arg)
+	print("[%s] connected: Button.pressed -> _on_pressed" % _dbg_id)
+
 	Events.fish_pack_selected_signal.connect(_on_fish_pack_selected)
+	print("[%s] connected: Events.fish_pack_selected_signal -> _on_fish_pack_selected" % _dbg_id)
 
 func _on_pressed() -> void:
+	var live := get_tree().get_nodes_in_group("fish").size()
+	print("[%s] _on_pressed: bubbles=%d  live=%d/%d  disabled=%s" %
+		[_dbg_id, Globals.current_bubble_count, live, max_fish_count, str(disabled)])
+
 	if Globals.current_bubble_count < entry_cost:
+		Events.display_player_message("[%s][BLOCK] not enough bubbles for entry (need %d)" % [_dbg_id, entry_cost])
+		print("[%s][BLOCK] entry gate failed: have=%d need=%d" % [_dbg_id, Globals.current_bubble_count, entry_cost])
 		return
-	if active_fish >= max_fish_count:
+	if live >= max_fish_count:
+		print("[%s][BLOCK] max_fish_count reached (%d/%d)" % [_dbg_id, live, max_fish_count])
+		Events.display_player_message("[%s][BLOCK] max_fish_count reached" % _dbg_id)
 		return
 
+	print("[%s] visuals: pods.play('Running'), knob.visible=true, knob.play('Running')" % _dbg_id)
 	pods.play("Running")
 	knob.visible = true
 	knob.play("Running")
+
 	disabled = true
-	Events.fish_pack_button()  # opens the pack choice UI elsewhere
+	print("[%s] button disabled=true" % _dbg_id)
+
+	print("[%s] emitting: _on_button_signal" % _dbg_id)
+	Events._on_button_signal.emit()
+
+	print("[%s] emitting: fish_pack_button (open chooser UI)" % _dbg_id)
+	Events.fish_pack_button()
 
 func _on_fish_pack_selected(fish_pack: String) -> void:
-	var fpr: FishPackResource
+	print("[%s] PACK SELECTED: '%s'" % [_dbg_id, fish_pack])
+
+	var fpr: FishPackResource = null
 	var cost := 0
+
+	# --- choose pack + cost ---
 	match fish_pack:
 		"A":
-			fpr = fish_pack_pool[0]
+			if fish_pack_pool.size() > 0:
+				fpr = fish_pack_pool[0]
 			cost = cost_pack_a
 		"B":
-			fpr = fish_pack_pool[1]
+			if fish_pack_pool.size() > 1:
+				fpr = fish_pack_pool[1]
 			cost = cost_pack_b
 		"C":
-			fpr = fish_pack_pool[2]
+			if fish_pack_pool.size() > 2:
+				fpr = fish_pack_pool[2]
 			cost = cost_pack_c
 		_:
+			print("[%s][ERROR] Unknown pack key: %s" % [_dbg_id, fish_pack])
 			disabled = false
+			print("[%s] button disabled=false (unknown pack)" % _dbg_id)
 			return
 
-	if Globals.current_bubble_count < cost:
-		disabled = false
-		return
-	Events.bubble_count_changed(-cost)  # ✅ subtract
+	print("[%s] pack picked: fpr=%s cost=%d" % [_dbg_id, fpr, cost])
 
-	var fish_keys: Array = fpr.fish_pool.keys()
-	if fish_keys.is_empty():
+	if fpr == null:
+		print("[%s][ERROR] Pack '%s' index missing in fish_pack_pool. size=%d" %
+			[_dbg_id, fish_pack, fish_pack_pool.size()])
 		disabled = false
+		print("[%s] button disabled=false (missing pack index)" % _dbg_id)
+		return
+	if not ("fish_pool" in fpr):
+		print("[%s][ERROR] FishPackResource missing 'fish_pool' for pack '%s' (resource=%s)" %
+			[_dbg_id, fish_pack, fpr])
+		disabled = false
+		print("[%s] button disabled=false (no fish_pool)" % _dbg_id)
+		return
+
+	# --- cost gate ---
+	print("[%s] cost gate: pack=%s cost=%d player_bubbles=%d" %
+		[_dbg_id, fish_pack, cost, Globals.current_bubble_count])
+	if Globals.current_bubble_count < cost:
+		print("[%s][BLOCK] Not enough bubbles for pack %s (have=%d need=%d)" %
+			[_dbg_id, fish_pack, Globals.current_bubble_count, cost])
+		disabled = false
+		print("[%s] button disabled=false (cost gate fail)" % _dbg_id)
+		return
+
+	# Deduct
+	Events.bubble_count_changed(-cost)
+	print("[%s] bubbles deducted: -%d -> now=%d" %
+		[_dbg_id, cost, Globals.current_bubble_count])
+
+	# --- pick fish ---
+	var fish_keys: Array = fpr.fish_pool.keys()
+	print("[%s] fish_pool keys (%d): %s" % [_dbg_id, fish_keys.size(), fish_keys])
+
+	if fish_keys.is_empty():
+		print("[%s][ERROR] fish_pool is empty for pack %s" % [_dbg_id, fish_pack])
+		disabled = false
+		print("[%s] button disabled=false (empty fish_pool)" % _dbg_id)
 		return
 
 	var species_id: String = fish_keys.pick_random()
-	var frames: SpriteFrames = fpr.fish_pool[species_id]
+	print("[%s] species picked: %s" % [_dbg_id, species_id])
 
-	print("Selected Pack:", fish_pack, " | Random Fish:", species_id, " | Frames:", frames)
+	if not fpr.fish_pool.has(species_id):
+		print("[%s][ERROR] picked key '%s' not in fish_pool keys=%s" %
+			[_dbg_id, species_id, fish_keys])
+		disabled = false
+		print("[%s] button disabled=false (picked missing key)" % _dbg_id)
+		return
 
+	var evolution_frames: SpriteFrames = fpr.fish_pool[species_id]
+	var frames_path := (evolution_frames.resource_path if evolution_frames else "")
+	print("[%s] frames resolved: %s  path=%s" %
+		[_dbg_id, str(evolution_frames), frames_path])
+
+	if evolution_frames == null:
+		print("[%s][ERROR] Frames is NULL for species '%s' in pack %s" %
+			[_dbg_id, species_id, fish_pack])
+		disabled = false
+		print("[%s] button disabled=false (null frames)" % _dbg_id)
+		return
+
+	print("[%s] SELECTED -> Pack=%s | Species=%s | Frames=%s" %
+		[_dbg_id, fish_pack, species_id, str(evolution_frames)])
+
+	# --- visuals ---
+	print("[%s] visuals: pods.pause(), knob.pause(), knob.visible=false, sprite.play('Spawn'), pod.play('Spin')" % _dbg_id)
 	pods.pause()
 	knob.pause()
 	knob.visible = false
 	fish_gacha_sprite.play("Spawn")
 	pod.play("Spin")
 
+	print("[%s] path tween: from=%f to=%f dur=%f" %
+		[_dbg_id, from_ratio, to_ratio, path_duration])
 	await _run_path(from_ratio, to_ratio, path_duration)
-	
+
+	print("[%s] pod transform: pod.play('Transform') + pop_in" % _dbg_id)
 	pod.play("Transform")
 	await _pop_in(pod, 0.6, 4.0, 1.02, true, 0.18)
+	print("[%s] waiting for pod.animation_finished..." % _dbg_id)
 	await pod.animation_finished
+	print("[%s] pod animation finished" % _dbg_id)
 
-	Events.fish_rolled_signal.emit(fish_pack, species_id, frames)
+	# --- emit rolled + spawn ---
+	print("[%s] EMIT signals: fish_rolled_signal + spawn_fish(species=%s, frames.path=%s)" %
+		[_dbg_id, species_id, frames_path])
+	Events.fish_rolled_signal.emit(fish_pack, species_id, evolution_frames)
 
-	var display_name := species_id  
-	Events.spawn_fish(frames, species_id, display_name)
+	var display_name := species_id
+	Events.spawn_fish(evolution_frames, species_id, display_name)
 
 	follow.progress_ratio = from_ratio
 	disabled = false
+	print("[%s] cleanup: follow.progress_ratio=%f  disabled=false" % [_dbg_id, follow.progress_ratio])
 
 func _run_path(from: float, to: float, dur: float) -> void:
-	if _tween: _tween.kill()
+	if _tween:
+		print("[%s] tween: killing previous tween=%s" % [_dbg_id, _tween])
+		_tween.kill()
 	follow.loop = false
 	follow.progress_ratio = from
 	_tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	print("[%s] tween: follow.progress_ratio %f -> %f over %f" % [_dbg_id, from, to, dur])
 	_tween.tween_property(follow, "progress_ratio", to, dur)
 	await _tween.finished
+	print("[%s] tween: finished (progress_ratio=%f)" % [_dbg_id, follow.progress_ratio])
 
 func _notification(what):
 	if what == NOTIFICATION_TRANSFORM_CHANGED and scale != Vector2.ONE:
+		print("[%s] NOTIFICATION_TRANSFORM_CHANGED: forcing scale back to (1,1) was=%s" % [_dbg_id, str(scale)])
 		scale = Vector2.ONE
 
 func _pop_in(node: Node, from_s: float = 0.6, to_s: float = 1.0, overshoot: float = 1.08, fade: bool = true, t: float = 0.22) -> void:
 	var ci := node as CanvasItem
 	if fade and ci:
+		print("[%s] pop_in: fade from 0 -> 1 over %f on %s" % [_dbg_id, t, ci])
 		ci.modulate.a = 0.0
 
 	if node is Node2D:
-		# If your sprite isn’t centered at its middle, set its pivot here:
-		# (For Sprite2D/AnimatedSprite2D: ensure centered=true, or set pivot_offset)
+		print("[%s] pop_in: Node2D scale %f -> %f (overshoot %f)" % [_dbg_id, from_s, to_s, overshoot])
 		(node as Node2D).scale = Vector2(from_s, from_s)
 	elif node is Control:
+		print("[%s] pop_in: Control pivot to center, scale %f -> %f (overshoot %f)" % [_dbg_id, from_s, to_s, overshoot])
 		(node as Control).pivot_offset = (node as Control).size * 0.5
 		(node as Control).scale = Vector2(from_s, from_s)
 
 	var tw := create_tween()
 
-	# 1) Fade runs in parallel (optional)
 	if fade and ci:
 		tw.set_parallel(true)
 		tw.tween_property(ci, "modulate:a", 1.0, t).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		tw.set_parallel(false)
 
-	# 2) Scale overshoot then settle (sequential!)
 	tw.tween_property(node, "scale", Vector2(to_s * overshoot, to_s * overshoot), t)\
 		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	tw.tween_property(node, "scale", Vector2(to_s, to_s), 0.10)\
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 	await tw.finished
+	print("[%s] pop_in: finished for node=%s" % [_dbg_id, node])

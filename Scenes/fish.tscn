@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dsp6pyx71vaj4"]
+[gd_scene load_steps=32 format=3 uid="uid://dsp6pyx71vaj4"]
 
 [ext_resource type="Script" uid="uid://c37wotvnystf1" path="res://Scripts/fish_body.gd" id="1_hgn23"]
 [ext_resource type="Script" uid="uid://lggwoh4bq3qj" path="res://Scripts/fish.gd" id="1_jdl8t"]
@@ -10,6 +10,19 @@
 [ext_resource type="Material" uid="uid://cjdp5n0gwwarp" path="res://Resources/Shader/green_rarity.tres" id="7_fl3e6"]
 [ext_resource type="Material" uid="uid://dxh1vmoehjm6v" path="res://Resources/Shader/pink_rarity.tres" id="8_clm4a"]
 [ext_resource type="FontFile" uid="uid://b0pnvxy3ibar" path="res://Assets/Font/Better VCR 9.0.1.ttf" id="10_sd48r"]
+[ext_resource type="Script" uid="uid://75m2s85mdg00" path="res://Scripts/fish_sfx.gd" id="11_sd48r"]
+[ext_resource type="AudioStream" uid="uid://b3h8ki2hwmy32" path="res://Assets/OGG/SFX/fish click.ogg" id="13_dtff2"]
+[ext_resource type="AudioStream" uid="uid://cvkyitysdqtg0" path="res://Assets/OGG/coin.ogg" id="13_v5k5h"]
+[ext_resource type="AudioStream" uid="uid://dc3los4rqiyq2" path="res://Assets/OGG/bloom.ogg" id="14_qcs6c"]
+[ext_resource type="AudioStream" uid="uid://bhyuhybrm1m7m" path="res://Assets/OGG/SFX/fish eating.ogg" id="15_62nyy"]
+[ext_resource type="AudioStream" uid="uid://4l35vkbfgtfi" path="res://Assets/OGG/liquid.ogg" id="15_m0pku"]
+[ext_resource type="AudioStream" uid="uid://5yy88c7v334r" path="res://Assets/OGG/pop2.mp3" id="16_iy0f1"]
+[ext_resource type="AudioStream" uid="uid://isd4reyp784x" path="res://Assets/OGG/pop1.mp3" id="16_v5k5h"]
+[ext_resource type="AudioStream" uid="uid://2mrrbxcf5a7p" path="res://Assets/OGG/Splash2.ogg" id="17_dtff2"]
+[ext_resource type="AudioStream" uid="uid://dq42rr5ohb8by" path="res://Assets/OGG/Splash.ogg" id="18_62nyy"]
+[ext_resource type="AudioStream" uid="uid://vd7s4tvtqf88" path="res://Assets/OGG/SFX/shiny gacha open.ogg" id="21_po6i4"]
+[ext_resource type="AudioStream" uid="uid://bwhdqorjn6ttl" path="res://Assets/OGG/SFX/food spit.ogg" id="22_qa415"]
+[ext_resource type="AudioStream" uid="uid://c6o0x4abnmj2r" path="res://Assets/OGG/SFX/fish grown.ogg" id="23_o03n1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xu20i"]
 radius = 12.1655
@@ -60,14 +73,22 @@ motion_mode = 1
 script = ExtResource("1_hgn23")
 fish_sprite_frames = ExtResource("4_21uvr")
 evolution_frames = ExtResource("4_csmc7")
-speed = 90.0
-avoid_distance = 50.0
-avoid_strength = 2.0
+speed = 100.0
+change_direction_interval = 4.0
+turn_smoothness = 2.0
+body_radius = 20.0
+avoid_strength = 4.0
+center_pull = 0.9
+corner_boost = 5.0
+jitter_strength = 0.1
 
-[node name="FishSprite" type="AnimatedSprite2D" parent="FishBody"]
+[node name="Tilt" type="Node2D" parent="FishBody"]
+unique_name_in_owner = true
+
+[node name="FishSprite" type="AnimatedSprite2D" parent="FishBody/Tilt"]
 unique_name_in_owner = true
 sprite_frames = ExtResource("4_21uvr")
-animation = &"Cry"
+animation = &"Idle"
 autoplay = "Idle"
 script = ExtResource("6_csmc7")
 rarity_shader_pool = Array[ShaderMaterial]([ExtResource("5_csmc7"), ExtResource("7_fl3e6"), ExtResource("8_clm4a")])
@@ -136,3 +157,8 @@ text = "$"
 label_settings = SubResource("LabelSettings_fll1f")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="FishSFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+script = ExtResource("11_sd48r")
+track_pool = Array[AudioStream]([ExtResource("14_qcs6c"), ExtResource("13_dtff2"), ExtResource("13_v5k5h"), ExtResource("15_62nyy"), ExtResource("15_m0pku"), ExtResource("16_v5k5h"), ExtResource("16_iy0f1"), ExtResource("17_dtff2"), ExtResource("18_62nyy"), ExtResource("21_po6i4"), ExtResource("22_qa415"), ExtResource("23_o03n1")])

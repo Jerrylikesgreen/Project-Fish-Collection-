@@ -1,86 +1,82 @@
 class_name FishBody
 extends CharacterBody2D
 
+signal evolution_signal
+signal fish_ate(r:int)
+
 @export var fish_sprite_frames: SpriteFrames
 @export var evolution_frames: SpriteFrames
+@export var species_id: String = ""
 @onready var fish_sensor: FishSensor = %FishSensor
-
-# ── Movement / Wander ───────────────────────────────────────
-@export var speed: float = 60.0
-@export var change_direction_interval: float = 3.0     ## seconds between random headings
-@export var turn_smoothness: float = 5.0               ## higher = slower to turn (more smoothing)
-
-# ── Edge Handling ───────────────────────────────────────────
-@export var padding: float = 20.0                      ## keep this far from screen edges
-@export var body_radius: float = 12.0                  ## half-size of the sprite/body to avoid clipping
-@export var avoid_distance: float = 120.0              ## start steering away when within this distance
-@export var avoid_strength: float = 3.0                ## how hard to steer away from edges
-@export var center_pull: float = 0.8                   ## mild bias toward view center while evading
-@export var corner_boost: float = 1.5                  ## extra push when near two edges (a corner)
-@export var evade_turn_multiplier: float = 3.0         ## turn faster while evading
-@export var min_evade_pause: float = 0.3               ## pause wander retargeting while evading (sec)
-@export var jitter_strength: float = 0.05              ## tiny randomness to avoid perfect orbits
-@export var _is_hungry: bool = false 
-# ── Visuals ────────────────────────────────────────────────
-
+@onready var fish_sfx: AudioStreamPlayer = %FishSFX
 @onready var marker_2d: Marker2D = %Marker2D
 @onready var fish_sprite: AnimatedSprite2D = %FishSprite
 @onready var hunger_tick: Timer = %HungerTick
 
+# ── Movement / Wander ───────────────────────────────────────
+@export var speed: float = 60.0
+@export var change_direction_interval: float = 3.0     # seconds between random headings
+@export var turn_smoothness: float = 5.0               # higher = slower to turn (more smoothing)
+
+# ── Edge Handling ───────────────────────────────────────────
+@export var padding: float = 20.0                      # keep this far from screen edges
+@export var body_radius: float = 12.0                  # half-size of the sprite/body to avoid clipping
+@export var avoid_distance: float = 120.0              # start steering away when within this distance
+@export var avoid_strength: float = 3.0                # how hard to steer away from edges
+@export var center_pull: float = 0.8                   # mild bias toward view center while evading
+@export var corner_boost: float = 1.5                  # extra push when near two edges (a corner)
+@export var evade_turn_multiplier: float = 3.0         # turn faster while evading
+@export var min_evade_pause: float = 0.3               # pause wander retargeting while evading (sec)
+@export var jitter_strength: float = 0.05              # tiny randomness to avoid perfect orbits
+@export var _is_hungry: bool = false
+
+# ── State ───────────────────────────────────────────────────
 var direction: Vector2 = Vector2.RIGHT
 var target_direction: Vector2 = Vector2.RIGHT
 var change_timer: float = 0.0
 var _consumed_food_value: int = 0
-var _evolved:bool = false
-
+var _evolved: bool = false
 
 func _ready() -> void:
 	randomize()
 	_set_new_direction()
 	hunger_tick.timeout.connect(_on_hunger_tick)
 
-
-
-
 func _physics_process(delta: float) -> void:
 	change_timer -= delta
 
-	var evading := _apply_edge_avoidance(delta)
+	# --- evade edges first ---
+	var evading: bool = _apply_edge_avoidance(delta)
 
-	# Only pick a new random heading if we’re NOT evading
+	# --- random wander if not evading and timer elapsed ---
 	if change_timer <= 0.0 and not evading:
 		_set_new_direction()
-	
-	var seeking := false
+
+	# --- seek food if hungry (overrides target) ---
 	if _is_hungry and not evading and fish_sensor:
 		var t := fish_sensor.get_target()
 		if t and is_instance_valid(t):
 			var to_food := (t.global_position - global_position)
-			if to_food.length() > 0.001:
+			if to_food.length_squared() > 1e-6:
 				target_direction = to_food.normalized()
-				seeking = true
 
-	# Turn faster when evading
+	# --- steer toward target (faster when evading) ---
 	var turn := turn_smoothness * (evade_turn_multiplier if evading else 1.0)
 	target_direction = target_direction.normalized()
 	direction = direction.lerp(target_direction, delta * turn).normalized()
 
-	# Move
+	# --- move ---
 	velocity = direction * speed
 	move_and_slide()
+
 	_eat_fish()
-	
 
-
-
-	# Safety net: clamp & reflect if we somehow touched the bounds
 	_reflect_if_clamped()
 
-	# Face movement direction
-	if direction.length() > 0.001:
-		fish_sprite.rotation = direction.angle()
+	if direction.length_squared() > 0.0:
+		var target_rot := direction.angle()
+		fish_sprite.rotation = lerp_angle(fish_sprite.rotation, target_rot, delta * 10.0)
 
-## Calculate safe rect in WORLD space (camera-aware)
 func _get_safe_rect() -> Rect2:
 	var vp_size: Vector2 = get_viewport().get_visible_rect().size
 	var world_from_screen: Transform2D = get_canvas_transform().affine_inverse()
@@ -95,7 +91,7 @@ func _get_safe_rect() -> Rect2:
 	return Rect2(Vector2(min_x, min_y), Vector2(max_x - min_x, max_y - min_y))
 
 # Soft steering away from edges; adjusts target_direction and returns whether we’re near edges
-func _apply_edge_avoidance(delta: float) -> bool:
+func _apply_edge_avoidance(_delta: float) -> bool:
 	var r := _get_safe_rect()
 	var min_x := r.position.x
 	var min_y := r.position.y
@@ -177,39 +173,69 @@ func _reflect_if_clamped() -> void:
 func _set_new_direction() -> void:
 	target_direction = Vector2(randf() * 2.0 - 1.0, randf() * 2.0 - 1.0).normalized()
 	change_timer = randf_range(change_direction_interval * 0.5, change_direction_interval * 1.5)
-	
-	
-func _eat_fish():
-	if !_is_hungry:
-		return	
+
+func _eat_fish() -> void:
+	if not _is_hungry:
+		return
 	for i in range(get_slide_collision_count()):
 		var c := get_slide_collision(i)
 		var hit := c.get_collider()
-		if hit:	
-			print("Fish ate:", hit)
+		if hit:
+			print("Fish ate:", hit._rarity)
 			hit.call_deferred("queue_free")
-			fish_sensor.consume_food(hit)
-			_consumed_food_value = _consumed_food_value + 1
+			if fish_sensor:
+				fish_sensor.consume_food(hit)
+			_consumed_food_value += 1 
+			emit_signal("fish_ate", hit._rarity)
 			fish_sprite.play("Eat")
 			_is_hungry = false
 			_check_hunger_value()
+			if fish_sfx and "track_pool" in fish_sfx and fish_sfx.track_pool.size() > 8:
+				fish_sfx.set_stream(fish_sfx.track_pool[8])
 
-
-func _on_hunger_tick()->void:
-	if !_is_hungry:
+func _on_hunger_tick() -> void:
+	if not _is_hungry:
 		_is_hungry = true
 		fish_sprite.play("Cry")
 
-
-func _check_hunger_value()->void:
-	if _evolved == true:
+func _check_hunger_value() -> void:
+	if _evolved:
 		return
 	if _consumed_food_value > 3:
-		fish_sprite.set_sprite_frames(evolution_frames)
-		fish_sprite.play("Evolve")
-		_evolved = true 
-		var old_hunger_tick = hunger_tick.get_wait_time()
-		
-		hunger_tick.set_wait_time(old_hunger_tick * 1.5 )
+		_switch_frames_and_play(evolution_frames, ["Evolve", "Idle", "idle"])
+		_evolved = true
 
-		
+		var old_hunger_tick := hunger_tick.wait_time
+		hunger_tick.wait_time = old_hunger_tick * 1.5
+
+
+func _switch_frames_and_play(evolution_frames: SpriteFrames, preferred: Array[String] = ["Evolve", "Idle", "idle"]) -> void:
+	if evolution_frames == null:
+		push_warning("FishBody: evolution_frames is NULL — cannot switch")
+		return
+
+	print("[FishBody] Switching to evolution_frames=%s" % str(evolution_frames))
+
+	fish_sprite.sprite_frames = evolution_frames
+	var names := evolution_frames.get_animation_names()
+	print("[FishBody] Applied evolution_frames. Animations=%s" % names)
+
+	if names.is_empty():
+		push_warning("FishBody: new SpriteFrames has no animations")
+		return
+
+	var pick := ""
+	for n in preferred:
+		if evolution_frames.has_animation(n):
+			pick = n
+			break
+	if pick == "":
+		pick = names[0]
+
+	print("[FishBody] Playing animation '%s' after evolve" % pick)
+
+	fish_sprite.animation = pick
+	fish_sprite.play(pick)
+
+
+	

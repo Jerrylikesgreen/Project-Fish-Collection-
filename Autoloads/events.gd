@@ -17,8 +17,13 @@ signal selling_fish_signal(enabled:bool)
 
 signal add_fish_to_collection_signal(fish:Fish)
 
+signal _on_button_signal
+
 signal collection_discover(species_id: String, display_name: String, icon: Texture2D)
 signal collection_add(species_id: String)  # for increments when “caught”
+signal play_sfx_signal(sfx: AudioStream)
+signal game_started
+signal global_sfx_signal(sfx: AudioStream)
 
 
 
@@ -66,9 +71,13 @@ func fish_pack_selected(fish_pack: String)->void:
 func sell_fish_button_pressed(value: bool) -> void:
 	selling_fish = value
 	emit_signal("selling_fish_signal", value)
+	
+func play_sfx(sfx: AudioStream)->void:
+	emit_signal("play_sfx_signal", sfx)
+	pass
 
-
-
+func game_start()-> void:
+	emit_signal("game_started")
 
 func add_fish_to_collection(fish:Fish)->void:
 	emit_signal("add_fish_to_collection_signal", fish)

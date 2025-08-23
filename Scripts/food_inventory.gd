@@ -27,10 +27,10 @@ func _ready() -> void:
 	Events.collection_add.connect(_on_add)  # if you gate counts on “caught”
 	Events.fish_spawned.connect(_on_spawned) # if you count spawns, not catches
 
-func _on_discover(species_id: String, name: String, icon: Texture2D) -> void:
+func _on_discover(species_id: String, f_name: String, icon: Texture2D) -> void:
 	if not _entries.has(species_id):
 		_entries[species_id] = Entry.new()
-		_entries[species_id].name = name
+		_entries[species_id].name = f_name
 		_entries[species_id].icon = icon
 		_entries[species_id].count = 0
 		_refresh_list()
@@ -42,10 +42,10 @@ func _on_add(species_id: String) -> void:
 
 func _on_spawned(fish: Fish) -> void:
 	var id := fish.species_id
-	var name := fish.get_collection_name()
+	var f_name := fish.get_collection_name()
 	if not _entries.has(id):
 		_entries[id] = Entry.new()
-		_entries[id].name = name
+		_entries[id].name = f_name
 		_entries[id].icon = fish.get_icon_texture()
 		_entries[id].count = 0
 	_entries[id].count += 1

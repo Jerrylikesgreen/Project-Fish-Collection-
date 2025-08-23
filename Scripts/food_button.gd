@@ -14,6 +14,7 @@ func _on_button_pressed() -> void:
 		return
 	disabled = true  
 	Events.spawn_food_button_pressed()
+	Events._on_button_signal.emit()
 
 func _on_popup_finished() -> void:
 	disabled = false 

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dqt8tqx0ma4by"
+path="res://.godot/imported/screen tap.ogg-a79d63fadd63b2b5720025b2e3b487af.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/OGG/SFX/screen tap.ogg"
+dest_files=["res://.godot/imported/screen tap.ogg-a79d63fadd63b2b5720025b2e3b487af.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

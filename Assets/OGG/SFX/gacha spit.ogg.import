@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://vait3b1qgvtk"
+path="res://.godot/imported/gacha spit.ogg-b4db95eadf004c9aa6fd5a96f290cd25.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/OGG/SFX/gacha spit.ogg"
+dest_files=["res://.godot/imported/gacha spit.ogg-b4db95eadf004c9aa6fd5a96f290cd25.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

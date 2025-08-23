@@ -13,7 +13,11 @@ config_version=5
 config/name="Gacha Fish 08/21"
 run/main_scene="uid://0epxcm5d0bqp"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0.388235, 0.545098, 0.588235, 1)
+boot_splash/image="uid://bj0j1x0ytnjh5"
+config/icon="uid://bj0j1x0ytnjh5"
+config/macos_native_icon="uid://bj0j1x0ytnjh5"
+config/windows_native_icon="uid://bj0j1x0ytnjh5"
 
 [autoload]
 
@@ -26,6 +30,17 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/size/resizable=false
 window/stretch/mode="canvas_items"
+window/windows_native_icon=""
+
+[file_customization]
+
+folder_colors={
+"res://Assets/": "teal",
+"res://Autoloads/": "green",
+"res://Resources/": "yellow",
+"res://Scenes/": "orange",
+"res://Scripts/": "red"
+}
 
 [global_group]
 
@@ -43,6 +58,10 @@ Tap={
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(72, 10),"global_position":Vector2(81, 58),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
+
+[input_devices]
+
+pointing/android/enable_pan_and_scale_gestures=true
 
 [layer_names]
 

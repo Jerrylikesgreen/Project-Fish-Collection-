@@ -53,6 +53,7 @@ top_padding = 100.0
 launch_duration = 0.4
 
 [node name="FishFoodSprite" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(-1, -1)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_o3xqx")

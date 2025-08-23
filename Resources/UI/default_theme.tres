@@ -1,9 +1,23 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://cthsnn82p74vp"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://cthsnn82p74vp"]
 
 [ext_resource type="Texture2D" uid="uid://jeb8nscm8hb8" path="res://Assets/PNG/UI/large panel.png" id="1_76a3c"]
+[ext_resource type="StyleBox" uid="uid://bu6g8rhbddjou" path="res://Scenes/box.tres" id="1_id12a"]
+[ext_resource type="StyleBox" uid="uid://qredtc0mntgm" path="res://Scenes/box2.tres" id="2_0ts44"]
+[ext_resource type="StyleBox" uid="uid://b2b06d7yg6jqo" path="res://Scenes/box3.tres" id="2_h4onc"]
+[ext_resource type="Texture2D" uid="uid://dedm0cbjsvvhc" path="res://Assets/Screens + Panels/large panel.png" id="4_h4onc"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h4onc"]
+texture = ExtResource("4_h4onc")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ot8jh"]
 texture = ExtResource("1_76a3c")
 
 [resource]
+Button/colors/font_color = Color(0.984314, 0.776471, 0.854902, 0.901961)
+Button/colors/font_outline_color = Color(0, 0, 0.282353, 0.878431)
+Button/constants/outline_size = 10
+Button/styles/hover = ExtResource("2_h4onc")
+Button/styles/normal = ExtResource("1_id12a")
+Button/styles/pressed = ExtResource("2_0ts44")
+ItemList/styles/panel = SubResource("StyleBoxTexture_h4onc")
 Panel/styles/panel = SubResource("StyleBoxTexture_ot8jh")

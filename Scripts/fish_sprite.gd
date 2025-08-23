@@ -19,6 +19,6 @@ func add_rarity(rarity: String) -> void:
 		self.material = null       # remove effect
 	print("Adding Rarity")
 
-func set_rarity_param(name: String, value) -> void:
+func set_rarity_param(f_name: String, value) -> void:
 	if self.material is ShaderMaterial:
-		self.material.set_shader_parameter(name, value)
+		self.material.set_shader_parameter(f_name, value)

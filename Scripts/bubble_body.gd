@@ -6,6 +6,7 @@ extends RigidBody2D
 @export var life_after_top: float = 0.8
 @onready var bubble_sprite: BubbleSprite = %BubbleSprite
 @export var bubble_value: int = 1
+@onready var bubble_sfx: AudioStreamPlayer = %BubbleSFX
 
 # Sway/bobble tuning
 @export var sway_force: float = 12.0          # left-right wiggle force
@@ -63,7 +64,6 @@ func _physics_process(delta: float) -> void:
 
 # Top edge of the *visible* screen in world coords (works with moving/zooming Camera2D)
 func _top_visible_y() -> float:
-	var vp_size: Vector2 = get_viewport().get_visible_rect().size
 	var world_from_screen: Transform2D = get_canvas_transform().affine_inverse()
 	var top_left_world: Vector2 = world_from_screen * Vector2.ZERO
 	return top_left_world.y
@@ -83,5 +83,5 @@ func _on_pop_input(_viewport: Viewport, event: InputEvent, _shape_idx: int) -> v
 func _do_pop() -> void:
 	_popping = true
 	bubble_sprite.play("Pop")
-	print("Pop")
+	bubble_sfx.play()
 	Events.bubble_count_changed(bubble_value)

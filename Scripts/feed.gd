@@ -12,3 +12,5 @@ func _ready() -> void:
 func _on_pressed() -> void:
 	_pressed = !_pressed
 	Events.sell_fish_button_pressed(_pressed)
+	if _pressed:
+		Events._on_button_signal.emit()

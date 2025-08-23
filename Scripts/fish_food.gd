@@ -8,8 +8,9 @@ extends RigidBody2D
 @export var random_flip: bool = true
 @export var launch_speed_left: float = 220.0   # px/s to the left during launch
 @export var launch_duration: float = 0.20      # seconds of “shoot left”
+@onready var fish_food_sprite: AnimatedSprite2D = %FishFoodSprite
 
-
+var _rarity
 var _launch_timer: float = 0.0
 var _in_launch := true
 var drift_timer: float = 0.0
@@ -59,6 +60,5 @@ func _physics_process(delta: float) -> void:
 			global_position.y = top_y
 
 func _top_visible_y() -> float:
-	var vp_size: Vector2 = get_viewport().get_visible_rect().size
 	var world_from_screen: Transform2D = get_canvas_transform().affine_inverse()
 	return (world_from_screen * Vector2.ZERO).y

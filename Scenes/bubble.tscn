@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cu3h8r4da4y8"]
+[gd_scene load_steps=14 format=3 uid="uid://cu3h8r4da4y8"]
 
 [ext_resource type="Texture2D" uid="uid://ebq77tnok2fm" path="res://Assets/PNG/Bubbles/bubble_1.png" id="1_mher7"]
 [ext_resource type="Texture2D" uid="uid://hpnm1s65quob" path="res://Assets/PNG/Bubbles/bubble_0.png" id="2_sqrnf"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bw27kwcqlskvd" path="res://Assets/PNG/Bubbles/pop_4.png" id="8_juj35"]
 [ext_resource type="Script" uid="uid://bhul7j2dujh6q" path="res://Scripts/bubble.gd" id="9_sqrnf"]
 [ext_resource type="Script" uid="uid://c7g35akfmxon" path="res://Scripts/bubble_body.gd" id="10_x6cym"]
+[ext_resource type="AudioStream" uid="uid://5yy88c7v334r" path="res://Assets/OGG/pop2.mp3" id="12_ympl2"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6vhsv"]
 animations = [{
@@ -76,3 +77,7 @@ script = ExtResource("9_sqrnf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_il1fm")
+
+[node name="BubbleSFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("12_ympl2")

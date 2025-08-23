@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bf1brx5ap83aq"
+path="res://.godot/imported/gacha open.ogg-93cc84676862e8763ceb26a114688571.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/OGG/SFX/gacha open.ogg"
+dest_files=["res://.godot/imported/gacha open.ogg-93cc84676862e8763ceb26a114688571.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

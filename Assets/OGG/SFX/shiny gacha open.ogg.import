@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://vd7s4tvtqf88"
+path="res://.godot/imported/shiny gacha open.ogg-8ffd9469dd321971ba46d0b13e2de153.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/OGG/SFX/shiny gacha open.ogg"
+dest_files=["res://.godot/imported/shiny gacha open.ogg-8ffd9469dd321971ba46d0b13e2de153.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

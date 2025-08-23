@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bwhdqorjn6ttl"
+path="res://.godot/imported/food spit.ogg-921e71f208d97add1922fbef9315a6c0.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/OGG/SFX/food spit.ogg"
+dest_files=["res://.godot/imported/food spit.ogg-921e71f208d97add1922fbef9315a6c0.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
