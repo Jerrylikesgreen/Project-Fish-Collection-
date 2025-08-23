@@ -251,6 +251,7 @@ offset_top = -300.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 6
+mouse_filter = 2
 
 [node name="Food" type="Button" parent="Tank/Gachas"]
 unique_name_in_owner = true
@@ -571,6 +572,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Camera" type="Camera2D" parent="."]
 offset = Vector2(640, 360)

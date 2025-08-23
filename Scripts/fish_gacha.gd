@@ -31,7 +31,7 @@ func _ready() -> void:
 func _on_pressed() -> void:
 	if Globals.current_bubble_count < cost_bubbles:
 		return
-<<<<<<< Updated upstream
+
 	if active_fish < max_fish_count: 
 		pods.play("Running")
 		knob.set_visible(true)
@@ -40,44 +40,18 @@ func _on_pressed() -> void:
 		Events.fish_pack_button()
 	else:
 		return
-=======
+
 	pods.play("Running")
 	knob.set_visible(true)
 	knob.play("Running")
 	disabled = true
-<<<<<<< Updated upstream
-=======
-	
 	Events.fish_pack_button()
->>>>>>> Stashed changes
-	
-	Events.fish_pack_button()
->>>>>>> Stashed changes
 	
 func _on_fish_pack_selected(fish_pack: String) -> void:
 	var fpr: FishPackResource
 	var new_frames: SpriteFrames
-<<<<<<< Updated upstream
-=======
-	if fish_pack == "A":
-		
-		fpr = fish_pack_pool[0]
-		new_frames = fpr.fish_pool.get("Blob")        ## Todo, to pick a fish at random.
-		print("On Fish Pack Selected", new_frames )
-		
-	if fish_pack == "B":
-		
-		fpr = fish_pack_pool[1]
-		new_frames = fpr.fish_pool.get("Betta")
-		print("On Fish Pack Selected", fpr )
-		
-	if fish_pack == "C":
-		
-		fpr = fish_pack_pool[2]
-		new_frames = fpr.fish_pool.get("Jiggly Puffish")        ## Todo, to pick a fish at random.
-		print("On Fish Pack Selected", new_frames )
->>>>>>> Stashed changes
-	
+
+
 	match fish_pack:
 		"A":
 			fpr = fish_pack_pool[0]

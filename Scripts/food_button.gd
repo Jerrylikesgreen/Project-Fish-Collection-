@@ -12,8 +12,8 @@ func _ready() -> void:
 func _on_button_pressed() -> void:
 	if Globals.current_bubble_count < food_cost:
 		return
-	disabled = true  # disable button
+	disabled = true  
 	Events.spawn_food_button_pressed()
 
 func _on_popup_finished() -> void:
-	disabled = false  # re-enable when done
+	disabled = false 

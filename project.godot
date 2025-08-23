@@ -52,6 +52,7 @@ Tap={
 2d_physics/layer_4="GUI"
 2d_physics/layer_5="Misc"
 2d_physics/layer_6="Wall"
+2d_physics/layer_7="Bubbles"
 
 [rendering]
 
