@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=3 uid="uid://0epxcm5d0bqp"]
+[gd_scene load_steps=86 format=3 uid="uid://0epxcm5d0bqp"]
 
 [ext_resource type="Script" uid="uid://cyqiplgu6dlnn" path="res://Scripts/food_spawner.gd" id="1_2yvf5"]
 [ext_resource type="Script" uid="uid://c1ubmt1jik6qq" path="res://Scripts/fish_spawner.gd" id="1_8v7by"]
@@ -66,6 +66,7 @@
 [ext_resource type="AudioStream" uid="uid://dqt8tqx0ma4by" path="res://Assets/OGG/SFX/screen tap.ogg" id="48_mdy11"]
 [ext_resource type="Texture2D" uid="uid://bm2qs1m06deqp" path="res://Assets/PNG/Pod/Pods Choice 4.png" id="49_ak5s2"]
 [ext_resource type="AudioStream" uid="uid://vd7s4tvtqf88" path="res://Assets/OGG/SFX/shiny gacha open.ogg" id="49_jqpsy"]
+[ext_resource type="Script" uid="uid://dbnrbqln315ux" path="res://Scenes/fish_count.gd" id="54_ehbil"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u02th"]
 atlas = ExtResource("7_3qleg")
@@ -322,10 +323,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -264.0
-offset_top = -47.0
-offset_right = -164.0
-offset_bottom = 53.0
+offset_left = -236.0
+offset_top = -21.0
+offset_right = -136.0
+offset_bottom = 79.0
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -630,10 +631,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -18.0
-offset_top = -185.0
-offset_right = 22.0
-offset_bottom = -162.0
+offset_left = -43.0
+offset_top = -180.0
+offset_right = 26.0
+offset_bottom = -151.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "TEst"
@@ -664,6 +665,14 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="FishCount" type="Label" parent="PlayerGUI"]
+offset_left = 1048.0
+offset_top = 114.0
+offset_right = 1088.0
+offset_bottom = 134.0
+label_settings = ExtResource("42_tjfcu")
+script = ExtResource("54_ehbil")
 
 [node name="Camera" type="Camera2D" parent="."]
 offset = Vector2(640, 360)

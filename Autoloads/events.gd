@@ -35,10 +35,10 @@ func spawn_food_button_pressed() -> void:
 	emit_signal("spawn_fish_food") 
 
 func spawn_fish(base_frames: SpriteFrames, species_id: String, display_name: String, evo_frames: SpriteFrames = null) -> void:
-	# Emit with evo_frames (may be null if caller doesn’t provide it)
 	emit_signal("spawn_fish_signal", base_frames, evo_frames, species_id, display_name)
 
-	display_player_message("What did you get?")
+	display_player_message("I wonder what you will get???")
+	
 
 	print("[Events] spawn_fish -> species=%s | base_frames=%s | evo_frames=%s | name=%s"
 		% [species_id, str(base_frames), str(evo_frames), display_name])
