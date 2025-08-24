@@ -1,11 +1,13 @@
-extends TextureButton
+class_name CollectionButton extends TextureButton
 
 
-# Called when the node enters the scene tree for the first time.
+var _pressed: bool = false
 func _ready() -> void:
-	pass # Replace with function body.
+	pressed.connect(_on_collections_button_pressed)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _on_collections_button_pressed() -> void:
+	_pressed = not _pressed
+	print("[CollectionsButton] pressed ->", _pressed)
+	Events.open_collections_screen.emit(_pressed)
+	Events._on_button_signal.emit()

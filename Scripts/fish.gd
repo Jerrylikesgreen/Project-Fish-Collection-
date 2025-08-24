@@ -43,6 +43,7 @@ const RARITY_WEIGHTS := [55, 25, 15, 5]
 
 var _rng := RandomNumberGenerator.new()
 
+
 func _ready() -> void:
 	add_to_group("fish")
 	sell_button.pressed.connect(_on_sell_button_pressed)
@@ -102,6 +103,7 @@ func _on_sell_button_pressed() -> void:
 	fish_sfx.set_stream(fish_sfx.track_pool[2])
 	fish_sfx.play()
 	Events.bubble_count_changed(3)
+	Events.fish_sold()
 	await fish_sfx.finished
 	queue_free()
 

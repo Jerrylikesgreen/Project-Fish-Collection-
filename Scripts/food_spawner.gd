@@ -32,6 +32,7 @@ func spawn_fish_food() -> void:
 		return
 
 	Events.bubble_count_changed(-bubble_cost)
+	await get_tree().get_frame()
 
 	var pos := _spawn_pos()  # <- deterministic
 	var food := FISH_FOOD.instantiate()
