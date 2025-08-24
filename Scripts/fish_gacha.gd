@@ -148,13 +148,13 @@ func _on_fish_pack_selected(fish_pack: String) -> void:
 	print("[%s] SELECTED -> Pack=%s | Species=%s | Frames=%s" %
 		[_dbg_id, fish_pack, species_id, str(evolution_frames)])
 
-	# --- visuals ---
 	print("[%s] visuals: pods.pause(), knob.pause(), knob.visible=false, sprite.play('Spawn'), pod.play('Spin')" % _dbg_id)
 	pods.pause()
 	knob.pause()
 	knob.visible = false
 	fish_gacha_sprite.play("Spawn")
-		# --- SPAWN POD + ASSIGN DATA ---
+
+	# --- SPAWN POD + ASSIGN DATA ---
 	var pod := POD.instantiate() as AnimatedSprite2D
 	print("[%s] SPAWN POD instanced: %s" % [_dbg_id, str(pod)])
 
@@ -163,23 +163,15 @@ func _on_fish_pack_selected(fish_pack: String) -> void:
 	if pod.has_method("play"):
 		pod.play()
 
-	# If your Pod script exposes fields, set them (these checks are safe even if it doesn't)
-	if "fish_pack" in pod:
-		pod.fish_pack = fish_pack
-	if "species_id" in pod:
-		pod.species_id = species_id
-	if "evolution_frames" in pod:
-		pod.evolution_frames = evolution_frames
-	if "frames_path" in pod:
-		pod.frames_path = frames_path
-	if "follow" in pod:
-		pod.follow = marker
-	if "from_ratio" in pod:
-		pod.from_ratio = from_ratio
-	if "to_ratio" in pod:
-		pod.to_ratio = to_ratio
-	if "path_duration" in pod:
-		pod.path_duration = path_duration
+	# Optional data pass-through (safe if fields exist)
+	if "fish_pack" in pod:        pod.fish_pack       = fish_pack
+	if "species_id" in pod:       pod.species_id      = species_id
+	if "evolution_frames" in pod: pod.evolution_frames= evolution_frames
+	if "frames_path" in pod:      pod.frames_path     = frames_path
+	if "follow" in pod:           pod.follow          = marker
+	if "from_ratio" in pod:       pod.from_ratio      = from_ratio
+	if "to_ratio" in pod:         pod.to_ratio        = to_ratio
+	if "path_duration" in pod:    pod.path_duration   = path_duration
 
 	print("[%s] POD DATA: pack=%s species=%s evo_frames=%s path=%s" %
 		[_dbg_id, fish_pack, species_id, str(evolution_frames), frames_path])
@@ -188,7 +180,7 @@ func _on_fish_pack_selected(fish_pack: String) -> void:
 	print("[%s] path tween: from=%f to=%f dur=%f" % [_dbg_id, from_ratio, to_ratio, path_duration])
 	await _run_path(from_ratio, to_ratio, path_duration)
 
-	# --- TRANSFORM + POP ---
+	# --- TRANSFORM + POP IN ---
 	if pod.has_method("play"):
 		pod.play("Transform")
 	await _pop_in(pod, 0.6, 1.0, 1.02, true, 0.18)
@@ -203,12 +195,15 @@ func _on_fish_pack_selected(fish_pack: String) -> void:
 	Events.fish_rolled_signal.emit(fish_pack, species_id, evolution_frames)
 
 	var display_name := species_id
-	# If your Events.spawn_fish supports evo_frames as 4th param (recommended):
 	Events.spawn_fish(null, species_id, display_name, evolution_frames)
 
-	# Reset marker for next roll
+	# --- POP OUT + CLEANUP ---
+	await _pop_out(pod, 0.6, true, 0.16) # to_s=0.6, fade=true, t=0.16
+	# (pod is freed inside _pop_out)
+
 	marker.progress_ratio = from_ratio
 	print("[%s] cleanup: marker.progress_ratio=%f" % [_dbg_id, marker.progress_ratio])
+
 
 
 
@@ -254,3 +249,27 @@ func _pop_in(node: Node, from_s: float = 0.6, to_s: float = 1.0, overshoot: floa
 
 	await tw.finished
 	print("[%s] pop_in: finished for node=%s" % [_dbg_id, node])
+
+
+func _pop_out(node: Node, to_s: float = 0.6, fade: bool = true, t: float = 0.18, free_on_end: bool = true) -> void:
+	var ci: CanvasItem = node as CanvasItem
+
+	var tw := create_tween()
+
+	# optional fade in parallel
+	if fade and ci:
+		tw.set_parallel(true)
+		tw.tween_property(ci, "modulate:a", 0.0, t).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+		tw.set_parallel(false)
+
+	# slight nudge then shrink
+	tw.tween_property(node, "scale", Vector2(1.02, 1.02), 0.06)\
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	tw.tween_property(node, "scale", Vector2(to_s, to_s), t)\
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+
+	await tw.finished
+	print("[%s] pop_out: finished for node=%s" % [_dbg_id, node])
+
+	if free_on_end and is_instance_valid(node):
+		node.queue_free()

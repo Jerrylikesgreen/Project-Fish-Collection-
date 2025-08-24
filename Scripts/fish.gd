@@ -43,6 +43,7 @@ const RARITY_WEIGHTS := [55, 25, 15, 5]
 
 var _rng := RandomNumberGenerator.new()
 
+
 func _ready() -> void:
 	add_to_group("fish")
 	sell_button.pressed.connect(_on_sell_button_pressed)

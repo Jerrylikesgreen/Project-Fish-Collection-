@@ -43,8 +43,9 @@ func _ready() -> void:
 	hunger_tick.timeout.connect(_on_hunger_tick)
 
 func _physics_process(delta: float) -> void:
+	if !_is_hungry:
+		fish_sprite.play("Idle")
 	change_timer -= delta
-
 	# --- evade edges first ---
 	var evading: bool = _apply_edge_avoidance(delta)
 
@@ -68,11 +69,8 @@ func _physics_process(delta: float) -> void:
 	# --- move ---
 	velocity = direction * speed
 	move_and_slide()
-
 	_eat_fish()
-
 	_reflect_if_clamped()
-
 	if direction.length_squared() > 0.0:
 		var target_rot := direction.angle()
 		fish_sprite.rotation = lerp_angle(fish_sprite.rotation, target_rot, delta * 10.0)

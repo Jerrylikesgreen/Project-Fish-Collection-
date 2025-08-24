@@ -147,6 +147,6 @@ animations = [{
 
 [node name="Pod" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_trevy")
-animation = &"Spin"
+animation = &"Transform"
 autoplay = "Spin"
 script = ExtResource("4_m6rhs")

@@ -1,38 +1,48 @@
 extends Node
 
 signal spawn_fish_food
-
 signal player_message(new_message:String)
-
 signal bubble_count_changed_signal(bubble_count:int)
-
 signal spawn_fish_signal(base_frames: SpriteFrames, evo_frames: SpriteFrames, species_id: String, display_name: String)
-
 signal fish_spawned(fish: Fish)  # emitted by your spawner AFTER instancing
 signal fish_sold_signal
 signal fish_pack_button_pressed
 signal fish_pack_selected_signal(pack: String)  # UI chose A/B/C
 signal fish_rolled_signal(pack: String, species_id: String, frames: SpriteFrames)
-
 signal selling_fish_signal(enabled:bool)
-
 signal add_fish_to_collection_signal(fish:Fish)
-
+signal setting_button_pressed_signal
 signal _on_button_signal
-
 signal collection_discover(species_id: String, display_name: String, icon: Texture2D) # TODO - add in collectins a finc to catch and store this information and then display when evolve trigers. 
 signal collection_add(species_id: String)  # for increments when “caught”
 signal play_sfx_signal(sfx: AudioStream)
 signal game_started
 signal global_sfx_signal(sfx: AudioStream)
-
+signal open_collections_screen(enabled:bool)
 
 
 var selling_fish := false
 var _sv: int = 0
 var _sv2: int = 0 
+
+
 func spawn_food_button_pressed() -> void:
 	emit_signal("spawn_fish_food") 
+
+
+func upgrade_button_pressed() -> void:
+	if Globals.current_number_of_fish_in_tank < Globals.max_fish_count:
+		var needed = Globals.max_fish_count - Globals.current_number_of_fish_in_tank
+		display_player_message("You need " + str(needed) + " more fish in the tank.")
+		return
+
+	if Globals.max_fish_count > 12:
+		display_player_message("No more upgrades.")
+		return
+
+	display_player_message("You upgraded your tank!")
+	Globals.max_fish_count *= 2
+
 
 func spawn_fish(base_frames: SpriteFrames, species_id: String, display_name: String, evo_frames: SpriteFrames = null) -> void:
 	emit_signal("spawn_fish_signal", base_frames, evo_frames, species_id, display_name)
@@ -92,3 +102,8 @@ func add_fish_to_collection(fish:Fish)->void:
 func fish_sold()->void:
 	emit_signal("fish_sold_signal")
 	pass
+
+
+func _on_settings_button_pressed()->void:
+	emit_signal("setting_button_pressed_signal")
+	

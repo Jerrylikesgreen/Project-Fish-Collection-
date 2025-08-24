@@ -68,7 +68,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Cry",
-"speed": 2.5
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -82,7 +82,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Eat",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -105,7 +105,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Evolve",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -116,5 +116,5 @@ animations = [{
 }],
 "loop": true,
 "name": &"Idle",
-"speed": 10.0
+"speed": 2.0
 }]

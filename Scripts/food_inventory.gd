@@ -22,12 +22,7 @@ func _ready() -> void:
 	select_mode = ItemList.SELECT_SINGLE
 	print("[Collection] _ready: fixed_icon_size=%s select_mode=%d" % [str(fixed_icon_size), select_mode])
 
-	# Wire UI toggle
-	if collection_button:
-		collection_button.pressed.connect(_on_button_pressed)
-		print("[Collection] Connected CollectionButton.pressed")
-	else:
-		push_warning("[Collection] Missing %CollectionButton")
+	Events.open_collections_screen.connect(_on_button_pressed)
 
 	# Wire Events (defensive in case signals are missing)
 	if "collection_discover" in Events:
@@ -115,12 +110,12 @@ func _on_spawned(fish: Node) -> void:
 	_debug_dump("_on_spawned")
 
 
-func _on_button_pressed() -> void:
-	if collection_panel:
-		collection_panel.visible = not collection_panel.visible
-		print("[Collection] toggle panel -> %s" % (str(collection_panel.visible)))
+func _on_button_pressed(enabled:bool) -> void:
+	if visible:
+		set_visible(false)
+		print(false)
+		
 	else:
-		# fallback: toggle self
 		visible = not visible
 		print("[Collection] toggle self -> %s" % str(visible))
 
