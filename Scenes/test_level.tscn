@@ -1,4 +1,3 @@
-[gd_scene load_steps=94 format=3 uid="uid://0epxcm5d0bqp"]
 
 [ext_resource type="Script" uid="uid://cyqiplgu6dlnn" path="res://Scripts/food_spawner.gd" id="1_2yvf5"]
 [ext_resource type="Script" uid="uid://c1ubmt1jik6qq" path="res://Scripts/fish_spawner.gd" id="1_8v7by"]
@@ -8,8 +7,7 @@
 [ext_resource type="Script" uid="uid://cdgj263ww2sy7" path="res://Scripts/fish_gacha.gd" id="3_8v7by"]
 [ext_resource type="Script" uid="uid://bogxsy2tcltcy" path="res://Scripts/food_inventory.gd" id="4_8v7by"]
 [ext_resource type="Script" uid="uid://c2frm46fryv2j" path="res://Scripts/pop_up.gd" id="5_1rqgg"]
-[ext_resource type="Texture2D" uid="uid://c6x46bsx8qw5g" path="res://Assets/PNG/Gacha/Fish Gacha/GotchaPond 1-2-6.png" id="6_sw8nc"]
-[ext_resource type="Texture2D" uid="uid://djhwies83x7o3" path="res://Assets/PNG/FishTank/fish tank v2.png" id="6_tjfcu"]
+
 [ext_resource type="Texture2D" uid="uid://7e13eadbe4q4" path="res://Assets/PNG/Gacha/Fish Gacha/GotchaPond sheet.png" id="7_x6ft1"]
 [ext_resource type="PackedScene" uid="uid://dsp6pyx71vaj4" path="res://Scenes/fish.tscn" id="8_sw8nc"]
 [ext_resource type="Script" uid="uid://5woyao7aputs" path="res://Scripts/bubble_count.gd" id="9_3ihge"]
@@ -42,14 +40,7 @@
 [ext_resource type="Script" uid="uid://dqoi58q5kge1b" path="res://Scenes/collection_button.gd" id="33_ak5s2"]
 [ext_resource type="Texture2D" uid="uid://brg2fdkopky08" path="res://Assets/Buttons/quit button sprite sheet.png" id="36_giktf"]
 [ext_resource type="PackedScene" uid="uid://cl6d6ciy0nfuk" path="res://Scenes/bgm.tscn" id="36_u02th"]
-[ext_resource type="Script" uid="uid://43fkkkkth4dh" path="res://Scenes/settings_button.gd" id="37_c0jdj"]
-[ext_resource type="PackedScene" uid="uid://4bet4u0kpxok" path="res://Scenes/sfx.tscn" id="37_mf1sy"]
-[ext_resource type="StyleBox" uid="uid://byj8cwmd1chlu" path="res://Resources/x3.tres" id="37_uwunu"]
-[ext_resource type="Texture2D" uid="uid://byqu47t3r3whg" path="res://Assets/PNG/UI/upgrade button sprite sheet-2.png.png" id="38_30ic5"]
-[ext_resource type="Texture2D" uid="uid://t2npf2hmjwnr" path="res://Assets/PNG/UI/settings button sprite sheet-1.png.png" id="38_udux3"]
-[ext_resource type="StyleBox" uid="uid://cpxqbprqfspmi" path="res://Resources/x2.tres" id="38_uwunu"]
-[ext_resource type="Texture2D" uid="uid://kr4gf33v2psy" path="res://Assets/Buttons/button 3.png" id="39_1net0"]
-[ext_resource type="Texture2D" uid="uid://cslyfsm3epmwd" path="res://Assets/PNG/UI/upgrade button sprite sheet-3.png.png" id="39_5ypgn"]
+
 [ext_resource type="Texture2D" uid="uid://bni4juyv2vv8t" path="res://Assets/PNG/UI/settings button sprite sheet-3.png.png" id="39_30ic5"]
 [ext_resource type="Texture2D" uid="uid://jeb8nscm8hb8" path="res://Assets/PNG/UI/large panel.png" id="39_j66g3"]
 [ext_resource type="AudioStream" uid="uid://cvrmoaaguasjj" path="res://Assets/OGG/SFX/menu click.ogg" id="39_jv8m2"]
@@ -308,7 +299,7 @@ offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("6_tjfcu")
+texture = ExtResource("6_hq26m")
 
 [node name="Gachas" type="Control" parent="Tank"]
 layout_mode = 3
@@ -481,29 +472,6 @@ icon_mode = 0
 script = ExtResource("4_8v7by")
 icon_px = Vector2i(60, 60)
 
-[node name="Panel" type="Panel" parent="Tank"]
-offset_left = 15.0
-offset_top = 9.0
-offset_right = 354.0
-offset_bottom = 84.0
-
-[node name="PlayerButtons" type="HBoxContainer" parent="Tank"]
-anchors_preset = -1
-anchor_right = 0.082
-anchor_bottom = 0.147
-offset_left = 13.0
-offset_top = 9.0
-offset_right = 79.04
-offset_bottom = -48.84
-scale = Vector2(1.9, 1.9)
-size_flags_horizontal = 0
-alignment = 1
-
-[node name="SellButton" type="TextureButton" parent="Tank/PlayerButtons"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 1.05
-tooltip_text = "Sell your fish! "
 texture_normal = ExtResource("26_wqktx")
 texture_pressed = ExtResource("27_m3bb5")
 texture_hover = ExtResource("28_kruuw")
@@ -511,12 +479,6 @@ ignore_texture_size = true
 stretch_mode = 4
 script = ExtResource("30_1net0")
 
-[node name="CollectionButton" type="TextureButton" parent="Tank/PlayerButtons"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-tooltip_text = "Check Out Your Collection! "
-action_mode = 0
 texture_normal = ExtResource("29_peb0m")
 texture_pressed = ExtResource("30_oqmk0")
 texture_hover = ExtResource("31_v45m5")
@@ -524,10 +486,6 @@ ignore_texture_size = true
 stretch_mode = 4
 script = ExtResource("33_ak5s2")
 
-[node name="SettingsButton" type="TextureButton" parent="Tank/PlayerButtons"]
-layout_mode = 2
-size_flags_horizontal = 3
-tooltip_text = "Settings"
 texture_normal = ExtResource("38_udux3")
 texture_pressed = ExtResource("39_30ic5")
 texture_hover = ExtResource("40_5ypgn")
