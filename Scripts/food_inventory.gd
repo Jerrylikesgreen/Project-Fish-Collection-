@@ -1,7 +1,8 @@
 class_name Collection
 extends ItemList
 
-@onready var collection_button: Button = %CollectionButton
+@onready var collection_button:  = %CollectionButton
+
 @onready var collection_panel: Control = %Collection
 
 @export var icon_px: Vector2i = Vector2i(48, 48)
@@ -141,10 +142,7 @@ func add_fish_to_collection(fish: Node) -> void:
 		e = Entry.new()
 		e.name = name
 		e.icon = _get_or_make_thumb(key, icon_tex)
-		e.count = 1
 		_entries[key] = e
-	else:
-		e.count += 1
 
 	print("[Collection] add_fish_to_collection: key=%s name=%s icon=%s count=%d"
 		% [key, name, str(icon_tex), e.count])
