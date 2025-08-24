@@ -2,19 +2,13 @@ class_name food_button
 extends Button
 
 @export var food_cost: int
-@onready var pop_up: PopUp = %PopUp
+@onready var food_gacha_sprite: AnimatedSprite2D = $FoodGachaSprite
 
 func _ready() -> void:
 	food_cost = Globals.food_cost
 	pressed.connect(_on_button_pressed)
-	pop_up.finished.connect(_on_popup_finished)  # Listen for when popup ends
 
 func _on_button_pressed() -> void:
 	if Globals.current_bubble_count < food_cost:
 		return
-	disabled = true  
 	Events.spawn_food_button_pressed()
-	Events._on_button_signal.emit()
-
-func _on_popup_finished() -> void:
-	disabled = false 

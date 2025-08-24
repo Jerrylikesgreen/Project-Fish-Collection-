@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="FishPackResource" load_steps=3 format=3 uid="uid://c2y214dyh212h"]
+[gd_resource type="Resource" script_class="FishPackResource" load_steps=4 format=3 uid="uid://c2y214dyh212h"]
 
-[ext_resource type="SpriteFrames" uid="uid://bvrqlu7dvpi2g" path="res://Resources/FishResources/jiggly_puffish.tres" id="1_4xgdr"]
+[ext_resource type="SpriteFrames" uid="uid://dv1t38ero7a13" path="res://Resources/FishResources/SeaHorse.tres" id="1_kr8dv"]
 [ext_resource type="Script" uid="uid://bv67m0lje1mhq" path="res://Scripts/fish_pack_resource_script.gd" id="1_tdp0s"]
+[ext_resource type="SpriteFrames" uid="uid://tes7dgaru5m4" path="res://Resources/FishResources/princess_peach.tres" id="2_y864o"]
 
 [resource]
 script = ExtResource("1_tdp0s")
 pack_name = "C Pack"
 fish_pool = Dictionary[String, SpriteFrames]({
-"Jiggly Puffish": ExtResource("1_4xgdr")
+"Princes Peach": ExtResource("2_y864o"),
+"Sea Horse": ExtResource("1_kr8dv")
 })
 metadata/_custom_type_script = "uid://bv67m0lje1mhq"

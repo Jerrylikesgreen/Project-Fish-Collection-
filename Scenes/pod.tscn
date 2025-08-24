@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://bc8slijdgrva5"]
+[gd_scene load_steps=23 format=3 uid="uid://bc8slijdgrva5"]
 
 [ext_resource type="Texture2D" uid="uid://g8itduhpyr4e" path="res://Assets/PNG/Pod/Pod.png" id="1_h3x3r"]
 [ext_resource type="Texture2D" uid="uid://nbo0ckl88tso" path="res://Assets/PNG/Pod/Pod Movement.png" id="2_m6rhs"]
 [ext_resource type="Texture2D" uid="uid://bum13vjjrxubt" path="res://Assets/PNG/Pod/Pod transformation.png" id="3_22n3q"]
+[ext_resource type="Script" uid="uid://dppja5ewgvsrb" path="res://Scripts/pod.gd" id="4_m6rhs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aevy3"]
 atlas = ExtResource("2_m6rhs")
@@ -145,6 +146,7 @@ animations = [{
 }]
 
 [node name="Pod" type="AnimatedSprite2D"]
-scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_trevy")
-animation = &"Idle"
+animation = &"Spin"
+autoplay = "Spin"
+script = ExtResource("4_m6rhs")

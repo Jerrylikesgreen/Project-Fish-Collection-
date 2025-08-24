@@ -3,11 +3,11 @@ extends Node2D
 
 const FISH_FOOD := preload("res://Scenes/fish_food.tscn")
 
-# Where to spawn (drag one or more Marker2D into this array in the inspector)
-@export var spawn_markers: Array[Marker2D] = []
+# Single, fixed spawn point (set this in the Inspector). If left empty, we use this node's position.
+@export var spawn_marker: Marker2D
 
 # Cost to drop food
-@export var bubble_cost: int = 3
+@export var bubble_cost: int = 5
 
 # Inspector default rarity (used if random_rarity = false)
 @export_enum("Common", "Uncommon", "Rare", "Ultra") var rarity: int = 0
@@ -21,36 +21,36 @@ const FISH_FOOD := preload("res://Scenes/fish_food.tscn")
 
 func _ready() -> void:
 	randomize()
-	Events.spawn_fish_food.connect(spawn_fish_food)
+	if "spawn_fish_food" in Events:
+		Events.spawn_fish_food.connect(spawn_fish_food)
+	else:
+		push_warning("[FoodSpawner] Events.spawn_fish_food signal missing")
 
 func spawn_fish_food() -> void:
-	if Globals.current_bubble_count < 3:
+	if Globals.current_bubble_count < bubble_cost:
+		print("[FoodSpawner] Not enough bubbles (have=%d need=%d)" % [Globals.current_bubble_count, bubble_cost])
 		return
-	Events.bubble_count_changed(-3)
 
-	var pos := global_position  # or pick from markers if you have them
+	Events.bubble_count_changed(-bubble_cost)
 
+	var pos := _spawn_pos()  # <- deterministic
 	var food := FISH_FOOD.instantiate()
 	add_child(food)
 	food.global_position = pos
-	var r: int = (_rand_rarity() if random_rarity else rarity)
 
+	var r: int = (_rand_rarity() if random_rarity else rarity)
 	_apply_rarity_frame(food, r)
 	food._rarity = r
 
 	var names := ["Common", "Uncommon", "Rare", "Ultra"]
-	Events.display_player_message("You got " + names[clamp(r, 0, 3)])
-
-	_pop_in(food, 0.16, 1.06)
+	Events.display_player_message("You got a " + names[clamp(r, 0, 3)])
 
 
 # ---------- helpers ----------
 
-func _pick_spawn_position() -> Vector2:
-	if spawn_markers.size() > 0:
-		var m = spawn_markers.pick_random()
-		if m and is_instance_valid(m):
-			return m.global_position
+func _spawn_pos() -> Vector2:
+	if spawn_marker and is_instance_valid(spawn_marker):
+		return spawn_marker.global_position
 	return global_position
 
 func _apply_rarity_frame(food: Node, r: int) -> void:
@@ -61,12 +61,9 @@ func _apply_rarity_frame(food: Node, r: int) -> void:
 	# Otherwise try common child names/paths
 	var spr := food.get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
 	if spr == null:
-		# if your scene exposes a script var `fish_food_sprite`, use it:
-		if "fish_food_sprite" in food:
-			spr = food.fish_food_sprite
+		spr = food.fish_food_sprite
 	if spr:
 		spr.frame = r
-	# else: silently ignore (no crash)
 
 func _rand_rarity() -> int:
 	var weights := [max(0, weight_common), max(0, weight_uncommon), max(0, weight_rare), max(0, weight_ultra)]
@@ -80,19 +77,3 @@ func _rand_rarity() -> int:
 		if pick < acc:
 			return i
 	return 0
-
-func _pop_in(node: Node, t: float = 0.2, overshoot: float = 1.08) -> void:
-	var ci := node as CanvasItem
-	if ci:
-		ci.modulate.a = 0.0
-	if "scale" in node:
-		node.scale = Vector2(0.6, 0.6)
-	var tw := create_tween()
-	if ci:
-		tw.set_parallel(true)
-		tw.tween_property(ci, "modulate:a", 1.0, t).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-		tw.set_parallel(false)
-	tw.tween_property(node, "scale", Vector2(overshoot, overshoot), t)\
-		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	tw.tween_property(node, "scale", Vector2.ONE, 0.08)\
-		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)

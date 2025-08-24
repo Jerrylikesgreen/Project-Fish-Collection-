@@ -47,10 +47,9 @@ collision_layer = 2
 collision_mask = 49
 input_pickable = true
 script = ExtResource("1_7pthg")
-drift_force = 200.0
-drift_frequency = 2.0
-top_padding = 100.0
-launch_duration = 0.4
+drift_force = 50.0
+top_padding = 150.0
+launch_duration = 1.5
 
 [node name="FishFoodSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true

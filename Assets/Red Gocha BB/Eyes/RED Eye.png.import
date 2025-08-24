@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0sk2s31ywql2"
-path="res://.godot/imported/HELLOCATfish Eating.png-7e2dece5d496c755213aacc6105ed26c.ctex"
+uid="uid://cs2g8cc1b6w03"
+path="res://.godot/imported/RED Eye.png-70e0b7e131c1ee74d2627f64b48ee765.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/PNG/Fish/HelloCatfish/HELLOCATfish Eating.png"
-dest_files=["res://.godot/imported/HELLOCATfish Eating.png-7e2dece5d496c755213aacc6105ed26c.ctex"]
+source_file="res://Assets/Red Gocha BB/Eyes/RED Eye.png"
+dest_files=["res://.godot/imported/RED Eye.png-70e0b7e131c1ee74d2627f64b48ee765.ctex"]
 
 [params]
 
