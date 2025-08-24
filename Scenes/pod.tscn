@@ -146,7 +146,6 @@ animations = [{
 }]
 
 [node name="Pod" type="AnimatedSprite2D"]
-scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_trevy")
 animation = &"Spin"
 autoplay = "Spin"

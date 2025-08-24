@@ -53,6 +53,9 @@ func _on_pressed() -> void:
 
 	print("[%s] emitting: fish_pack_button (open chooser UI)" % _dbg_id)
 	Events.fish_pack_button()
+	pods.play()
+	knob.play()
+	
 
 func _on_fish_pack_selected(fish_pack: String) -> void:
 	print("[%s] PACK SELECTED: '%s'" % [_dbg_id, fish_pack])
@@ -150,17 +153,15 @@ func _on_fish_pack_selected(fish_pack: String) -> void:
 	pods.pause()
 	knob.pause()
 	knob.visible = false
+	fish_gacha_sprite.play("Spawn")
 		# --- SPAWN POD + ASSIGN DATA ---
 	var pod := POD.instantiate() as AnimatedSprite2D
 	print("[%s] SPAWN POD instanced: %s" % [_dbg_id, str(pod)])
 
-	# Attach pod under the PathFollow2D so it rides with marker.progress_ratio
 	marker.add_child(pod)
 	pod.position = Vector2.ZERO    # local to marker
-	# If your pod has a "Spawn" animation, play it:
 	if pod.has_method("play"):
 		pod.play()
-		pod.scale = Vector2(4, 4)
 
 	# If your Pod script exposes fields, set them (these checks are safe even if it doesn't)
 	if "fish_pack" in pod:

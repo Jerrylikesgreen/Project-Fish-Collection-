@@ -24,7 +24,6 @@ var _tween: Tween
 
 func _ready() -> void:
 	await get_tree().get_frame()
-	scale = Vector2.ONE * 4
 
 
 	_pop_target = (get_node(pop_target_path) if pop_target_path != NodePath() else self)
@@ -79,7 +78,7 @@ func _run_path(from: float, to: float, dur: float) -> void:
 	print("[%s] tween: finished (progress_ratio=%f)" % [dbg_id, follow.progress_ratio])
 
 
-func _pop_in(node: Node, from_s: float = 0.6, to_s: float = 4.0, overshoot: float = 4.18, fade: bool = true, t: float = 0.22) -> void:
+func _pop_in(node: Node, from_s: float = 0.6, to_s: float = 1.0, overshoot: float = 1.18, fade: bool = true, t: float = 0.22) -> void:
 	var ci := node as CanvasItem
 	if fade and ci:
 		print("[%s] pop_in: fade 0 -> 1 over %f on %s" % [dbg_id, t, ci])

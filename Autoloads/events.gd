@@ -32,8 +32,7 @@ var selling_fish := false
 var _sv: int = 0
 var _sv2: int = 0 
 func spawn_food_button_pressed() -> void:
-	emit_signal("spawn_fish_food")  # pass TRUE here!
-# Updated signal: include evo_frames as optional 4th param
+	emit_signal("spawn_fish_food") 
 
 func spawn_fish(base_frames: SpriteFrames, species_id: String, display_name: String, evo_frames: SpriteFrames = null) -> void:
 	# Emit with evo_frames (may be null if caller doesn’t provide it)

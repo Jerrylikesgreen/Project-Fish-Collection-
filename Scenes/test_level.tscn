@@ -16,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://7e13eadbe4q4" path="res://Assets/PNG/Gacha/Fish Gacha/GotchaPond sheet.png" id="7_x6ft1"]
 [ext_resource type="PackedScene" uid="uid://dsp6pyx71vaj4" path="res://Scenes/fish.tscn" id="8_sw8nc"]
 [ext_resource type="Script" uid="uid://5woyao7aputs" path="res://Scripts/bubble_count.gd" id="9_3ihge"]
+[ext_resource type="Texture2D" uid="uid://cpdap303fexix" path="res://Assets/PNG/Gacha/Food Gacha/New GotchaPond Feeder 1 .png" id="9_mdy11"]
+[ext_resource type="Texture2D" uid="uid://ciutgtu4fxt31" path="res://Assets/PNG/Gacha/Food Gacha/New GotchaPond Feeder 2 .png" id="10_jqpsy"]
 [ext_resource type="Script" uid="uid://bv67m0lje1mhq" path="res://Scripts/fish_pack_resource_script.gd" id="11_27ncn"]
 [ext_resource type="Resource" uid="uid://sd2s2lgpqgit" path="res://Resources/FishPack/a_pack.tres" id="12_b0tfs"]
 [ext_resource type="Resource" uid="uid://bdqmy0hu5r4c" path="res://Resources/FishPack/b_pack.tres" id="13_375gp"]
@@ -60,14 +62,6 @@
 atlas = ExtResource("7_3qleg")
 region = Rect2(0, 0, 86, 102)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_27kub"]
-atlas = ExtResource("7_3qleg")
-region = Rect2(2, 0, 80, 102)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4ocp4"]
-atlas = ExtResource("7_3qleg")
-region = Rect2(92, 0, 80, 102)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_iskje"]
 animations = [{
 "frames": [{
@@ -80,10 +74,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_27kub")
+"texture": ExtResource("9_mdy11")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4ocp4")
+"texture": ExtResource("10_jqpsy")
 }],
 "loop": false,
 "name": &"Spawn",
@@ -326,15 +320,13 @@ flat = true
 script = ExtResource("2_3ihge")
 food_cost = 5
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Tank/Gachas/Food"]
+[node name="FoodGachaSprite" type="AnimatedSprite2D" parent="Tank/Gachas/Food"]
 z_index = 1
 position = Vector2(53, -53)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_iskje")
 animation = &"Spawn"
 autoplay = "Idle"
-frame = 1
-frame_progress = 1.0
 
 [node name="Food Gacha" type="Label" parent="Tank/Gachas/Food"]
 z_index = 4
@@ -396,6 +388,7 @@ curve = SubResource("Curve2D_x6ft1")
 unique_name_in_owner = true
 position = Vector2(273, 197)
 rotation = 0.0618678
+scale = Vector2(3, 3)
 rotates = false
 
 [node name="Knob" type="AnimatedSprite2D" parent="Tank/Gachas/Fish/FishGachaSprite"]
@@ -447,6 +440,7 @@ mouse_filter = 2
 
 [node name="Collection" type="ItemList" parent="Tank/CenterContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
