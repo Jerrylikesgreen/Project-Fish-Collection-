@@ -1,0 +1,667 @@
+[gd_scene load_steps=78 format=3 uid="uid://0epxcm5d0bqp"]
+
+[ext_resource type="Script" uid="uid://cyqiplgu6dlnn" path="res://Scripts/food_spawner.gd" id="1_2yvf5"]
+[ext_resource type="Script" uid="uid://c1ubmt1jik6qq" path="res://Scripts/fish_spawner.gd" id="1_8v7by"]
+[ext_resource type="Script" uid="uid://b6yvkgbh8t8bo" path="res://Scripts/test_level.gd" id="1_260qw"]
+[ext_resource type="Script" uid="uid://c48pwl472ti4m" path="res://Scripts/food_button.gd" id="2_3ihge"]
+[ext_resource type="PackedScene" uid="uid://cu3h8r4da4y8" path="res://Scenes/bubble.tscn" id="2_tjfcu"]
+[ext_resource type="Script" uid="uid://cdgj263ww2sy7" path="res://Scripts/fish_gacha.gd" id="3_8v7by"]
+[ext_resource type="Script" uid="uid://bogxsy2tcltcy" path="res://Scripts/food_inventory.gd" id="4_8v7by"]
+[ext_resource type="SpriteFrames" uid="uid://d04n5or4127m4" path="res://Resources/FishResources/base_fish.tres" id="4_jv8m2"]
+[ext_resource type="Texture2D" uid="uid://dc2meyqrbsics" path="res://Assets/PNG/FishTank/fish tank v1.png" id="4_so54a"]
+[ext_resource type="Script" uid="uid://c2frm46fryv2j" path="res://Scripts/pop_up.gd" id="5_1rqgg"]
+[ext_resource type="Script" uid="uid://da5lphkv0x6bq" path="res://Scripts/feed.gd" id="6_mwmob"]
+[ext_resource type="Texture2D" uid="uid://c6x46bsx8qw5g" path="res://Assets/PNG/Gacha/Fish Gacha/GotchaPond 1-2-6.png" id="6_sw8nc"]
+[ext_resource type="Texture2D" uid="uid://b2f27fbel4gja" path="res://Assets/PNG/Gacha/Food Gacha/GotchaFeeder Sheet.png" id="7_3qleg"]
+[ext_resource type="Script" uid="uid://5c3wh5t2h7m5" path="res://Scripts/inventory_button.gd" id="7_so54a"]
+[ext_resource type="Texture2D" uid="uid://7e13eadbe4q4" path="res://Assets/PNG/Gacha/Fish Gacha/GotchaPond sheet.png" id="7_x6ft1"]
+[ext_resource type="PackedScene" uid="uid://dsp6pyx71vaj4" path="res://Scenes/fish.tscn" id="8_sw8nc"]
+[ext_resource type="Script" uid="uid://5woyao7aputs" path="res://Scripts/bubble_count.gd" id="9_3ihge"]
+[ext_resource type="Script" uid="uid://bv67m0lje1mhq" path="res://Scripts/fish_pack_resource_script.gd" id="11_27ncn"]
+[ext_resource type="Resource" uid="uid://sd2s2lgpqgit" path="res://Resources/FishPack/a_pack.tres" id="12_b0tfs"]
+[ext_resource type="Resource" uid="uid://bdqmy0hu5r4c" path="res://Resources/FishPack/b_pack.tres" id="13_375gp"]
+[ext_resource type="Script" uid="uid://l3rag6qnq8f2" path="res://Scripts/debug_lable.gd" id="13_mwmob"]
+[ext_resource type="Resource" uid="uid://c2y214dyh212h" path="res://Resources/FishPack/c_pack.tres" id="14_hvg4u"]
+[ext_resource type="Texture2D" uid="uid://dk3ajxatnw8s6" path="res://Assets/PNG/Gacha/Fish Gacha/Knob 1-5.png" id="16_3g43l"]
+[ext_resource type="Shader" uid="uid://d4c5lyffn1qtv" path="res://Resources/Shader/fish_rarity_shader.gdshader" id="16_3qleg"]
+[ext_resource type="Texture2D" uid="uid://dqyq1iy66g73q" path="res://Assets/PNG/Gacha/Fish Gacha/Knob 2.png" id="17_3qleg"]
+[ext_resource type="Texture2D" uid="uid://fa3l5m47tofw" path="res://Assets/PNG/Gacha/Fish Gacha/Knob 3.png" id="18_u02th"]
+[ext_resource type="Texture2D" uid="uid://hkph3ve1titp" path="res://Assets/PNG/Gacha/Fish Gacha/Knob 4.png" id="19_mf1sy"]
+[ext_resource type="Script" uid="uid://dq1gmtaladmn7" path="res://Scripts/fish_pack_menu.gd" id="21_0j4h4"]
+[ext_resource type="Theme" uid="uid://cthsnn82p74vp" path="res://Resources/UI/default_theme.tres" id="21_pkn5o"]
+[ext_resource type="Texture2D" uid="uid://ck3324o5dff0f" path="res://Assets/PNG/Gacha/Fish Gacha/InsidePods.png" id="21_u02th"]
+[ext_resource type="Texture2D" uid="uid://g8itduhpyr4e" path="res://Assets/PNG/Pod/Pod.png" id="21_y42of"]
+[ext_resource type="LabelSettings" uid="uid://chpqb3ckah4tf" path="res://Scenes/Lable.tres" id="23_j66g3"]
+[ext_resource type="Script" uid="uid://dedfil08onxhl" path="res://Scripts/a_pack.gd" id="23_v608p"]
+[ext_resource type="Script" uid="uid://cyrkq5ltycipq" path="res://Scripts/b_pack.gd" id="24_0212m"]
+[ext_resource type="Script" uid="uid://csp2bq3gqvmkm" path="res://Scripts/c_pack.gd" id="25_0212m"]
+[ext_resource type="Texture2D" uid="uid://dedm0cbjsvvhc" path="res://Assets/Screens + Panels/large panel.png" id="26_j66g3"]
+[ext_resource type="Script" uid="uid://sxtsr5p4qdb5" path="res://Scripts/sell_fish.gd" id="27_u02th"]
+[ext_resource type="Texture2D" uid="uid://brg2fdkopky08" path="res://Assets/Buttons/quit button sprite sheet.png" id="36_giktf"]
+[ext_resource type="PackedScene" uid="uid://cl6d6ciy0nfuk" path="res://Scenes/bgm.tscn" id="36_u02th"]
+[ext_resource type="StyleBox" uid="uid://dl8rl0b2j7l6l" path="res://Scenes/x.tres" id="37_3628t"]
+[ext_resource type="PackedScene" uid="uid://4bet4u0kpxok" path="res://Scenes/sfx.tscn" id="37_mf1sy"]
+[ext_resource type="StyleBox" uid="uid://byj8cwmd1chlu" path="res://Scenes/x3.tres" id="37_uwunu"]
+[ext_resource type="StyleBox" uid="uid://cpxqbprqfspmi" path="res://Scenes/x2.tres" id="38_uwunu"]
+[ext_resource type="Texture2D" uid="uid://jeb8nscm8hb8" path="res://Assets/PNG/UI/large panel.png" id="39_j66g3"]
+[ext_resource type="AudioStream" uid="uid://cvrmoaaguasjj" path="res://Assets/OGG/SFX/menu click.ogg" id="39_jv8m2"]
+[ext_resource type="AudioStream" uid="uid://bolo0jcgu76mo" path="res://Assets/OGG/SFX/bubble pop.ogg" id="40_eylua"]
+[ext_resource type="AudioStream" uid="uid://cekw8jk2nd0p2" path="res://Assets/OGG/SFX/bubble-spawn.ogg" id="41_giktf"]
+[ext_resource type="LabelSettings" uid="uid://cyu83gvgjadlv" path="res://Scenes/dialog.tres" id="42_tjfcu"]
+[ext_resource type="AudioStream" uid="uid://b3h8ki2hwmy32" path="res://Assets/OGG/SFX/fish click.ogg" id="42_y0hbx"]
+[ext_resource type="AudioStream" uid="uid://bhyuhybrm1m7m" path="res://Assets/OGG/SFX/fish eating.ogg" id="43_6fm05"]
+[ext_resource type="AudioStream" uid="uid://c6o0x4abnmj2r" path="res://Assets/OGG/SFX/fish grown.ogg" id="44_3628t"]
+[ext_resource type="AudioStream" uid="uid://bwhdqorjn6ttl" path="res://Assets/OGG/SFX/food spit.ogg" id="45_uwunu"]
+[ext_resource type="AudioStream" uid="uid://bf1brx5ap83aq" path="res://Assets/OGG/SFX/gacha open.ogg" id="46_j66g3"]
+[ext_resource type="AudioStream" uid="uid://vait3b1qgvtk" path="res://Assets/OGG/SFX/gacha spit.ogg" id="47_tjfcu"]
+[ext_resource type="AudioStream" uid="uid://dqt8tqx0ma4by" path="res://Assets/OGG/SFX/screen tap.ogg" id="48_mdy11"]
+[ext_resource type="AudioStream" uid="uid://vd7s4tvtqf88" path="res://Assets/OGG/SFX/shiny gacha open.ogg" id="49_jqpsy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u02th"]
+atlas = ExtResource("7_3qleg")
+region = Rect2(0, 0, 86, 102)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27kub"]
+atlas = ExtResource("7_3qleg")
+region = Rect2(2, 0, 80, 102)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ocp4"]
+atlas = ExtResource("7_3qleg")
+region = Rect2(92, 0, 80, 102)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iskje"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u02th")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27kub")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ocp4")
+}],
+"loop": false,
+"name": &"Spawn",
+"speed": 2.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p51s7"]
+atlas = ExtResource("7_x6ft1")
+region = Rect2(0, 0, 80, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbmvr"]
+atlas = ExtResource("7_x6ft1")
+region = Rect2(80, 0, 80, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7alf0"]
+atlas = ExtResource("7_x6ft1")
+region = Rect2(0, 89, 80, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_260qw"]
+atlas = ExtResource("7_x6ft1")
+region = Rect2(80, 89, 80, 89)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x6ft1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_sw8nc")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p51s7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fbmvr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7alf0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_260qw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p51s7")
+}],
+"loop": false,
+"name": &"Spawn",
+"speed": 5.0
+}]
+
+[sub_resource type="Curve2D" id="Curve2D_x6ft1"]
+bake_interval = 20.21
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 273, 197, 0, 0, 0, 0, 386, 204, 0, 0, 0, 0, 408, 26, 0, 0, 0, 0, 384, -127, 0, 0, 0, 0, 411, -241)
+}
+point_count = 5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u02th"]
+shader = ExtResource("16_3qleg")
+shader_parameter/use_texture = true
+shader_parameter/base_color = Color(1, 0.027451, 1, 1)
+shader_parameter/glitter_color = Color(1, 0, 0.905882, 1)
+shader_parameter/glitter_density = 8.0
+shader_parameter/sparkle_intensity = 0.989
+shader_parameter/edge_boost = 0.3
+shader_parameter/fall_speed_uv = 0.0150001
+shader_parameter/twinkle_speed = 5.236
+shader_parameter/twinkle_sharpness = 16.0
+shader_parameter/active_fraction = 0.234
+shader_parameter/shape_channel = 3
+shader_parameter/invert_shape = false
+shader_parameter/shape_min_scale = 1.0
+shader_parameter/shape_max_scale = 1.0
+shader_parameter/random_rotate = true
+shader_parameter/shape_padding = 0.071
+shader_parameter/apply_on_transparent = false
+shader_parameter/opaque_threshold = 0.056
+shader_parameter/opaque_softness = 0.02
+shader_parameter/transparent_sparkle_alpha = 0.6
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u02th"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_3g43l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_3qleg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_u02th")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_mf1sy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_3g43l")
+}],
+"loop": true,
+"name": &"Running",
+"speed": 6.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mf1sy"]
+atlas = ExtResource("21_u02th")
+region = Rect2(0, 0, 66, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmu1o"]
+atlas = ExtResource("21_u02th")
+region = Rect2(66, 0, 66, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jv8m2"]
+atlas = ExtResource("21_u02th")
+region = Rect2(132, 0, 66, 35)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_27kub"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mf1sy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gmu1o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jv8m2")
+}],
+"loop": true,
+"name": &"Running",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h4onc"]
+texture = ExtResource("26_j66g3")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ot8jh"]
+texture = ExtResource("39_j66g3")
+
+[sub_resource type="Theme" id="Theme_tjfcu"]
+Button/colors/font_color = Color(0.984314, 0.776471, 0.854902, 0.901961)
+Button/colors/font_outline_color = Color(0, 0, 0.282353, 0.878431)
+Button/constants/outline_size = 8
+ItemList/styles/panel = SubResource("StyleBoxTexture_h4onc")
+Panel/styles/panel = SubResource("StyleBoxTexture_ot8jh")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3628t"]
+
+[sub_resource type="Theme" id="Theme_mdy11"]
+Button/colors/font_color = Color(0.984314, 0.776471, 0.854902, 0.901961)
+Button/styles/focus = SubResource("StyleBoxEmpty_3628t")
+Button/styles/hover = ExtResource("37_uwunu")
+Button/styles/normal = ExtResource("37_3628t")
+Button/styles/pressed = ExtResource("38_uwunu")
+Panel/styles/panel = SubResource("StyleBoxTexture_ot8jh")
+
+[node name="TestLevel" type="Node2D"]
+script = ExtResource("1_260qw")
+
+[node name="Bubbles" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+layer = 100
+
+[node name="Bubble" parent="Bubbles" instance=ExtResource("2_tjfcu")]
+position = Vector2(677, 347)
+
+[node name="Bubble2" parent="Bubbles" instance=ExtResource("2_tjfcu")]
+position = Vector2(677, 347)
+
+[node name="Bubble3" parent="Bubbles" instance=ExtResource("2_tjfcu")]
+position = Vector2(677, 347)
+
+[node name="Bubble4" parent="Bubbles" instance=ExtResource("2_tjfcu")]
+position = Vector2(613, 357)
+
+[node name="Bubble5" parent="Bubbles" instance=ExtResource("2_tjfcu")]
+position = Vector2(613, 357)
+
+[node name="Bubble6" parent="Bubbles" instance=ExtResource("2_tjfcu")]
+position = Vector2(613, 357)
+
+[node name="FishSpawner" type="Node2D" parent="."]
+position = Vector2(431, 190)
+script = ExtResource("1_8v7by")
+fish_scene = ExtResource("8_sw8nc")
+starter_frames = ExtResource("4_jv8m2")
+
+[node name="FoodSpawner" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1076, 577)
+script = ExtResource("1_2yvf5")
+
+[node name="Tank" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="TankVisuals" type="TextureRect" parent="Tank"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_so54a")
+
+[node name="Gachas" type="Control" parent="Tank"]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -300.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 6
+mouse_filter = 2
+
+[node name="Food" type="Button" parent="Tank/Gachas"]
+unique_name_in_owner = true
+z_index = -1
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -264.0
+offset_top = -47.0
+offset_right = -164.0
+offset_bottom = 53.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 4
+flat = true
+script = ExtResource("2_3ihge")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Tank/Gachas/Food"]
+z_index = 1
+position = Vector2(53, -53)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_iskje")
+animation = &"Spawn"
+autoplay = "Idle"
+frame = 1
+frame_progress = 1.0
+
+[node name="Food Gacha" type="Label" parent="Tank/Gachas/Food"]
+z_index = 4
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -131.0
+offset_top = 4.0
+offset_right = 139.0
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Food Gacha"
+label_settings = ExtResource("23_j66g3")
+
+[node name="Fish" type="Button" parent="Tank/Gachas"]
+unique_name_in_owner = true
+z_index = -1
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 70.0
+offset_top = -178.0
+offset_right = 170.0
+offset_bottom = -78.0
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 1
+flat = true
+icon_alignment = 1
+script = ExtResource("3_8v7by")
+path_duration = 5.0
+fish_pack_pool = Array[ExtResource("11_27ncn")]([ExtResource("12_b0tfs"), ExtResource("13_375gp"), ExtResource("14_hvg4u")])
+
+[node name="FishGachaSprite" type="AnimatedSprite2D" parent="Tank/Gachas/Fish"]
+unique_name_in_owner = true
+top_level = true
+z_index = 1
+position = Vector2(202, 491)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_x6ft1")
+animation = &"Spawn"
+autoplay = "Idle"
+frame = 4
+frame_progress = 1.0
+
+[node name="Path" type="Path2D" parent="Tank/Gachas/Fish/FishGachaSprite"]
+unique_name_in_owner = true
+top_level = true
+position = Vector2(8, 420)
+curve = SubResource("Curve2D_x6ft1")
+
+[node name="Marker" type="PathFollow2D" parent="Tank/Gachas/Fish/FishGachaSprite/Path"]
+unique_name_in_owner = true
+position = Vector2(273, 197)
+rotation = 0.0618678
+rotates = false
+
+[node name="Knob" type="AnimatedSprite2D" parent="Tank/Gachas/Fish/FishGachaSprite"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_u02th")
+position = Vector2(-20.75, 25.5)
+sprite_frames = SubResource("SpriteFrames_u02th")
+animation = &"Running"
+frame = 4
+frame_progress = 1.0
+
+[node name="Pods" type="AnimatedSprite2D" parent="Tank/Gachas/Fish/FishGachaSprite"]
+unique_name_in_owner = true
+show_behind_parent = true
+position = Vector2(-5.75, 3.75)
+sprite_frames = SubResource("SpriteFrames_27kub")
+animation = &"Running"
+
+[node name="Fish Gacha" type="Label" parent="Tank/Gachas/Fish"]
+z_index = 4
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.0
+offset_top = 27.0
+offset_right = 215.0
+offset_bottom = 78.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "Fish Gacha"
+label_settings = ExtResource("23_j66g3")
+
+[node name="Collection" type="ItemList" parent="Tank"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -251.5
+offset_top = -156.5
+offset_right = 251.5
+offset_bottom = 156.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme = ExtResource("21_pkn5o")
+max_text_lines = 2
+auto_width = true
+auto_height = true
+text_overrun_behavior = 4
+item_count = 1
+max_columns = 2
+same_column_width = true
+fixed_column_width = 200
+icon_mode = 0
+icon_scale = 0.5
+fixed_icon_size = Vector2i(100, 100)
+script = ExtResource("4_8v7by")
+
+[node name="PlayerButton" type="GridContainer" parent="Tank"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1249.0
+offset_top = -634.0
+offset_right = -1045.0
+offset_bottom = -568.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("21_pkn5o")
+columns = 2
+
+[node name="Feed" type="Button" parent="Tank/PlayerButton"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme = SubResource("Theme_tjfcu")
+text = "Feed"
+script = ExtResource("6_mwmob")
+
+[node name="CollectionButton" type="Button" parent="Tank/PlayerButton"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Collection"
+script = ExtResource("7_so54a")
+
+[node name="Menu" type="Button" parent="Tank/PlayerButton"]
+layout_mode = 2
+text = "Menu~"
+
+[node name="SellFish" type="Button" parent="Tank/PlayerButton"]
+layout_mode = 2
+text = "Sell Fish"
+script = ExtResource("27_u02th")
+
+[node name="BubbleCount" type="Label" parent="Tank"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -53.0
+offset_top = 116.0
+offset_right = 59.0
+offset_bottom = 140.0
+grow_horizontal = 2
+text = "Bubble Count: "
+label_settings = ExtResource("23_j66g3")
+script = ExtResource("9_3ihge")
+
+[node name="Debug" type="Label" parent="Tank"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_top = -86.0
+offset_right = 49.0
+offset_bottom = -62.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Debug Lable"
+script = ExtResource("13_mwmob")
+
+[node name="PlayerGUI" type="CanvasLayer" parent="."]
+
+[node name="FishPackMenu" type="Panel" parent="PlayerGUI"]
+unique_name_in_owner = true
+visible = false
+top_level = true
+offset_left = 440.0
+offset_top = 210.0
+offset_right = 840.0
+offset_bottom = 510.0
+theme = ExtResource("21_pkn5o")
+script = ExtResource("21_0j4h4")
+
+[node name="GridContainer" type="VBoxContainer" parent="PlayerGUI/FishPackMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("21_pkn5o")
+
+[node name="APack" type="Button" parent="PlayerGUI/FishPackMenu/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("21_pkn5o")
+text = "Pack A : 5 Bubbles"
+icon = ExtResource("21_y42of")
+alignment = 0
+icon_alignment = 2
+script = ExtResource("23_v608p")
+
+[node name="BPack" type="Button" parent="PlayerGUI/FishPackMenu/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Pack B : 20 Bubbles
+
+"
+icon = ExtResource("21_y42of")
+alignment = 0
+icon_alignment = 2
+script = ExtResource("24_0212m")
+
+[node name="CPack" type="Button" parent="PlayerGUI/FishPackMenu/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Pack C : 175 Bubbles
+"
+icon = ExtResource("21_y42of")
+alignment = 0
+icon_alignment = 2
+script = ExtResource("25_0212m")
+
+[node name="QuitButtonSpriteSheet" type="Sprite2D" parent="PlayerGUI/FishPackMenu"]
+z_index = 1
+position = Vector2(327, 272)
+texture = ExtResource("36_giktf")
+region_enabled = true
+region_rect = Rect2(23, 1, 20, 20)
+region_filter_clip_enabled = true
+
+[node name="QuitButton" type="Button" parent="PlayerGUI/FishPackMenu/QuitButtonSpriteSheet"]
+unique_name_in_owner = true
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_mdy11")
+theme_type_variation = &"x"
+metadata/_edit_use_anchors_ = true
+
+[node name="PopUp" type="Label" parent="PlayerGUI"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -185.0
+offset_right = 22.0
+offset_bottom = -162.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "TEst"
+label_settings = ExtResource("42_tjfcu")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("5_1rqgg")
+min_width_pixels = 600
+metadata/_edit_use_anchors_ = true
+
+[node name="Timer" type="Timer" parent="PlayerGUI/PopUp"]
+unique_name_in_owner = true
+
+[node name="PanelContainer" type="PanelContainer" parent="PlayerGUI/PopUp"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Camera" type="Camera2D" parent="."]
+offset = Vector2(640, 360)
+
+[node name="BGM" parent="." instance=ExtResource("36_u02th")]
+volume_db = -46.018
+
+[node name="SFX" parent="." instance=ExtResource("37_mf1sy")]
+stream = ExtResource("39_jv8m2")
+sfx_pool = Array[AudioStream]([ExtResource("40_eylua"), ExtResource("41_giktf"), ExtResource("42_y0hbx"), ExtResource("43_6fm05"), ExtResource("44_3628t"), ExtResource("45_uwunu"), ExtResource("46_j66g3"), ExtResource("47_tjfcu"), ExtResource("39_jv8m2"), ExtResource("48_mdy11"), ExtResource("49_jqpsy")])

@@ -6,7 +6,8 @@ signal player_message(new_message:String)
 
 signal bubble_count_changed_signal(bubble_count:int)
 
-signal spawn_fish_signal(new_frames:SpriteFrames)
+signal spawn_fish_signal(base_frames: SpriteFrames, evo_frames: SpriteFrames, species_id: String, display_name: String)
+
 signal fish_spawned(fish: Fish)  # emitted by your spawner AFTER instancing
 
 signal fish_pack_button_pressed
@@ -32,10 +33,17 @@ var _sv: int = 0
 var _sv2: int = 0 
 func spawn_food_button_pressed() -> void:
 	emit_signal("spawn_fish_food")  # pass TRUE here!
+# Updated signal: include evo_frames as optional 4th param
 
-func spawn_fish(frames: SpriteFrames, species_id: String, display_name: String):
-	emit_signal("spawn_fish_signal", frames, species_id, display_name)
+func spawn_fish(base_frames: SpriteFrames, species_id: String, display_name: String, evo_frames: SpriteFrames = null) -> void:
+	# Emit with evo_frames (may be null if caller doesn’t provide it)
+	emit_signal("spawn_fish_signal", base_frames, evo_frames, species_id, display_name)
+
 	display_player_message("What did you get?")
+
+	print("[Events] spawn_fish -> species=%s | base_frames=%s | evo_frames=%s | name=%s"
+		% [species_id, str(base_frames), str(evo_frames), display_name])
+
 
 func display_player_message(new_message:String)-> void:
 	emit_signal("player_message", new_message)

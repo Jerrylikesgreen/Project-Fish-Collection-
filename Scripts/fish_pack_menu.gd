@@ -1,5 +1,9 @@
 class_name FishPackMenu
 extends Panel
+
+const FISH = preload("res://Scenes/fish.tscn")
+
+
 var is_on := false
 @onready var a_pack: Button = %APack
 @onready var b_pack: Button = %BPack
@@ -63,3 +67,4 @@ func _emit_selection(pack: String) -> void:
 
 func _on_pressed_x() -> void:
 	visible = !visible
+	

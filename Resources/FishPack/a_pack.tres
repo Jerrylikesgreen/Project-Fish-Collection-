@@ -1,14 +1,18 @@
-[gd_resource type="Resource" script_class="FishPackResource" load_steps=4 format=3 uid="uid://sd2s2lgpqgit"]
+[gd_resource type="Resource" script_class="FishPackResource" load_steps=6 format=3 uid="uid://sd2s2lgpqgit"]
 
 [ext_resource type="Script" uid="uid://bv67m0lje1mhq" path="res://Scripts/fish_pack_resource_script.gd" id="1_awhad"]
 [ext_resource type="SpriteFrames" uid="uid://dble86scfuhx8" path="res://Resources/FishResources/blob.tres" id="1_o45s8"]
 [ext_resource type="SpriteFrames" uid="uid://otlu2migh4ql" path="res://Resources/FishResources/pika_tadpol.tres" id="2_o45s8"]
+[ext_resource type="SpriteFrames" uid="uid://bvrqlu7dvpi2g" path="res://Resources/FishResources/jiggly_puffish.tres" id="3_n3881"]
+[ext_resource type="SpriteFrames" uid="uid://c1kq6x3tm0dbe" path="res://Resources/FishResources/hello_catfish.tres" id="4_vwkx2"]
 
 [resource]
 script = ExtResource("1_awhad")
 pack_name = "A Pack"
 fish_pool = Dictionary[String, SpriteFrames]({
 "Blob": ExtResource("1_o45s8"),
+"Hello Catfish": ExtResource("4_vwkx2"),
+"JigglyPuff": ExtResource("3_n3881"),
 "Pike Tadpol": ExtResource("2_o45s8")
 })
 metadata/_custom_type_script = "uid://bv67m0lje1mhq"

@@ -62,4 +62,4 @@ animations = [{
 [node name="Logo" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_chwn1")
 autoplay = "default"
-frame_progress = 0.663807
+frame_progress = 0.963203

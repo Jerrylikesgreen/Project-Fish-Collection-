@@ -1,13 +1,17 @@
 [gd_resource type="Theme" load_steps=8 format=3 uid="uid://cthsnn82p74vp"]
 
 [ext_resource type="Texture2D" uid="uid://jeb8nscm8hb8" path="res://Assets/PNG/UI/large panel.png" id="1_76a3c"]
-[ext_resource type="StyleBox" uid="uid://bu6g8rhbddjou" path="res://Scenes/box.tres" id="1_id12a"]
-[ext_resource type="StyleBox" uid="uid://qredtc0mntgm" path="res://Scenes/box2.tres" id="2_0ts44"]
-[ext_resource type="StyleBox" uid="uid://b2b06d7yg6jqo" path="res://Scenes/box3.tres" id="2_h4onc"]
+[ext_resource type="StyleBox" uid="uid://bu6g8rhbddjou" path="res://Resources/box.tres" id="1_id12a"]
+[ext_resource type="StyleBox" uid="uid://qredtc0mntgm" path="res://Resources/box2.tres" id="2_0ts44"]
+[ext_resource type="StyleBox" uid="uid://b2b06d7yg6jqo" path="res://Resources/box3.tres" id="2_h4onc"]
 [ext_resource type="Texture2D" uid="uid://dedm0cbjsvvhc" path="res://Assets/Screens + Panels/large panel.png" id="4_h4onc"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h4onc"]
 texture = ExtResource("4_h4onc")
+texture_margin_left = 25.0
+texture_margin_top = 8.0
+texture_margin_right = 25.0
+texture_margin_bottom = 3.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ot8jh"]
 texture = ExtResource("1_76a3c")

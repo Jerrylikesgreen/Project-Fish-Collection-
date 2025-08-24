@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chd5tdq14k6t4"
-path="res://.godot/imported/HELLOCATfish Swimming.png-27e77d74cf547e2331fa1410616e6b6f.ctex"
+uid="uid://ihumtvvyfc56"
+path="res://.godot/imported/SeaHorse cry 2.png-f76af03f2a82dfa1385bbb1120456e4d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/PNG/Fish/HelloCatfish/HELLOCATfish Swimming.png"
-dest_files=["res://.godot/imported/HELLOCATfish Swimming.png-27e77d74cf547e2331fa1410616e6b6f.ctex"]
+source_file="res://Assets/SeaHorse/Eyes/SeaHorse cry 2.png"
+dest_files=["res://.godot/imported/SeaHorse cry 2.png-f76af03f2a82dfa1385bbb1120456e4d.ctex"]
 
 [params]
 

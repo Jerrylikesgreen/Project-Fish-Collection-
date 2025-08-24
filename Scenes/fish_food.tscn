@@ -49,7 +49,8 @@ input_pickable = true
 script = ExtResource("1_7pthg")
 drift_force = 200.0
 drift_frequency = 2.0
-top_padding = 100.0
+top_padding = 125.0
+launch_speed_left = 350.0
 launch_duration = 0.4
 
 [node name="FishFoodSprite" type="AnimatedSprite2D" parent="."]

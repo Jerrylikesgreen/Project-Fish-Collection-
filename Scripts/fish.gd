@@ -175,3 +175,40 @@ func _maybe_play_rare_chime() -> void:
 		print("Rare fish spawned: rarity=", RARITIES[_rarity], " (idx=", _rarity, ") — SFX played")
 	else:
 		print("Rare fish spawned but no SFX available (check rare_spawn_sfx_index or assign rare_spawn_sfx)")
+
+
+func get_evolution_icon_texture() -> Texture2D:
+	# Prefer FishBody.evolution_frames if available
+	var evo_frames: SpriteFrames = null
+	if has_node("FishBody"):
+		var fb := get_node("FishBody")
+		if fb:
+			evo_frames = fb.get("evolution_frames")
+	# Fallback to a copy cached on the Fish root (if you mirror it there)
+	if evo_frames == null:
+		evo_frames = self.get("evolution_sprites")
+
+	if evo_frames == null:
+		print("[Fish] get_evolution_icon_texture: evo_frames=NULL → returning NULL")
+		return null
+
+	var names := evo_frames.get_animation_names()
+	if names.is_empty():
+		print("[Fish] get_evolution_icon_texture: evo_frames has no animations → NULL")
+		return null
+
+	# Prefer an idle-like animation but fall back to first with frames
+	var pick := ""
+	for n in ["Idle", "idle"]:
+		if evo_frames.has_animation(n):
+			pick = n; break
+	if pick == "":
+		pick = names[0]
+	if evo_frames.get_frame_count(pick) <= 0:
+		for n in names:
+			if evo_frames.get_frame_count(n) > 0:
+				pick = n; break
+
+	var tex := evo_frames.get_frame_texture(pick, 0)
+	print("[Fish] get_evolution_icon_texture: pick='%s' tex=%s" % [pick, str(tex)])
+	return tex

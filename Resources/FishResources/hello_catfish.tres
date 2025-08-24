@@ -1,9 +1,9 @@
 [gd_resource type="SpriteFrames" load_steps=19 format=3 uid="uid://c1kq6x3tm0dbe"]
 
-[ext_resource type="Texture2D" uid="uid://uxvni6ijx770" path="res://Assets/PNG/Fish/HelloCatfish/HELLOCATfish Hungry.png" id="1_d0q84"]
-[ext_resource type="Texture2D" uid="uid://0sk2s31ywql2" path="res://Assets/PNG/Fish/HelloCatfish/HELLOCATfish Eating.png" id="2_mp338"]
-[ext_resource type="Texture2D" uid="uid://cdjywg1sfug5o" path="res://Assets/PNG/Fish/HelloCatfish/Pod 2 HELLOCATfish transformation.png" id="3_xcjao"]
-[ext_resource type="Texture2D" uid="uid://chd5tdq14k6t4" path="res://Assets/PNG/Fish/HelloCatfish/HELLOCATfish Swimming.png" id="4_msrsg"]
+[ext_resource type="Texture2D" uid="uid://uxvni6ijx770" path="res://Assets/PNG/Fish/Blob/HelloCatfish/HELLOCATfish Hungry.png" id="1_d0q84"]
+[ext_resource type="Texture2D" uid="uid://0sk2s31ywql2" path="res://Assets/PNG/Fish/Blob/HelloCatfish/HELLOCATfish Eating.png" id="2_mp338"]
+[ext_resource type="Texture2D" uid="uid://cdjywg1sfug5o" path="res://Assets/PNG/Fish/Blob/HelloCatfish/Pod 2 HELLOCATfish transformation.png" id="3_xcjao"]
+[ext_resource type="Texture2D" uid="uid://chd5tdq14k6t4" path="res://Assets/PNG/Fish/Blob/HelloCatfish/HELLOCATfish Swimming.png" id="4_msrsg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_orl5q"]
 atlas = ExtResource("1_d0q84")
