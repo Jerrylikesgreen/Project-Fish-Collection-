@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dawb3umxuxhp8"
-path="res://.godot/imported/settings button sprite sheet.png-6f13fdf07bd3f60854c422eb0defd604.ctex"
+uid="uid://byqu47t3r3whg"
+path="res://.godot/imported/upgrade button sprite sheet-2.png.png-176b496e9b201649497d4b374a12b286.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/PNG/UI/settings button sprite sheet.png"
-dest_files=["res://.godot/imported/settings button sprite sheet.png-6f13fdf07bd3f60854c422eb0defd604.ctex"]
+source_file="res://Assets/PNG/UI/upgrade button sprite sheet-2.png.png"
+dest_files=["res://.godot/imported/upgrade button sprite sheet-2.png.png-176b496e9b201649497d4b374a12b286.ctex"]
 
 [params]
 
