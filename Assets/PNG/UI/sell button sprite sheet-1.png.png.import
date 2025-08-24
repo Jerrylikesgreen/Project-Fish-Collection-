@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dawb3umxuxhp8"
-path="res://.godot/imported/settings button sprite sheet.png-6f13fdf07bd3f60854c422eb0defd604.ctex"
+uid="uid://cywxc2a87q61"
+path="res://.godot/imported/sell button sprite sheet-1.png.png-af141d883fd5c6a360d79843953bbb81.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/PNG/UI/settings button sprite sheet.png"
-dest_files=["res://.godot/imported/settings button sprite sheet.png-6f13fdf07bd3f60854c422eb0defd604.ctex"]
+source_file="res://Assets/PNG/UI/sell button sprite sheet-1.png.png"
+dest_files=["res://.godot/imported/sell button sprite sheet-1.png.png-af141d883fd5c6a360d79843953bbb81.ctex"]
 
 [params]
 
