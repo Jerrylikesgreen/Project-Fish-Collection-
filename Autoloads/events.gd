@@ -9,7 +9,7 @@ signal bubble_count_changed_signal(bubble_count:int)
 signal spawn_fish_signal(base_frames: SpriteFrames, evo_frames: SpriteFrames, species_id: String, display_name: String)
 
 signal fish_spawned(fish: Fish)  # emitted by your spawner AFTER instancing
-
+signal fish_sold_signal
 signal fish_pack_button_pressed
 signal fish_pack_selected_signal(pack: String)  # UI chose A/B/C
 signal fish_rolled_signal(pack: String, species_id: String, frames: SpriteFrames)
@@ -20,7 +20,7 @@ signal add_fish_to_collection_signal(fish:Fish)
 
 signal _on_button_signal
 
-signal collection_discover(species_id: String, display_name: String, icon: Texture2D)
+signal collection_discover(species_id: String, display_name: String, icon: Texture2D) # TODO - add in collectins a finc to catch and store this information and then display when evolve trigers. 
 signal collection_add(species_id: String)  # for increments when “caught”
 signal play_sfx_signal(sfx: AudioStream)
 signal game_started
@@ -36,9 +36,8 @@ func spawn_food_button_pressed() -> void:
 
 func spawn_fish(base_frames: SpriteFrames, species_id: String, display_name: String, evo_frames: SpriteFrames = null) -> void:
 	emit_signal("spawn_fish_signal", base_frames, evo_frames, species_id, display_name)
-
 	display_player_message("I wonder what you will get???")
-	
+	Globals.current_number_of_fish_in_tank = Globals.current_number_of_fish_in_tank + 1
 
 	print("[Events] spawn_fish -> species=%s | base_frames=%s | evo_frames=%s | name=%s"
 		% [species_id, str(base_frames), str(evo_frames), display_name])
@@ -88,3 +87,8 @@ func game_start()-> void:
 
 func add_fish_to_collection(fish:Fish)->void:
 	emit_signal("add_fish_to_collection_signal", fish)
+
+
+func fish_sold()->void:
+	emit_signal("fish_sold_signal")
+	pass

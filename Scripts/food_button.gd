@@ -9,6 +9,8 @@ func _ready() -> void:
 	pressed.connect(_on_button_pressed)
 
 func _on_button_pressed() -> void:
-	if Globals.current_bubble_count < food_cost:
+	if Globals.current_bubble_count < Globals.food_cost:
 		return
+	food_gacha_sprite.play("Spawn")
 	Events.spawn_food_button_pressed()
+	

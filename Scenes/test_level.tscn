@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://0epxcm5d0bqp"]
+[gd_scene load_steps=85 format=3 uid="uid://0epxcm5d0bqp"]
 
 [ext_resource type="Script" uid="uid://cyqiplgu6dlnn" path="res://Scripts/food_spawner.gd" id="1_2yvf5"]
 [ext_resource type="Script" uid="uid://c1ubmt1jik6qq" path="res://Scripts/fish_spawner.gd" id="1_8v7by"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" uid="uid://c2frm46fryv2j" path="res://Scripts/pop_up.gd" id="5_1rqgg"]
 [ext_resource type="Texture2D" uid="uid://c6x46bsx8qw5g" path="res://Assets/PNG/Gacha/Fish Gacha/GotchaPond 1-2-6.png" id="6_sw8nc"]
 [ext_resource type="Texture2D" uid="uid://djhwies83x7o3" path="res://Assets/PNG/FishTank/fish tank v2.png" id="6_tjfcu"]
-[ext_resource type="Texture2D" uid="uid://b2f27fbel4gja" path="res://Assets/PNG/Gacha/Food Gacha/GotchaFeeder Sheet.png" id="7_3qleg"]
 [ext_resource type="Texture2D" uid="uid://7e13eadbe4q4" path="res://Assets/PNG/Gacha/Fish Gacha/GotchaPond sheet.png" id="7_x6ft1"]
 [ext_resource type="PackedScene" uid="uid://dsp6pyx71vaj4" path="res://Scenes/fish.tscn" id="8_sw8nc"]
 [ext_resource type="Script" uid="uid://5woyao7aputs" path="res://Scripts/bubble_count.gd" id="9_3ihge"]
@@ -67,18 +66,15 @@
 [ext_resource type="Texture2D" uid="uid://bm2qs1m06deqp" path="res://Assets/PNG/Pod/Pods Choice 4.png" id="49_ak5s2"]
 [ext_resource type="AudioStream" uid="uid://vd7s4tvtqf88" path="res://Assets/OGG/SFX/shiny gacha open.ogg" id="49_jqpsy"]
 [ext_resource type="Script" uid="uid://dbnrbqln315ux" path="res://Scenes/fish_count.gd" id="54_ehbil"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u02th"]
-atlas = ExtResource("7_3qleg")
-region = Rect2(0, 0, 86, 102)
+[ext_resource type="SpriteFrames" uid="uid://d04n5or4127m4" path="res://Resources/FishResources/base_fish.tres" id="55_buck4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_iskje"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_u02th")
+"texture": ExtResource("9_mdy11")
 }],
-"loop": true,
+"loop": false,
 "name": &"Idle",
 "speed": 5.0
 }, {
@@ -86,12 +82,15 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("9_mdy11")
 }, {
-"duration": 1.0,
+"duration": 1.5,
 "texture": ExtResource("10_jqpsy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_mdy11")
 }],
 "loop": false,
 "name": &"Spawn",
-"speed": 2.0
+"speed": 15.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p51s7"]
@@ -255,7 +254,7 @@ script = ExtResource("1_260qw")
 
 [node name="Bubbles" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
-layer = 100
+layer = 10
 
 [node name="Bubble" parent="Bubbles" instance=ExtResource("2_tjfcu")]
 position = Vector2(677, 347)
@@ -545,6 +544,7 @@ text = "Debug Lable"
 script = ExtResource("13_mwmob")
 
 [node name="PlayerGUI" type="CanvasLayer" parent="."]
+layer = 10
 
 [node name="FishPackMenu" type="Panel" parent="PlayerGUI"]
 unique_name_in_owner = true
@@ -673,6 +673,53 @@ offset_right = 1088.0
 offset_bottom = 134.0
 label_settings = ExtResource("42_tjfcu")
 script = ExtResource("54_ehbil")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlayerGUI/FishCount"]
+position = Vector2(43, -14)
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("55_buck4")
+animation = &"Idle"
+frame_progress = 0.269701
+
+[node name="Settings" type="Panel" parent="PlayerGUI"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = -1
+anchor_left = 0.396
+anchor_top = 0.415
+anchor_right = 0.563
+anchor_bottom = 0.573
+offset_left = -274.88
+offset_top = -188.8
+offset_right = 327.36
+offset_bottom = 197.44
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("21_pkn5o")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerGUI/Settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 31.0
+offset_top = 24.0
+offset_right = -35.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PlayerGUI/Settings/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Volume"
+label_settings = ExtResource("23_j66g3")
+
+[node name="HSlider" type="HSlider" parent="PlayerGUI/Settings/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("21_pkn5o")
 
 [node name="Camera" type="Camera2D" parent="."]
 offset = Vector2(640, 360)

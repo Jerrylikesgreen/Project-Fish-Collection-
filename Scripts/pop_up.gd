@@ -24,16 +24,12 @@ func _ready() -> void:
 	timer.one_shot = true
 	timer.wait_time = hold_seconds
 
-	if is_instance_valid(food):
-		food.pressed.connect(_on_button_pressed)
 
 	Events.player_message.connect(_on_player_message)
 
 	visible = false
 	set_text(" ") 
 
-func _on_button_pressed() -> void:
-	_on_player_message("Fish Food!")
 
 func _on_player_message(msg: String) -> void:
 	if _typing:

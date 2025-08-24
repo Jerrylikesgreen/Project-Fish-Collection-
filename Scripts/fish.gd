@@ -102,6 +102,7 @@ func _on_sell_button_pressed() -> void:
 	fish_sfx.set_stream(fish_sfx.track_pool[2])
 	fish_sfx.play()
 	Events.bubble_count_changed(3)
+	Events.fish_sold()
 	await fish_sfx.finished
 	queue_free()
 

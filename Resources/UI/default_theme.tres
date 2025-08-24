@@ -1,10 +1,14 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://cthsnn82p74vp"]
+[gd_resource type="Theme" load_steps=12 format=3 uid="uid://cthsnn82p74vp"]
 
 [ext_resource type="Texture2D" uid="uid://jeb8nscm8hb8" path="res://Assets/PNG/UI/large panel.png" id="1_76a3c"]
 [ext_resource type="StyleBox" uid="uid://bu6g8rhbddjou" path="res://Resources/box.tres" id="1_id12a"]
 [ext_resource type="StyleBox" uid="uid://qredtc0mntgm" path="res://Resources/box2.tres" id="2_0ts44"]
 [ext_resource type="StyleBox" uid="uid://b2b06d7yg6jqo" path="res://Resources/box3.tres" id="2_h4onc"]
+[ext_resource type="Texture2D" uid="uid://csbo2qh2gyksj" path="res://fish.tres" id="4_3aapj"]
+[ext_resource type="StyleBox" uid="uid://cpxqbprqfspmi" path="res://Resources/x2.tres" id="4_avaao"]
+[ext_resource type="Texture2D" uid="uid://k4fobtdouuk5" path="res://Assets/Buttons/1.png" id="4_dx04i"]
 [ext_resource type="Texture2D" uid="uid://dedm0cbjsvvhc" path="res://Assets/Screens + Panels/large panel.png" id="4_h4onc"]
+[ext_resource type="StyleBox" uid="uid://dl8rl0b2j7l6l" path="res://Resources/x.tres" id="6_3aapj"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h4onc"]
 texture = ExtResource("4_h4onc")
@@ -15,6 +19,9 @@ texture_margin_bottom = 3.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ot8jh"]
 texture = ExtResource("1_76a3c")
+expand_margin_left = 60.0
+expand_margin_top = 30.0
+expand_margin_right = 30.0
 
 [resource]
 Button/colors/font_color = Color(0.984314, 0.776471, 0.854902, 0.901961)
@@ -23,5 +30,11 @@ Button/constants/outline_size = 10
 Button/styles/hover = ExtResource("2_h4onc")
 Button/styles/normal = ExtResource("1_id12a")
 Button/styles/pressed = ExtResource("2_0ts44")
+HSlider/icons/grabber = ExtResource("4_3aapj")
+HSlider/icons/grabber_disabled = ExtResource("4_dx04i")
+HSlider/icons/grabber_highlight = ExtResource("4_dx04i")
+HSlider/styles/grabber_area = ExtResource("4_avaao")
+HSlider/styles/grabber_area_highlight = ExtResource("6_3aapj")
+HSlider/styles/slider = ExtResource("1_id12a")
 ItemList/styles/panel = SubResource("StyleBoxTexture_h4onc")
 Panel/styles/panel = SubResource("StyleBoxTexture_ot8jh")
