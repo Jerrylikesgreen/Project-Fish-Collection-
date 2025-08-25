@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dhwyj1rnvx44o"
+path="res://.godot/imported/Sweet Treats.ogg-3ac22b04c176047975a43a2881547799.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/OGG/ogg-short-loopable-background-music/Sweet Treats.ogg"
+dest_files=["res://.godot/imported/Sweet Treats.ogg-3ac22b04c176047975a43a2881547799.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

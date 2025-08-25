@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://by2o7y2byj0i3"
+path="res://.godot/imported/Dangerous Path.ogg-dbb4676793455cee501364bbe40a4ca3.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/OGG/ogg-short-loopable-background-music/Dangerous Path.ogg"
+dest_files=["res://.godot/imported/Dangerous Path.ogg-dbb4676793455cee501364bbe40a4ca3.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

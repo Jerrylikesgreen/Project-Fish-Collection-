@@ -1,6 +1,26 @@
 class_name Fish
 extends Node2D
 
+# Bubble tier -> value granted
+const BUBBLE_VALUES := [1, 2, 3, 5]  # Normal, Uncommon, Rare, Ultra
+
+# Baseline odds (weights). Tweak to taste.
+const BUBBLE_WEIGHTS_BASE := [75, 20, 4, 1]
+
+# When evolved, shift away from Common toward higher tiers.
+# Index order: [Common, Uncommon, Rare, Ultra]
+const EVOLVED_MULT := [0.8, 1.3, 2.0, 2.5]
+
+# Extra bias by fish rarity (your RARITIES order: Base, Gold, Green, Pink).
+# Each row multiplies the 4 bubble tiers respectively.
+const FISH_RARITY_MULTS := [
+	[1.00, 1.00, 1.00, 1.00],  # Base fish
+	[0.85, 1.20, 1.60, 2.00],  # Gold
+	[0.75, 1.30, 1.90, 2.40],  # Green
+	[0.60, 1.40, 2.20, 3.00],  # Pink
+]
+
+
 const BUBBLE := preload("res://Scenes/bubble.tscn")
 @onready var fish_sfx: AudioStreamPlayer = %FishSFX
 @onready var fish_sprite: Fish_Sprite = %FishSprite
@@ -43,6 +63,8 @@ const RARITY_WEIGHTS := [55, 25, 15, 5]
 
 var _rng := RandomNumberGenerator.new()
 
+# Fish.gd (top-level var)
+var style_material: ShaderMaterial = null
 
 func _ready() -> void:
 	add_to_group("fish")
@@ -71,12 +93,27 @@ func _on_evolved()->void:
 func _spawn_one() -> void:
 	var bubble: RigidBody2D = BUBBLE.instantiate()
 	get_tree().current_scene.get_child(1).add_child(bubble)
-	fish_sfx.set_stream(fish_sfx.track_pool[5]) 
-	fish_sfx.play()
+
+	# SFX (keep what you had)
+	if fish_sfx and "track_pool" in fish_sfx and fish_sfx.track_pool.size() > 5:
+		fish_sfx.set_stream(fish_sfx.track_pool[5])
+		fish_sfx.play()
+
 	bubble.global_position = mouth.global_position
-	if fish_body._evolved:
-		bubble.modulate = Color(0.0, 0.0, 0.784)
-		bubble.bubble_value = 3
+
+	# Build weights from evolution + fish rarity
+	var evolved := (fish_body != null and fish_body._evolved)
+	var weights := _build_bubble_weights(evolved, rarity)  # rarity is your 0..3 enum
+
+	var tier := _pick_by_weights(weights)   # 0..3
+	var value = BUBBLE_VALUES[tier]        # 1,2,3,5
+
+	bubble.bubble_value = value
+	_apply_bubble_visual(bubble, value)
+
+
+
+
 
 func _pick_random_rarity_index() -> int:
 	var total := 0
@@ -214,3 +251,49 @@ func get_evolution_icon_texture() -> Texture2D:
 	var tex := evo_frames.get_frame_texture(pick, 0)
 	print("[Fish] get_evolution_icon_texture: pick='%s' tex=%s" % [pick, str(tex)])
 	return tex
+
+
+
+
+func apply_style_material(mat: ShaderMaterial) -> void:
+	style_material = mat
+	var spr := get_node_or_null("FishBody/Tilt/FishSprite")
+	if spr == null:
+		spr = get_node_or_null("FishBody/FishSprite")
+	if spr and spr is CanvasItem:
+		(spr as CanvasItem).modulate = Color(1,1,1,1)
+		(spr as CanvasItem).self_modulate = Color(1,1,1,1)
+		(spr as CanvasItem).material = mat
+		print("[Fish] style material applied to %s" % spr.get_path())
+
+func _pick_by_weights(weights: Array) -> int:
+	var total := 0
+	for w in weights:
+		total += int(w)
+	if total <= 0:
+		return 0
+	var roll := _rng.randi_range(0, total - 1)
+	for i in range(weights.size()):
+		roll -= int(weights[i])
+		if roll < 0:
+			return i
+	return 0
+
+func _build_bubble_weights(evolved: bool, fish_rarity_idx: int) -> Array:
+	var w := BUBBLE_WEIGHTS_BASE.duplicate()
+	var rarity_idx := clampi(fish_rarity_idx, 0, FISH_RARITY_MULTS.size() - 1)
+	var rm = FISH_RARITY_MULTS[rarity_idx]
+	for i in range(w.size()):
+		var mult = rm[i] * (EVOLVED_MULT[i] if evolved else 1.0)
+		var v = float(w[i]) * mult
+		w[i] = max(1, int(round(v)))  # keep positive integers
+	return w
+
+func _apply_bubble_visual(bubble: Node, value: int) -> void:
+	if bubble is CanvasItem:
+		var ci := bubble as CanvasItem
+		match value:
+			1: ci.modulate = Color(1, 1, 1, 1)       # normal
+			2: ci.modulate = Color(0.85, 0.95, 1, 1) # faint blue
+			3: ci.modulate = Color(0.40, 0.80, 1, 1) # bright blue
+			5: ci.modulate = Color(1.00, 0.90, 0.40, 1) # golden

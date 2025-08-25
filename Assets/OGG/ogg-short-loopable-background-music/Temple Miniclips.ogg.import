@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bhrrlcmn5fcb4"
+path="res://.godot/imported/Temple Miniclips.ogg-c891b7462420510bb426e896339f2517.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/OGG/ogg-short-loopable-background-music/Temple Miniclips.ogg"
+dest_files=["res://.godot/imported/Temple Miniclips.ogg-c891b7462420510bb426e896339f2517.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

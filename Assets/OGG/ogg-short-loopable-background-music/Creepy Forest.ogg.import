@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://kyk7qdhihdi8"
+path="res://.godot/imported/Creepy Forest.ogg-3ad44b14dbe3b7c8ba5e8d09ebd4b549.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/OGG/ogg-short-loopable-background-music/Creepy Forest.ogg"
+dest_files=["res://.godot/imported/Creepy Forest.ogg-3ad44b14dbe3b7c8ba5e8d09ebd4b549.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

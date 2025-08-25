@@ -17,6 +17,7 @@ const FISH_BODY_PATH := "FishBody"  # adjust if your path differs
 func _ready() -> void:
 	Events.spawn_fish_signal.connect(_on_spawn_fish)
 	print("[SPAWNER] Connected to Events.spawn_fish_signal")
+	Globals.current_number_of_fish_in_tank = Globals.current_number_of_fish_in_tank + 1
 
 	for i in range(autospawn_count):
 		var base := starter_base_frames
@@ -35,20 +36,17 @@ func _on_spawn_fish(base_frames: SpriteFrames, evo_frames: SpriteFrames, species
 	var fish := fish_scene.instantiate()
 	print("[SPAWNER] Instanced: %s" % fish)
 
-
 	fish.set("species_id", species_id)
 	fish.set("display_name", (display_name if display_name != "" else species_id))
 	fish.set("evolution_sprites", evo_frames)
 
-	var fish_body := fish.get_node_or_null(FISH_BODY_PATH) as FishBody
-
+	var fish_body := fish.get_node_or_null(FISH_BODY_PATH)
 	if fish_body:
 		fish_body.set("fish_sprite_frames", base_frames)
 		fish_body.set("evolution_frames", evo_frames)
 	else:
-		push_warning("[SPAWNER] Could not find FishBody at path '%s' under Fish scene" % FISH_BODY_PATH)
+		push_warning("[SPAWNER] Could not find FishBody at path '%s'" % FISH_BODY_PATH)
 
-	# Add to tree, then decorate
 	add_child(fish)
 	fish.add_to_group("fish")
 	print("[SPAWNER] Added to tree. fish group size=%d"
@@ -56,19 +54,9 @@ func _on_spawn_fish(base_frames: SpriteFrames, evo_frames: SpriteFrames, species
 
 	_spawn_intro_pop(fish)
 
-	# Optional: fire your own hooks
 	if "fish_spawned" in Events:
 		Events.fish_spawned.emit(fish)
-		print("[SPAWNER] Emitted fish_spawned")
 
-	# Optional: collection discovery icon from evo (or base if evo missing)
-	var icon_tex := _icon_from_frames(evo_frames if evo_frames else base_frames)
-	if "collection_discover" in Events and icon_tex:
-		Events.collection_discover.emit(
-			species_id,
-			(display_name if display_name != "" else species_id),
-			icon_tex
-		)
 
 
 func _spawn_intro_pop(fish: Node2D) -> void:
@@ -107,3 +95,102 @@ func _icon_from_frames(frames: SpriteFrames) -> Texture2D:
 	var tex := frames.get_frame_texture(anim, 0)
 	print("[SPAWNER] _icon_from_frames: returning texture=%s" % str(tex))
 	return tex
+
+func _apply_material_recursive(n: Node, mat: ShaderMaterial) -> int:
+	var count := 0
+	if n is CanvasItem:
+		var ci := n as CanvasItem
+		ci.modulate = Color(1,1,1,1)        # avoid double darkening
+		ci.self_modulate = Color(1,1,1,1)
+		ci.material = mat
+		count += 1
+	for c in n.get_children():
+		count += _apply_material_recursive(c, mat)
+	return count
+
+# ---- find likely drawables under a root (fallback) ----
+func _find_drawables(root: Node) -> Array[CanvasItem]:
+	var out: Array[CanvasItem] = []
+	var stack: Array[Node] = [root]
+	while stack.size() > 0:
+		var n = stack.pop_back()
+		if n is CanvasItem:
+			# Prefer common 2D drawables; skip invisible containers
+			if n is AnimatedSprite2D or n is Sprite2D or n is MeshInstance2D or n is NinePatchRect:
+				out.append(n)
+		for c in n.get_children():
+			stack.append(c)
+	return out
+
+
+# ---- build style material (your values kept) ----
+const SHADER_PATH := "res://shaders/highlight_tint.gdshader"
+const SHADER_MODE := 1
+
+func _build_style_material(tint_col: Color) -> ShaderMaterial:
+	var sh := load(SHADER_PATH)
+	if sh == null:
+		push_warning("[SPAWNER] shader not found at %s" % SHADER_PATH)
+		return null
+	var mat := ShaderMaterial.new()
+	mat.shader = sh
+	mat.set_shader_parameter("mode", SHADER_MODE)
+	mat.set_shader_parameter("tint_color", tint_col)
+	mat.set_shader_parameter("strength", 1.0)
+	mat.set_shader_parameter("preserve_whites", true)
+	mat.set_shader_parameter("highlight_keep", 0.90)
+	mat.set_shader_parameter("softness", 0.12)
+	mat.set_shader_parameter("preserve_luma", true)
+	mat.set_shader_parameter("value_gain", 1.15)
+	mat.set_shader_parameter("lift", 0.08)
+	return mat
+
+# ---- pull queued style from Events, apply, and stash on Fish ----
+func _apply_fish_style_if_any(fish: Node) -> void:
+	if not Events.has_method("consume_next_fish_style"):
+		return
+
+	var sty = Events.consume_next_fish_style()
+	if sty == null or not sty.has("has") or sty["has"] != true:
+		print("[SPAWNER] no queued fish style")
+		return
+
+	var tint: Color = sty.get("tint", Color(1,1,1,1))
+	var sparkle: bool = sty.get("sparkle", false)
+	var mat := _build_style_material(tint)
+	if mat == null:
+		return
+
+	# Prefer the exact sprite path(s) you expect in your Fish scene
+	var applied := 0
+	var chosen_path := ""
+	var paths := [
+		"FishBody/Tilt/FishSprite",  # if your FishBody has a Tilt node
+		"FishBody/FishSprite",       # common arrangement
+		"FishSprite"                 # fallback name at root
+	]
+	for p in paths:
+		var node := fish.get_node_or_null(p)
+		if node and node is CanvasItem:
+			applied = _apply_material_recursive(node, mat)
+			chosen_path = p
+			break
+
+	# Robust fallback if none of the paths existed or drew anything
+	if applied == 0:
+		var drawables := _find_drawables(fish)
+		for d in drawables:
+			d.modulate = Color(1,1,1,1)
+			d.self_modulate = Color(1,1,1,1)
+			d.material = mat
+			applied += 1
+		chosen_path = "fallback(%d drawables)" % drawables.size()
+
+	# Stash on Fish so FishBody can re-apply after evolve
+	if fish.has_method("apply_style_material"):
+		fish.apply_style_material(mat)
+	else:
+		fish.set("style_material", mat)
+
+	print("[SPAWNER] applied fish style tint=%s sparkle=%s via %s -> %d CanvasItem(s)"
+		% [str(tint), str(sparkle), chosen_path, applied])

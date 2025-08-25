@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bw3sby5a4ohcj"
+path="res://.godot/imported/Mysterious Tavern.ogg-e94972d51672578976844ce9ab13a837.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/OGG/ogg-short-loopable-background-music/Mysterious Tavern.ogg"
+dest_files=["res://.godot/imported/Mysterious Tavern.ogg-e94972d51672578976844ce9ab13a837.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

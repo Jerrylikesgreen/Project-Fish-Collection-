@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://blang141a2tp0"
+path="res://.godot/imported/Effects B.ogg-55d5f5fe404e3d52a6f0a4277ec25146.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/OGG/ogg-short-loopable-background-music/Effects B.ogg"
+dest_files=["res://.godot/imported/Effects B.ogg-55d5f5fe404e3d52a6f0a4277ec25146.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

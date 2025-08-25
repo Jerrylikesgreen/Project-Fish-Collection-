@@ -14,13 +14,9 @@ var _current_track       : int = TRACK_NONE
 var _last_gameplay_track : int = TRACK_NONE
 var _tw                  : Tween = null
 
-const TRACK_STREAMS: Dictionary = {
-	Track.PINK_BLOOM: preload("res://Assets/OGG/bloom.ogg"),
-}
 
 func _ready() -> void:
-	# Start with a gentle fade
-	play_track(Track.PINK_BLOOM, 0.2)
+
 	Events.game_started.connect(_on_game_start)
 
 
@@ -80,7 +76,6 @@ func _fade_in(t: float) -> void:
 
 func _switch_stream(track: int) -> void:
 	_current_track = track
-	stream = TRACK_STREAMS.get(track, null)  # returns AudioStream or null
 
 func _kill_tween() -> void:
 	if _tw and _tw.is_valid():

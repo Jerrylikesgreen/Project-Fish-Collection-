@@ -4,7 +4,6 @@ var bubble_count:int = 0
 
 func _ready() -> void:
 	Events.bubble_count_changed_signal.connect(_on_bubble_count)
-	set_text("Bubble Count: ")
 
 
 func _on_bubble_count(new_bubble_count:int)->void:

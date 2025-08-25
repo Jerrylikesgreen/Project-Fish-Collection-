@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://da2gv4wpi4uyw"
+path="res://.godot/imported/Dead Planet.ogg-7a56d79e38ed6ca1af6a79d7fb04154a.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/OGG/ogg-short-loopable-background-music/Dead Planet.ogg"
+dest_files=["res://.godot/imported/Dead Planet.ogg-7a56d79e38ed6ca1af6a79d7fb04154a.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

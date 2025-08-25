@@ -203,8 +203,16 @@ func _check_hunger_value() -> void:
 		_switch_frames_and_play(evolution_frames, ["Evolve", "Idle", "idle"])
 		_evolved = true
 
+		var p := get_parent()
+		if p != null and p is Fish:
+			var f := p as Fish
+			var show_name := f.get_collection_name()
+			Events.display_player_message("It grew into " + show_name + "!")
+			print("[FishBody] Evolution reveal -> ", show_name)
+
 		var old_hunger_tick := hunger_tick.wait_time
 		hunger_tick.wait_time = old_hunger_tick * 1.5
+
 
 
 func _switch_frames_and_play(evolution_frames: SpriteFrames, preferred: Array[String] = ["Evolve", "Idle", "idle"]) -> void:
@@ -213,11 +221,31 @@ func _switch_frames_and_play(evolution_frames: SpriteFrames, preferred: Array[St
 		return
 
 	print("[FishBody] Switching to evolution_frames=%s" % str(evolution_frames))
-
 	fish_sprite.sprite_frames = evolution_frames
+		# after: fish_sprite.sprite_frames = evolution_frames (and you picked/played anim)
+	var parent_fish := get_parent()
+	var species_id_to_emit := species_id
+	var reveal_name := species_id
+	
+	if parent_fish and parent_fish.has_method("get_collection_key"):
+		species_id_to_emit = String(parent_fish.get_collection_key())
+	if parent_fish and parent_fish.has_method("get_collection_name"):
+		reveal_name = String(parent_fish.get_collection_name())
+	
+	var icon_tex := _icon_from_frames(evolution_frames)
+	
+	if "collection_discover" in Events:
+		Events.collection_discover.emit(species_id_to_emit, reveal_name, icon_tex)
+		print("[FishBody] emitted collection_discover id=%s name=%s icon=%s"
+			% [species_id_to_emit, reveal_name, str(icon_tex)])
+	
+
+
+
+
+	# Pick an animation to play on the new frames
 	var names := evolution_frames.get_animation_names()
 	print("[FishBody] Applied evolution_frames. Animations=%s" % names)
-
 	if names.is_empty():
 		push_warning("FishBody: new SpriteFrames has no animations")
 		return
@@ -231,9 +259,24 @@ func _switch_frames_and_play(evolution_frames: SpriteFrames, preferred: Array[St
 		pick = names[0]
 
 	print("[FishBody] Playing animation '%s' after evolve" % pick)
-
 	fish_sprite.animation = pick
 	fish_sprite.play(pick)
 
-
-	
+func _icon_from_frames(frames: SpriteFrames) -> Texture2D:
+	if frames == null:
+		return null
+	var anim := ""
+	if frames.has_animation("Idle"):
+		anim = "Idle"
+	elif frames.has_animation("idle"):
+		anim = "idle"
+	else:
+		var names := frames.get_animation_names()
+		if names.size() > 0:
+			anim = names[0]
+		else:
+			return null
+	var count := frames.get_frame_count(anim)
+	if count <= 0:
+		return null
+	return frames.get_frame_texture(anim, 0)

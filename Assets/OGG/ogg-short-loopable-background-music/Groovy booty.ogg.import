@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bonh3qs8xgw6p"
+path="res://.godot/imported/Groovy booty.ogg-ebced0d2827eca9ebdc6871128f5a7ac.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/OGG/ogg-short-loopable-background-music/Groovy booty.ogg"
+dest_files=["res://.godot/imported/Groovy booty.ogg-ebced0d2827eca9ebdc6871128f5a7ac.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

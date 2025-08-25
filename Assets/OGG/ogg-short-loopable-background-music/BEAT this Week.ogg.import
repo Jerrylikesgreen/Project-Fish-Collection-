@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dktfvqn8crgn7"
+path="res://.godot/imported/BEAT this Week.ogg-9947802fe1cdd7c29ebfa036a3f06d01.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/OGG/ogg-short-loopable-background-music/BEAT this Week.ogg"
+dest_files=["res://.godot/imported/BEAT this Week.ogg-9947802fe1cdd7c29ebfa036a3f06d01.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

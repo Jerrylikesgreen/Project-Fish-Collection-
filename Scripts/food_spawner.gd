@@ -3,21 +3,35 @@ extends Node2D
 
 const FISH_FOOD := preload("res://Scenes/fish_food.tscn")
 
-# Single, fixed spawn point (set this in the Inspector). If left empty, we use this node's position.
 @export var spawn_marker: Marker2D
-
-# Cost to drop food
 @export var bubble_cost: int = 5
 
-# Inspector default rarity (used if random_rarity = false)
 @export_enum("Common", "Uncommon", "Rare", "Ultra") var rarity: int = 0
 @export var random_rarity: bool = true
 
-# Weights for random rarity (relative)
 @export var weight_common:   int = 50
 @export var weight_uncommon: int = 30
 @export var weight_rare:     int = 15
 @export var weight_ultra:    int = 5
+
+# ---------- copy & cadence ----------
+const LINES_COMMON := [
+	"Dropped some flakes.",
+	"Snack time.",
+	"A quick nibble."
+]
+const LINES_UNCOMMON := [
+	"Pellets on the way.",
+	"A tastier snack lands."
+]
+const LINES_RARE := [
+	"A rare treat splashes down.",
+	"That should perk them up."
+]
+const LINES_ULTRA := [
+	"Ultra treat—everyone swarms!",
+	"That’s the good stuff."
+]
 
 func _ready() -> void:
 	randomize()
@@ -27,14 +41,19 @@ func _ready() -> void:
 		push_warning("[FoodSpawner] Events.spawn_fish_food signal missing")
 
 func spawn_fish_food() -> void:
+	# Gate: not enough bubbles
 	if Globals.current_bubble_count < bubble_cost:
-		print("[FoodSpawner] Not enough bubbles (have=%d need=%d)" % [Globals.current_bubble_count, bubble_cost])
+		var short := bubble_cost - Globals.current_bubble_count
+		# brief cooldown so holding the button doesn't spam
+		Events.say_once("food_not_enough", "Need %d more bubbles for food." % short, "WARN", 2.0)
 		return
 
+	# Spend (Events will handle the spend message if you keep it enabled there)
 	Events.bubble_count_changed(-bubble_cost)
 	await get_tree().get_frame()
 
-	var pos := _spawn_pos()  # <- deterministic
+	# Spawn
+	var pos := _spawn_pos()
 	var food := FISH_FOOD.instantiate()
 	add_child(food)
 	food.global_position = pos
@@ -43,11 +62,25 @@ func spawn_fish_food() -> void:
 	_apply_rarity_frame(food, r)
 	food._rarity = r
 
-	var names := ["Common", "Uncommon", "Rare", "Ultra"]
-	Events.display_player_message("You got a " + names[clamp(r, 0, 3)])
-
+	_announce_food(r)
 
 # ---------- helpers ----------
+
+func _announce_food(r: int) -> void:
+	# Light touch for common/uncommon, always announce rare/ultra.
+	match r:
+		0:
+			if randf() < 0.25:
+				Events.say_once("food_common", LINES_COMMON.pick_random(), "ACTION", 5.0)
+		1:
+			if randf() < 0.40:
+				Events.say_once("food_uncommon", LINES_UNCOMMON.pick_random(), "ACTION", 6.0)
+		2:
+			Events.say_once("food_rare", LINES_RARE.pick_random(), "SUCCESS", 8.0)
+		3:
+			Events.say_once("food_ultra", LINES_ULTRA.pick_random(), "SUCCESS", 12.0)
+		_:
+			pass
 
 func _spawn_pos() -> Vector2:
 	if spawn_marker and is_instance_valid(spawn_marker):
@@ -55,13 +88,11 @@ func _spawn_pos() -> Vector2:
 	return global_position
 
 func _apply_rarity_frame(food: Node, r: int) -> void:
-	# Works if the root is AnimatedSprite2D
 	if food is AnimatedSprite2D:
 		(food as AnimatedSprite2D).frame = r
 		return
-	# Otherwise try common child names/paths
 	var spr := food.get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
-	if spr == null:
+	if spr == null and "fish_food_sprite" in food:
 		spr = food.fish_food_sprite
 	if spr:
 		spr.frame = r

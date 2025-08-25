@@ -27,6 +27,7 @@ config/windows_native_icon="uid://bj0j1x0ytnjh5"
 Events="*res://Autoloads/events.gd"
 Globals="*res://Autoloads/globals.gd"
 ScreenshotManager="*res://Autoloads/screenshot_manager.gd"
+TintUtil="*res://Scripts/tint_util.gd"
 
 [display]
 
