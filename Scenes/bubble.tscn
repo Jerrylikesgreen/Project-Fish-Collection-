@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://cu3h8r4da4y8"]
+[gd_scene load_steps=15 format=3 uid="uid://cu3h8r4da4y8"]
 
 [ext_resource type="Texture2D" uid="uid://ebq77tnok2fm" path="res://Assets/PNG/Bubbles/bubble_1.png" id="1_mher7"]
+[ext_resource type="Material" uid="uid://cjdp5n0gwwarp" path="res://Resources/Shader/green_rarity.tres" id="2_8kbcx"]
 [ext_resource type="Texture2D" uid="uid://hpnm1s65quob" path="res://Assets/PNG/Bubbles/bubble_0.png" id="2_sqrnf"]
 [ext_resource type="Texture2D" uid="uid://bew4q3ephxg61" path="res://Assets/PNG/Bubbles/bubble_2.png" id="3_x6cym"]
 [ext_resource type="Texture2D" uid="uid://clnva8ojvf68f" path="res://Assets/PNG/Bubbles/pop_0.png" id="4_pksoc"]
@@ -67,6 +68,7 @@ life_after_top = 2.0
 
 [node name="BubbleSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
+material = ExtResource("2_8kbcx")
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_6vhsv")
 animation = &"Pop"

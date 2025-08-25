@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dsp6pyx71vaj4"]
+[gd_scene load_steps=32 format=3 uid="uid://dsp6pyx71vaj4"]
 
 [ext_resource type="Script" uid="uid://c37wotvnystf1" path="res://Scripts/fish_body.gd" id="1_hgn23"]
 [ext_resource type="Script" uid="uid://lggwoh4bq3qj" path="res://Scripts/fish.gd" id="1_jdl8t"]
@@ -23,8 +23,6 @@
 [ext_resource type="AudioStream" uid="uid://vd7s4tvtqf88" path="res://Assets/OGG/SFX/shiny gacha open.ogg" id="21_po6i4"]
 [ext_resource type="AudioStream" uid="uid://bwhdqorjn6ttl" path="res://Assets/OGG/SFX/food spit.ogg" id="22_qa415"]
 [ext_resource type="AudioStream" uid="uid://c6o0x4abnmj2r" path="res://Assets/OGG/SFX/fish grown.ogg" id="23_o03n1"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_62nyy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xu20i"]
 radius = 12.1655
@@ -66,6 +64,7 @@ shadow_offset = Vector2(0.5, 0.5)
 scale = Vector2(4, 4)
 script = ExtResource("1_jdl8t")
 spawn_every = 3.0
+shiny_shader_pool = Array[ShaderMaterial]([null, ExtResource("5_csmc7"), ExtResource("7_fl3e6"), ExtResource("8_clm4a")])
 
 [node name="FishBody" type="CharacterBody2D" parent="."]
 unique_name_in_owner = true
@@ -86,7 +85,6 @@ jitter_strength = 0.1
 
 [node name="Tilt" type="Node2D" parent="FishBody"]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_62nyy")
 
 [node name="FishSprite" type="AnimatedSprite2D" parent="FishBody/Tilt"]
 unique_name_in_owner = true

@@ -570,6 +570,7 @@ script = ExtResource("37_c0jdj")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 14.84
+mouse_filter = 2
 
 [node name="UpgradeButton" type="TextureButton" parent="Tank/PlayerButtons"]
 layout_mode = 2

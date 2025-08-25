@@ -13,6 +13,14 @@ extends Node2D
 @export var starter_display_name: String = "Starter"
 
 const FISH_BODY_PATH := "FishBody"  # adjust if your path differs
+# Paths to rarity materials (you can extend this if needed)
+const RARITY_MATERIALS := {
+	"gold": preload("res://Resources/Shader/gold_rarity.tres"),
+	"green": preload("res://Resources/Shader/green_rarity.tres"),
+	"pink": preload("res://Resources/Shader/pink_rarity.tres"),
+}
+
+
 
 func _ready() -> void:
 	Events.spawn_fish_signal.connect(_on_spawn_fish)
@@ -155,19 +163,34 @@ func _apply_fish_style_if_any(fish: Node) -> void:
 		print("[SPAWNER] no queued fish style")
 		return
 
-	var tint: Color = sty.get("tint", Color(1,1,1,1))
+	var tint: Color = sty.get("tint", Color(1, 1, 1, 1))
 	var sparkle: bool = sty.get("sparkle", false)
-	var mat := _build_style_material(tint)
+	var rarity: String = sty.get("rarity", "gold")  # optional - default to "gold"
+
+	var mat: ShaderMaterial = null
+
+	if sparkle:
+		# Use pre-made shiny material if it exists
+		if RARITY_MATERIALS.has(rarity):
+			mat = RARITY_MATERIALS[rarity]
+			print("[SPAWNER] using shiny shader material: %s" % rarity)
+		else:
+			push_warning("[SPAWNER] Unknown rarity '%s'; no material applied" % rarity)
+			return
+	else:
+		# Default to tint shader
+		mat = _build_style_material(tint)
+
 	if mat == null:
 		return
 
-	# Prefer the exact sprite path(s) you expect in your Fish scene
+	# Apply material logic (unchanged)
 	var applied := 0
 	var chosen_path := ""
 	var paths := [
-		"FishBody/Tilt/FishSprite",  # if your FishBody has a Tilt node
-		"FishBody/FishSprite",       # common arrangement
-		"FishSprite"                 # fallback name at root
+		"FishBody/Tilt/FishSprite",
+		"FishBody/FishSprite",
+		"FishSprite"
 	]
 	for p in paths:
 		var node := fish.get_node_or_null(p)
@@ -176,7 +199,6 @@ func _apply_fish_style_if_any(fish: Node) -> void:
 			chosen_path = p
 			break
 
-	# Robust fallback if none of the paths existed or drew anything
 	if applied == 0:
 		var drawables := _find_drawables(fish)
 		for d in drawables:
@@ -186,7 +208,6 @@ func _apply_fish_style_if_any(fish: Node) -> void:
 			applied += 1
 		chosen_path = "fallback(%d drawables)" % drawables.size()
 
-	# Stash on Fish so FishBody can re-apply after evolve
 	if fish.has_method("apply_style_material"):
 		fish.apply_style_material(mat)
 	else:

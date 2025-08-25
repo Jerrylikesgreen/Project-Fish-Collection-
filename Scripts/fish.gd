@@ -32,38 +32,23 @@ const BUBBLE := preload("res://Scenes/bubble.tscn")
 @onready var mouth: Marker2D = %Marker2D
 @onready var sell_button: Button = %SellButton
 @export var icon_override: Texture2D
-
 @export var rare_spawn_sfx_index: int = 6     # index in fish_sfx.track_pool (set what you use)
 @export var rare_spawn_sfx: AudioStream       # optional direct stream fallback
-var _rare_chimed: bool = false                # guard so it plays once
-
 @onready var anim: Fish_Sprite = %FishSprite
 @export var evolution_sprites: SpriteFrames
 @export var spawn_every: float = 1.0
+@export var shiny_shader_pool:Array[ShaderMaterial]
 
-const RARITIES := ["Base","Gold","Green","Pink"]
+@export_enum("Base", "Gold", "Green", "Pink") var rarity: int 
 
-# === Update your rarity property to notify when it changes ===
-@export_enum("Base","Gold","Green","Pink") var rarity: int:
-	set(value):
-		var clamped := clampi(value, 0, RARITIES.size() - 1)
-		if clamped == _rarity:
-			# no change
-			return
-		_rarity = clamped
-		if is_inside_tree():
-			_apply_rarity_to_sprite()
-			_maybe_play_rare_chime()   # <-- play if non-base
-	get:
-		return _rarity
+
+
+
 var _rarity: int = 0
-
-
 const RARITY_WEIGHTS := [55, 25, 15, 5]
-
+const RARITIES := ["Base","Gold","Green","Pink"]
+var _rare_chimed: bool = false                # guard so it plays once
 var _rng := RandomNumberGenerator.new()
-
-# Fish.gd (top-level var)
 var style_material: ShaderMaterial = null
 
 func _ready() -> void:
@@ -79,10 +64,11 @@ func _ready() -> void:
 	fish_body.fish_ate.connect(_on_fish_ate)
 	_maybe_play_rare_chime()
 	rarity = _pick_random_rarity_index()
-	print(rarity, " Fish")
+	print(rarity, " Fish Rarity")
 	fish_body.evolution_signal.connect(_on_evolved)
 	fish_body.evolution_frames = evolution_sprites
 	fish_body.species_id = species_id
+	_apply_rarity_to_sprite()
 	print("[Fish] Assigned evolution_frames for species=%s | evolution_sprites=%s"
 		% [species_id, str(evolution_sprites)])
 
@@ -127,9 +113,7 @@ func _pick_random_rarity_index() -> int:
 	return 0
 
 func _apply_rarity_to_sprite() -> void:
-	var rarity_name = RARITIES[_rarity]
-	if fish_sprite:
-		fish_sprite.add_rarity(rarity_name)
+	fish_sprite.add_rarity(rarity)
 
 func _on_selling_fish_signal(enabled: bool) -> void:
 	sell_button.visible = enabled
