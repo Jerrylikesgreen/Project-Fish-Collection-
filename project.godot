@@ -40,7 +40,7 @@ window/windows_native_icon=""
 
 folder_colors={
 "res://Assets/": "teal",
-"res://Autoloads/": "green",
+"res://Autoloads/": "pink",
 "res://Resources/": "yellow",
 "res://Scenes/": "orange",
 "res://Scripts/": "red"
