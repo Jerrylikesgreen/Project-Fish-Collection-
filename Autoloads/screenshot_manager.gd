@@ -8,6 +8,7 @@ const DEBUG := true
 @export var toast_seconds := 1.6
 @export var toast_max_width := 520.0
 @export var shutter_sfx: AudioStream
+@export var download_on_web := true   # ⟵ NEW: offer a browser download after saving
 
 var _flash_layer: CanvasLayer
 var _flash_rect: ColorRect
@@ -17,7 +18,10 @@ var _toast_label: Label
 var _sfx: AudioStreamPlayer
 
 func _ready() -> void:
-	DirAccess.make_dir_recursive_absolute(SCREENSHOT_DIR)
+	# Make sure the directory exists (works on desktop, mobile, web)
+	if not DirAccess.dir_exists_absolute(SCREENSHOT_DIR):
+		DirAccess.make_dir_recursive_absolute(SCREENSHOT_DIR)
+
 	if DEBUG:
 		var abs := ProjectSettings.globalize_path(SCREENSHOT_DIR)
 		print("[ScreenshotManager] Ready →", SCREENSHOT_DIR, " (", abs, ")")
@@ -35,7 +39,9 @@ func _input(event: InputEvent) -> void:
 
 func take_screenshot(include_ui: bool = true) -> void:
 	if DEBUG: print("[ScreenshotManager] Taking screenshot… include_ui=", include_ui)
-	await RenderingServer.frame_post_draw
+
+	# Ensure the frame is fully drawn on all platforms
+	await get_tree().process_frame
 
 	var img: Image
 	var hidden: Array = []
@@ -43,7 +49,7 @@ func take_screenshot(include_ui: bool = true) -> void:
 		img = get_viewport().get_texture().get_image()
 	else:
 		hidden = _set_ui_visible(false)
-		await RenderingServer.frame_post_draw
+		await get_tree().process_frame
 		img = get_viewport().get_texture().get_image()
 		_set_ui_visible(true, hidden)
 
@@ -51,23 +57,40 @@ func take_screenshot(include_ui: bool = true) -> void:
 		push_warning("[ScreenshotManager] Image capture returned null")
 		return
 
+	# Web/GL usually needs vertical flip
+	img.flip_y()
+
 	var path := _unique_path()
 	var err := img.save_png(path)
 	if err == OK:
+		# Also trigger a browser download on Web, if you want
+		if OS.has_feature("web") and download_on_web:
+			var bytes := img.save_png_to_buffer()
+			_download_in_browser_as(path.get_file(), bytes)
+	
 		print("📸 Saved screenshot:", path)
-		# Visual/SFX indicators AFTER saving so they don't appear in the shot
 		_indicator_flash()
-		_indicator_toast("Saved: " + _humanize_user_path(path))
+		_indicator_toast(_saved_msg_for_current_platform(path))
 		_indicator_sfx()
 	else:
 		push_warning("[ScreenshotManager] Failed to save (code=%s) → %s" % [str(err), path])
+
 
 func _unique_path() -> String:
 	var ts := Time.get_datetime_string_from_system().replace(":", "-").replace(" ", "_")
 	return SCREENSHOT_DIR + "/screenshot_" + ts + ".png"
 
+func _saved_msg_for_current_platform(p: String) -> String:
+	if OS.has_feature("web"):
+		var suffix := " & downloaded." if download_on_web else "."
+		return "Screenshot saved to browser storage" + suffix
+	return "Saved: " + _humanize_user_path(p)
+
+
+
 # ─────────────────────────────────────────────────────────────
-# UI toggle used for "clean" shots
+# (Your existing UI hiding, indicators, etc. unchanged below)
+
 func _set_ui_visible(visible: bool, restore_list: Array = []) -> Array:
 	var affected: Array = []
 	if restore_list.size() > 0:
@@ -89,13 +112,16 @@ func _set_ui_visible(visible: bool, restore_list: Array = []) -> Array:
 			n.visible = visible
 			if not seen.has(n): seen[n] = true
 			affected.append(n)
-
-	if DEBUG:
-		print("[ScreenshotManager] _set_ui_visible(", visible, ") count=", affected.size())
 	return affected
 
-# ─────────────────────────────────────────────────────────────
-# Indicators (flash + toast + sfx)
+# … keep your _ensure_indicator_nodes(), _indicator_flash(), _indicator_toast(), _indicator_sfx() …
+
+func _humanize_user_path(p: String) -> String:
+	return ProjectSettings.globalize_path(p)
+
+
+
+
 
 func _ensure_indicator_nodes() -> void:
 	# FLASH (full-screen white ColorRect on a high CanvasLayer)
@@ -181,9 +207,24 @@ func _indicator_sfx() -> void:
 		return
 	_sfx.stream = shutter_sfx
 	_sfx.play()
+	
 
-func _humanize_user_path(p: String) -> String:
-	# Replace the sandbox prefix with an OS path for display
-	var abs := ProjectSettings.globalize_path(p)
-	# On desktop this will be a real path; on web it's a virtual fs
-	return abs
+func _download_in_browser_as(filename: String, bytes: PackedByteArray) -> void:
+	if not OS.has_feature("web"):
+		return
+	var b64 := Marshalls.raw_to_base64(bytes)
+	var js := """
+	(function(fileName, base64){
+		try{
+			const a = document.createElement('a');
+			a.href = 'data:image/png;base64,' + base64;
+			a.download = fileName;
+			document.body.appendChild(a);
+			a.click();
+			a.remove();
+			return true;
+		}catch(e){ console.error(e); return false; }
+	})
+	"""
+	var args_json := JSON.stringify([filename, b64])
+	JavaScriptBridge.eval(js + "(" + args_json + ");")
