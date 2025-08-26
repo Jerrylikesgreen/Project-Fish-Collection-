@@ -28,11 +28,11 @@ sfx_volume=0.87
 
 [autoload]
 
+SpeciesRegistry="*res://Autoloads/species_registry.gd"
 Events="*res://Autoloads/events.gd"
 Globals="*res://Autoloads/globals.gd"
 ScreenshotManager="*res://Autoloads/screenshot_manager.gd"
 TintUtil="*res://Scripts/tint_util.gd"
-SpeciesRegistry="*res://Autoloads/species_registry.gd"
 
 [display]
 

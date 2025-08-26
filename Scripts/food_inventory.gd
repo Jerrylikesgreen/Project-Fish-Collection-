@@ -36,9 +36,8 @@ func _ready() -> void:
 	select_mode = ItemList.SELECT_SINGLE
 
 	_seed_all_species_from_registry()
-	_load_discoveries()  # persistence (see below)
+	_load_discoveries()
 
-	# Connect events AFTER seeding & loading
 	if "open_collections_screen" in Events:
 		Events.open_collections_screen.connect(_on_button_set_visible)
 	if "collection_discover" in Events:
@@ -46,8 +45,17 @@ func _ready() -> void:
 	if "fish_spawned" in Events:
 		Events.fish_spawned.connect(_on_spawned)
 
+	print("[Collection] seeded species=", _entries.size())
 	_refresh_list()
 	_debug_dump("after _ready")
+	print("[Collection] ALL_SPECIES count=", SpeciesRegistry.ALL_SPECIES.size())
+	for id in SpeciesRegistry.ALL_SPECIES.keys():
+		var sil_ok = SpeciesRegistry.ALL_SPECIES[id].has("silhouette") and SpeciesRegistry.ALL_SPECIES[id]["silhouette"] != null
+		print("  -", id, " silhouette=", sil_ok)
+	
+	print("[Collection] ItemList item_count=", item_count, " fixed_icon_size=", fixed_icon_size)
+
+
 
 
 func _seed_all_species_from_registry() -> void:
@@ -126,10 +134,14 @@ func _on_discover(species_id: String, f_name: String, icon: Texture2D) -> void:
 
 	if _thumb_cache.has(species_id):
 		_thumb_cache.erase(species_id)
-	e.icon = _get_or_make_thumb(species_id, icon)
+
+	# If discover passes null icon in Web, fall back to silhouette or placeholder
+	var sil: Texture2D = SpeciesRegistry.ALL_SPECIES.get(species_id, {}).get("silhouette", null)
+	e.icon = _get_or_make_thumb(species_id, icon if icon != null else sil)
 
 	_refresh_list()
 	_debug_dump("_on_discover")
+
 
 
 
@@ -145,7 +157,6 @@ func _refresh_list() -> void:
 	keys.sort_custom(func(a, b):
 		var ea := _entries[a]
 		var eb := _entries[b]
-		# revealed first, then name
 		if ea.revealed != eb.revealed:
 			return ea.revealed and not eb.revealed
 		return ea.name.nocasecmp_to(eb.name) < 0
@@ -156,9 +167,9 @@ func _refresh_list() -> void:
 		var label := e.name
 		if e.revealed:
 			label += " [" + e.rarity_name + "]"
+		# Even if icon is null, still add the item so you see labels
 		var idx := add_item(label, e.icon)
 		set_item_metadata(idx, key)
-		# subtle tint: gray-out unrevealed
 		set_item_icon_modulate(idx, Color(1,1,1,1) if e.revealed else Color(0.7,0.7,0.7,1))
 		set_item_tooltip(idx, "Rarity: %s" % e.rarity_name if e.revealed else "Unseen")
 
@@ -166,18 +177,25 @@ func _refresh_list() -> void:
 
 
 
+@export var flip_icons_horizontally := false  # avoid get_image() on Web
+
 func _get_or_make_thumb(species_id: String, tex: Texture2D) -> Texture2D:
 	if _thumb_cache.has(species_id):
 		return _thumb_cache[species_id]
 
 	var result: Texture2D = tex
-	if tex != null:
-		var img := tex.get_image()
-		if img != null:
+	if result == null:
+		result = placeholder_icon
+
+	if flip_icons_horizontally and result != null and result is ImageTexture:
+		var img := result.get_image()
+		if img:
 			img.flip_x()
 			result = ImageTexture.create_from_image(img)
+
 	_thumb_cache[species_id] = result
 	return result
+
 
 
 func _recount_species(species_id: String) -> int:

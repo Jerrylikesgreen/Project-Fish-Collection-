@@ -3,6 +3,7 @@ extends Button
 
 const POD = preload("res://Scenes/pod.tscn")
 const FISH = preload("res://Scenes/fish.tscn")
+@onready var ftimer: Timer = $ftimer
 
 @onready var fish_gacha_sprite: AnimatedSprite2D = %FishGachaSprite
 @onready var marker: PathFollow2D = %Marker
@@ -61,6 +62,7 @@ const LINES_TANK_FULL: Array[String] = [
 
 
 func _ready() -> void:
+	ftimer.timeout.connect(_on_timeout)
 	print("[%s] _ready" % _dbg_id)
 	print("[%s] config: pool_size=%d  costs={entry:%d, A:%d, B:%d, C:%d}  path{from:%f,to:%f,dur:%f}  limits live<=%d" %
 		[_dbg_id, fish_pack_pool.size(), entry_cost, cost_pack_a, cost_pack_b, cost_pack_c, from_ratio, to_ratio, path_duration, Globals.max_fish_count])
@@ -70,6 +72,9 @@ func _ready() -> void:
 
 	Events.fish_pack_selected_signal.connect(_on_fish_pack_selected)
 	print("[%s] connected: Events.fish_pack_selected_signal -> _on_fish_pack_selected" % _dbg_id)
+
+func _on_timeout()->void:
+	disabled = false
 
 func _on_pressed() -> void:
 	var live := get_tree().get_nodes_in_group("fish").size()
@@ -96,6 +101,7 @@ func _on_pressed() -> void:
 	pods.play()
 	knob.play()
 	disabled = true
+	ftimer.start()
 
 
 # Lightweight copy system (no emojis, no spoilers)
