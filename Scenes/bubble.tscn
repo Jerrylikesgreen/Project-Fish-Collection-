@@ -71,10 +71,8 @@ unique_name_in_owner = true
 material = ExtResource("2_8kbcx")
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_6vhsv")
-animation = &"Pop"
+animation = &"Idle"
 autoplay = "Idle"
-frame = 4
-frame_progress = 1.0
 script = ExtResource("9_sqrnf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djhwies83x7o3"
-path="res://.godot/imported/fish tank v2.png-7f43aa64f6b80f0ac3005d9d81a32727.ctex"
+uid="uid://b6d0x7f3jdbq2"
+path="res://.godot/imported/pika_tadpol_sil.png-828f939b52039eaceb976964741acae2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/PNG/FishTank/fish tank v2.png"
-dest_files=["res://.godot/imported/fish tank v2.png-7f43aa64f6b80f0ac3005d9d81a32727.ctex"]
+source_file="res://Resources/CollectionSilhouettes/pika_tadpol_sil.png"
+dest_files=["res://.godot/imported/pika_tadpol_sil.png-828f939b52039eaceb976964741acae2.ctex"]
 
 [params]
 

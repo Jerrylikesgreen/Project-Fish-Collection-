@@ -1,9 +1,8 @@
-[gd_resource type="SpriteFrames" load_steps=21 format=3 uid="uid://tes7dgaru5m4"]
+[gd_resource type="SpriteFrames" load_steps=18 format=3 uid="uid://tes7dgaru5m4"]
 
 [ext_resource type="Texture2D" uid="uid://bq8pqxgk6sqit" path="res://Assets/PNG/Fish/Princess Pheach/Princess Pheash Hungry.png" id="1_hcxm7"]
 [ext_resource type="Texture2D" uid="uid://ceysejhuctkrw" path="res://Assets/PNG/Fish/Princess Pheach/Princess Pheash Eating.png" id="2_1nnoe"]
 [ext_resource type="Texture2D" uid="uid://bv8utq2lennwt" path="res://Assets/PNG/Fish/Princess Pheach/Pod 2 Princess Pheash transformation.png" id="3_rkgy4"]
-[ext_resource type="Texture2D" uid="uid://baiks7dkru78g" path="res://Assets/PNG/Fish/Princess Pheach/Princess Pheash Swim.png" id="4_3dh7g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ye5v1"]
 atlas = ExtResource("1_hcxm7")
@@ -60,14 +59,6 @@ region = Rect2(183, 0, 61, 46)
 [sub_resource type="AtlasTexture" id="AtlasTexture_tppp3"]
 atlas = ExtResource("3_rkgy4")
 region = Rect2(244, 0, 61, 46)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_45p7f"]
-atlas = ExtResource("4_3dh7g")
-region = Rect2(0, 0, 55, 42)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_131ku"]
-atlas = ExtResource("4_3dh7g")
-region = Rect2(55, 0, 55, 42)
 
 [resource]
 animations = [{
@@ -128,13 +119,7 @@ animations = [{
 "name": &"Evolve",
 "speed": 6.0
 }, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_45p7f")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_131ku")
-}],
+"frames": [],
 "loop": true,
 "name": &"Idle",
 "speed": 2.0

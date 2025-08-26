@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=4 uid="uid://0epxcm5d0bqp"]
+[gd_scene load_steps=133 format=4 uid="uid://0epxcm5d0bqp"]
 
 [ext_resource type="Script" uid="uid://cyqiplgu6dlnn" path="res://Scripts/food_spawner.gd" id="1_2yvf5"]
 [ext_resource type="Script" uid="uid://c1ubmt1jik6qq" path="res://Scripts/fish_spawner.gd" id="1_8v7by"]
@@ -7,24 +7,26 @@
 [ext_resource type="Script" uid="uid://cdgj263ww2sy7" path="res://Scripts/fish_gacha.gd" id="3_8v7by"]
 [ext_resource type="Script" uid="uid://bogxsy2tcltcy" path="res://Scripts/food_inventory.gd" id="4_8v7by"]
 [ext_resource type="Script" uid="uid://c2frm46fryv2j" path="res://Scripts/pop_up.gd" id="5_1rqgg"]
+[ext_resource type="Texture2D" uid="uid://c26g36j15u1v3" path="res://Assets/Screens + Panels/Backgound/Blue.png" id="6_ri05m"]
 [ext_resource type="Texture2D" uid="uid://c6x46bsx8qw5g" path="res://Assets/PNG/Gacha/Fish Gacha/GotchaPond 1-2-6.png" id="6_sw8nc"]
-[ext_resource type="Texture2D" uid="uid://djhwies83x7o3" path="res://Assets/PNG/FishTank/fish tank v2.png" id="6_tjfcu"]
 [ext_resource type="Script" uid="uid://doqrvi1i5ahxc" path="res://Scenes/tank_visuals.gd" id="7_hdyf0"]
 [ext_resource type="Texture2D" uid="uid://7e13eadbe4q4" path="res://Assets/PNG/Gacha/Fish Gacha/GotchaPond sheet.png" id="7_x6ft1"]
+[ext_resource type="Texture2D" uid="uid://bqorc282q5207" path="res://Assets/Screens + Panels/Backgound/Pink.png" id="8_ri05m"]
 [ext_resource type="PackedScene" uid="uid://dsp6pyx71vaj4" path="res://Scenes/fish.tscn" id="8_sw8nc"]
-[ext_resource type="Texture2D" uid="uid://cys8sx5trna0j" path="res://Assets/PNG/Tanks/fish tank level 1.png" id="8_xqjw4"]
 [ext_resource type="Script" uid="uid://5woyao7aputs" path="res://Scripts/bubble_count.gd" id="9_3ihge"]
-[ext_resource type="Texture2D" uid="uid://cm3820o6lg1dp" path="res://Assets/PNG/Tanks/fish tank level 2.png" id="9_e47pf"]
 [ext_resource type="Texture2D" uid="uid://cpdap303fexix" path="res://Assets/PNG/Gacha/Food Gacha/New GotchaPond Feeder 1 .png" id="9_mdy11"]
+[ext_resource type="Texture2D" uid="uid://dq0oram26capx" path="res://Assets/Screens + Panels/Backgound/Rainbow.png" id="9_vft2y"]
+[ext_resource type="Texture2D" uid="uid://bqicm1eqcypym" path="res://Assets/Screens + Panels/Backgound/fish tank level 1 no wall.png" id="10_2jnwg"]
 [ext_resource type="Texture2D" uid="uid://ciutgtu4fxt31" path="res://Assets/PNG/Gacha/Food Gacha/New GotchaPond Feeder 2 .png" id="10_jqpsy"]
-[ext_resource type="Texture2D" uid="uid://21y10eobsc4l" path="res://Assets/PNG/Tanks/fish tank level 3 updated.png" id="10_lawr0"]
+[ext_resource type="Texture2D" uid="uid://b3fia4f4pbhit" path="res://Assets/Screens + Panels/Backgound/fish tank level 2 FINAL no wall.png" id="11_7t5oe"]
 [ext_resource type="Script" uid="uid://bv67m0lje1mhq" path="res://Scripts/fish_pack_resource_script.gd" id="11_27ncn"]
 [ext_resource type="Resource" uid="uid://sd2s2lgpqgit" path="res://Resources/FishPack/a_pack.tres" id="12_b0tfs"]
+[ext_resource type="Texture2D" uid="uid://bcc366rsxy7g3" path="res://Assets/Screens + Panels/Backgound/fish tank level 3 no wall.png" id="12_ufwns"]
 [ext_resource type="Resource" uid="uid://bdqmy0hu5r4c" path="res://Resources/FishPack/b_pack.tres" id="13_375gp"]
 [ext_resource type="Script" uid="uid://l3rag6qnq8f2" path="res://Scripts/debug_lable.gd" id="13_mwmob"]
 [ext_resource type="Resource" uid="uid://c2y214dyh212h" path="res://Resources/FishPack/c_pack.tres" id="14_hvg4u"]
 [ext_resource type="Texture2D" uid="uid://dk3ajxatnw8s6" path="res://Assets/PNG/Gacha/Fish Gacha/Knob 1-5.png" id="16_3g43l"]
-[ext_resource type="Shader" uid="uid://d4c5lyffn1qtv" path="res://Resources/Shader/fish_rarity_shader.gdshader" id="16_3qleg"]
+[ext_resource type="Shader" uid="uid://d4c5lyffn1qtv" path="res://Shaders/fish_rarity_shader.gdshader" id="16_3qleg"]
 [ext_resource type="Texture2D" uid="uid://dqyq1iy66g73q" path="res://Assets/PNG/Gacha/Fish Gacha/Knob 2.png" id="17_3qleg"]
 [ext_resource type="Texture2D" uid="uid://fa3l5m47tofw" path="res://Assets/PNG/Gacha/Fish Gacha/Knob 3.png" id="18_u02th"]
 [ext_resource type="Texture2D" uid="uid://hkph3ve1titp" path="res://Assets/PNG/Gacha/Fish Gacha/Knob 4.png" id="19_mf1sy"]
@@ -35,23 +37,24 @@
 [ext_resource type="Script" uid="uid://dedfil08onxhl" path="res://Scripts/a_pack.gd" id="23_v608p"]
 [ext_resource type="Script" uid="uid://cyrkq5ltycipq" path="res://Scripts/b_pack.gd" id="24_0212m"]
 [ext_resource type="Script" uid="uid://csp2bq3gqvmkm" path="res://Scripts/c_pack.gd" id="25_0212m"]
-[ext_resource type="Texture2D" uid="uid://g4afb1q70jwk" path="res://Scenes/icon.svg" id="26_5ypgn"]
 [ext_resource type="Texture2D" uid="uid://cywxc2a87q61" path="res://Assets/PNG/UI/sell button sprite sheet-1.png.png" id="26_wqktx"]
 [ext_resource type="Texture2D" uid="uid://ytv1nmhegnp4" path="res://Assets/PNG/UI/sell button sprite sheet-3.png.png" id="27_m3bb5"]
 [ext_resource type="Texture2D" uid="uid://dd7asmdhmyp7v" path="res://Assets/PNG/UI/sell button sprite sheet-2.png.png" id="28_kruuw"]
+[ext_resource type="StyleBox" uid="uid://b2b06d7yg6jqo" path="res://Resources/UI/box3.tres" id="29_bo8ak"]
 [ext_resource type="Texture2D" uid="uid://f7u4xpnjpooo" path="res://Assets/PNG/UI/collection button sprite sheet-1.png.png" id="29_peb0m"]
 [ext_resource type="Script" uid="uid://battymc74a0mk" path="res://Scripts/sell_button.gd" id="30_1net0"]
 [ext_resource type="Texture2D" uid="uid://br24y5jbch8gu" path="res://Assets/PNG/UI/collection button sprite sheet-3.png.png" id="30_oqmk0"]
+[ext_resource type="StyleBox" uid="uid://qredtc0mntgm" path="res://Resources/UI/box2.tres" id="30_rxwuh"]
+[ext_resource type="Texture2D" uid="uid://kjuh8xipcp7i" path="res://Assets/Buttons/4.png" id="31_k3h2b"]
 [ext_resource type="Texture2D" uid="uid://bautb2hfftrfn" path="res://Assets/PNG/UI/collection button sprite sheet-2.png.png" id="31_v45m5"]
+[ext_resource type="Texture2D" uid="uid://dedm0cbjsvvhc" path="res://Assets/Screens + Panels/large panel.png" id="32_ri05m"]
 [ext_resource type="Script" uid="uid://dqoi58q5kge1b" path="res://Scripts/collection_button.gd" id="33_ak5s2"]
 [ext_resource type="Texture2D" uid="uid://brg2fdkopky08" path="res://Assets/Buttons/quit button sprite sheet.png" id="36_giktf"]
 [ext_resource type="PackedScene" uid="uid://cl6d6ciy0nfuk" path="res://Scenes/bgm.tscn" id="36_u02th"]
 [ext_resource type="Script" uid="uid://43fkkkkth4dh" path="res://Scripts/settings_button.gd" id="37_c0jdj"]
 [ext_resource type="PackedScene" uid="uid://4bet4u0kpxok" path="res://Scenes/sfx.tscn" id="37_mf1sy"]
-[ext_resource type="StyleBox" uid="uid://byj8cwmd1chlu" path="res://Resources/x3.tres" id="37_uwunu"]
 [ext_resource type="Texture2D" uid="uid://byqu47t3r3whg" path="res://Assets/PNG/UI/upgrade button sprite sheet-2.png.png" id="38_30ic5"]
 [ext_resource type="Texture2D" uid="uid://t2npf2hmjwnr" path="res://Assets/PNG/UI/settings button sprite sheet-1.png.png" id="38_udux3"]
-[ext_resource type="StyleBox" uid="uid://cpxqbprqfspmi" path="res://Resources/x2.tres" id="38_uwunu"]
 [ext_resource type="Texture2D" uid="uid://kr4gf33v2psy" path="res://Assets/Buttons/button 3.png" id="39_1net0"]
 [ext_resource type="Texture2D" uid="uid://cslyfsm3epmwd" path="res://Assets/PNG/UI/upgrade button sprite sheet-3.png.png" id="39_5ypgn"]
 [ext_resource type="Texture2D" uid="uid://bni4juyv2vv8t" path="res://Assets/PNG/UI/settings button sprite sheet-3.png.png" id="39_30ic5"]
@@ -63,7 +66,7 @@
 [ext_resource type="Script" uid="uid://bt6ijud3drcfl" path="res://Scripts/upgrade_button.gd" id="41_5ypgn"]
 [ext_resource type="AudioStream" uid="uid://cekw8jk2nd0p2" path="res://Assets/OGG/SFX/bubble-spawn.ogg" id="41_giktf"]
 [ext_resource type="PackedScene" uid="uid://jeg482ldscg" path="res://Scenes/quit_button.tscn" id="41_ujtds"]
-[ext_resource type="LabelSettings" uid="uid://cyu83gvgjadlv" path="res://Resources/dialog.tres" id="42_tjfcu"]
+[ext_resource type="LabelSettings" uid="uid://cyu83gvgjadlv" path="res://Resources/UI/dialog.tres" id="42_tjfcu"]
 [ext_resource type="AudioStream" uid="uid://b3h8ki2hwmy32" path="res://Assets/OGG/SFX/fish click.ogg" id="42_y0hbx"]
 [ext_resource type="AudioStream" uid="uid://bhyuhybrm1m7m" path="res://Assets/OGG/SFX/fish eating.ogg" id="43_6fm05"]
 [ext_resource type="Texture2D" uid="uid://bfc7tej63lq4t" path="res://Assets/PNG/UI/MiniBBGacha100 Sprite Sheet.png" id="44_5ypgn"]
@@ -79,6 +82,13 @@
 [ext_resource type="Script" uid="uid://6i4klu36qut7" path="res://Scripts/volume_slider.gd" id="55_1net0"]
 [ext_resource type="Script" uid="uid://c41du0ya3t2yt" path="res://Scripts/settings.gd" id="55_ak5s2"]
 [ext_resource type="Script" uid="uid://cx00h4y1iur4m" path="res://Scripts/camera_button.gd" id="56_ujtds"]
+[ext_resource type="Material" uid="uid://c3q6aaqt4pny4" path="res://Resources/Shader/gold_rarity.tres" id="62_k3h2b"]
+[ext_resource type="Texture2D" uid="uid://bnjt71fs3y4ow" path="res://Assets/PNG/UI/2s.png" id="64_lawr0"]
+[ext_resource type="Script" uid="uid://jq2sqjwuq3l4" path="res://Scenes/sfx_volume_slider.gd" id="65_k3h2b"]
+[ext_resource type="Texture2D" uid="uid://bpvatsc8iiq12" path="res://Assets/PNG/UI/3s.png" id="65_nclkr"]
+[ext_resource type="Texture2D" uid="uid://brhjebt0d1byc" path="res://Assets/PNG/UI/1s.png" id="66_7id3m"]
+[ext_resource type="Script" uid="uid://ynscnbdsyu8u" path="res://Scenes/photo_mode.gd" id="67_bo8ak"]
+[ext_resource type="PackedScene" uid="uid://c6x3tgkvj7n1h" path="res://Scenes/photo_hud.tscn" id="88_rxwuh"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_iskje"]
 animations = [{
@@ -162,15 +172,15 @@ point_count = 5
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u02th"]
 shader = ExtResource("16_3qleg")
 shader_parameter/use_texture = true
-shader_parameter/base_color = Color(1, 0.027451, 1, 1)
-shader_parameter/glitter_color = Color(1, 0, 0.905882, 1)
+shader_parameter/base_color = Color(0.52549, 0.690196, 0.760784, 1)
+shader_parameter/glitter_color = Color(0.647059, 0.407843, 0.921569, 1)
 shader_parameter/glitter_density = 8.0
-shader_parameter/sparkle_intensity = 0.989
+shader_parameter/sparkle_intensity = 1.14
 shader_parameter/edge_boost = 0.3
-shader_parameter/fall_speed_uv = 0.0150001
-shader_parameter/twinkle_speed = 5.236
-shader_parameter/twinkle_sharpness = 16.0
-shader_parameter/active_fraction = 0.234
+shader_parameter/fall_speed_uv = 0.15
+shader_parameter/twinkle_speed = 2.0
+shader_parameter/twinkle_sharpness = 8.0
+shader_parameter/active_fraction = 0.3
 shader_parameter/shape_channel = 3
 shader_parameter/invert_shape = false
 shader_parameter/shape_min_scale = 1.0
@@ -202,7 +212,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Running",
-"speed": 6.0
+"speed": 5.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mf1sy"]
@@ -234,34 +244,102 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ehbil"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3aapj"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3628t"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k3h2b"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ehbil"]
-bg_color = Color(0.913725, 0.74902, 0.890196, 0.854902)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.968627, 0.611765, 0.631373, 1)
-border_blend = true
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ufwns"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_877jt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ugs6u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2xo0k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jq4nq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n3x3s"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_vmt60"]
+color = Color(0.0392157, 0.34902, 0.372549, 1)
+thickness = 20
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_avaao"]
+color = Color(0.0431373, 0.466667, 0.254902, 1)
+thickness = 20
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_dx04i"]
+color = Color(0, 0.231373, 0.133333, 1)
+thickness = 20
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bo8ak"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rxwuh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rk56u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ri05m"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vft2y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qd44d"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h4onc"]
+texture = ExtResource("32_ri05m")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2jnwg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7t5oe"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ot8jh"]
 texture = ExtResource("39_j66g3")
+expand_margin_left = 60.0
+expand_margin_top = 30.0
+expand_margin_right = 30.0
+region_rect = Rect2(0, 0, 187, 129)
 
-[sub_resource type="Theme" id="Theme_mdy11"]
+[sub_resource type="Theme" id="Theme_vft2y"]
 Button/colors/font_color = Color(0.984314, 0.776471, 0.854902, 0.901961)
-Button/styles/disabled = SubResource("StyleBoxEmpty_ehbil")
-Button/styles/focus = SubResource("StyleBoxEmpty_3628t")
-Button/styles/hover = ExtResource("37_uwunu")
-Button/styles/normal = SubResource("StyleBoxFlat_ehbil")
-Button/styles/pressed = ExtResource("38_uwunu")
+Button/colors/font_outline_color = Color(0, 0, 0.282353, 0.878431)
+Button/constants/align_to_largest_stylebox = -3
+Button/constants/h_separation = 10
+Button/constants/line_spacing = 10
+Button/constants/outline_size = 10
+Button/font_sizes/font_size = 19
+Button/icons/icon = ExtResource("39_1net0")
+Button/styles/disabled = SubResource("StyleBoxEmpty_3aapj")
+Button/styles/disabled_mirrored = SubResource("StyleBoxEmpty_k3h2b")
+Button/styles/hover = ExtResource("29_bo8ak")
+Button/styles/hover_mirrored = SubResource("StyleBoxEmpty_ufwns")
+Button/styles/hover_pressed = SubResource("StyleBoxEmpty_877jt")
+Button/styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_ugs6u")
+Button/styles/normal = SubResource("StyleBoxEmpty_2xo0k")
+Button/styles/normal_mirrored = SubResource("StyleBoxEmpty_jq4nq")
+Button/styles/pressed = ExtResource("30_rxwuh")
+Button/styles/pressed_mirrored = SubResource("StyleBoxEmpty_n3x3s")
+HSlider/constants/center_grabber = 1
+HSlider/icons/grabber = ExtResource("31_k3h2b")
+HSlider/icons/grabber_disabled = ExtResource("31_k3h2b")
+HSlider/icons/grabber_highlight = ExtResource("31_k3h2b")
+HSlider/styles/grabber_area = SubResource("StyleBoxLine_vmt60")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxLine_avaao")
+HSlider/styles/slider = SubResource("StyleBoxLine_dx04i")
+ItemList/styles/cursor = SubResource("StyleBoxEmpty_bo8ak")
+ItemList/styles/cursor_unfocused = SubResource("StyleBoxEmpty_rxwuh")
+ItemList/styles/focus = SubResource("StyleBoxEmpty_rk56u")
+ItemList/styles/hovered = SubResource("StyleBoxEmpty_ri05m")
+ItemList/styles/hovered_selected = SubResource("StyleBoxEmpty_vft2y")
+ItemList/styles/hovered_selected_focus = SubResource("StyleBoxEmpty_qd44d")
+ItemList/styles/panel = SubResource("StyleBoxTexture_h4onc")
+ItemList/styles/selected = SubResource("StyleBoxEmpty_2jnwg")
+ItemList/styles/selected_focus = SubResource("StyleBoxEmpty_7t5oe")
 Panel/styles/panel = SubResource("StyleBoxTexture_ot8jh")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_rxwuh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ypgn"]
 atlas = ExtResource("44_5ypgn")
@@ -311,6 +389,57 @@ loop = true
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_260qw")
 
+[node name="CaptureFX" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="FrameRect" type="TextureRect" parent="CaptureFX"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="StickerTL" type="TextureButton" parent="CaptureFX"]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="StickerTR" type="TextureButton" parent="CaptureFX"]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+mouse_filter = 2
+
+[node name="StickerBL" type="TextureButton" parent="CaptureFX"]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="StickerBR" type="TextureButton" parent="CaptureFX"]
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+
 [node name="Bubbles" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 layer = 10
@@ -339,9 +468,24 @@ offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("6_tjfcu")
+texture = ExtResource("6_ri05m")
 script = ExtResource("7_hdyf0")
-tank_sprites = Array[CompressedTexture2D]([ExtResource("8_xqjw4"), ExtResource("9_e47pf"), ExtResource("10_lawr0")])
+tank_sprites = Array[CompressedTexture2D]([ExtResource("6_ri05m"), ExtResource("8_ri05m"), ExtResource("9_vft2y")])
+
+[node name="TankVisuals2" type="TextureRect" parent="Tank"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("10_2jnwg")
+script = ExtResource("7_hdyf0")
+tank_sprites = Array[CompressedTexture2D]([ExtResource("10_2jnwg"), ExtResource("11_7t5oe"), ExtResource("12_ufwns")])
 
 [node name="Gachas" type="Control" parent="Tank"]
 layout_mode = 3
@@ -454,8 +598,8 @@ material = SubResource("ShaderMaterial_u02th")
 position = Vector2(-20.75, 25.5)
 sprite_frames = SubResource("SpriteFrames_u02th")
 animation = &"Running"
-frame = 4
-frame_progress = 1.0
+frame = 1
+frame_progress = 0.489692
 
 [node name="Pods" type="AnimatedSprite2D" parent="Tank/Gachas/Fish/FishGachaSprite"]
 unique_name_in_owner = true
@@ -483,46 +627,55 @@ size_flags_horizontal = 4
 text = "Fish Gacha"
 label_settings = ExtResource("23_j66g3")
 
-[node name="Collections" type="CenterContainer" parent="Tank"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = -1.0
-offset_right = 20.0
-offset_bottom = -1.0
+[node name="Collections" type="VBoxContainer" parent="Tank"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -135.0
+offset_top = -45.0
+offset_right = 135.0
+offset_bottom = 45.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 2
 mouse_filter = 2
+
+[node name="Label" type="Label" parent="Tank/Collections"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Collection"
+label_settings = ExtResource("23_j66g3")
 
 [node name="Collection" type="ItemList" parent="Tank/Collections"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
-theme = ExtResource("21_pkn5o")
-allow_reselect = true
+mouse_filter = 1
+theme = SubResource("Theme_vft2y")
 auto_width = true
 auto_height = true
 text_overrun_behavior = 1
-max_columns = 3
+max_columns = 4
 same_column_width = true
-fixed_column_width = 150
 icon_mode = 0
+fixed_icon_size = Vector2i(50, 50)
 script = ExtResource("4_8v7by")
-icon_px = Vector2i(60, 60)
-placeholder_icon = ExtResource("26_5ypgn")
+icon_px = Vector2i(100, 100)
 
 [node name="PlayerButtons" type="HBoxContainer" parent="Tank"]
 anchors_preset = -1
 anchor_right = 0.082
 anchor_bottom = 0.147
-offset_left = 33.0
-offset_top = 65.0
-offset_right = 535.04
-offset_bottom = 7.16
+offset_left = 14.0
+offset_top = 56.0
+offset_right = 532.04
+offset_bottom = -2.83999
 scale = Vector2(1.9, 1.9)
 size_flags_horizontal = 0
 alignment = 1
@@ -569,10 +722,11 @@ script = ExtResource("37_c0jdj")
 [node name="Padding" type="Control" parent="Tank/PlayerButtons"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 14.84
+size_flags_stretch_ratio = 11.82
 mouse_filter = 2
 
 [node name="UpgradeButton" type="TextureButton" parent="Tank/PlayerButtons"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 1.3
@@ -588,9 +742,9 @@ script = ExtResource("41_5ypgn")
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -342.0
+offset_left = -314.0
 offset_top = 72.0
-offset_right = 36.0
+offset_right = 64.0
 offset_bottom = 118.0
 grow_horizontal = 2
 text = "0"
@@ -626,10 +780,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -304.0
-offset_top = -227.5
-offset_right = 304.0
-offset_bottom = 227.5
+offset_left = -198.0
+offset_top = -117.0
+offset_right = 198.0
+offset_bottom = 245.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("21_pkn5o")
@@ -642,10 +796,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -157.0
-offset_top = -196.0
-offset_right = 295.0
-offset_bottom = 196.0
+offset_left = -159.5
+offset_top = -165.0
+offset_right = 181.5
+offset_bottom = 163.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("21_pkn5o")
@@ -686,8 +840,8 @@ script = ExtResource("25_0212m")
 
 [node name="QuitButtonSpriteSheet" type="Sprite2D" parent="PlayerGUI/FishPackMenu"]
 z_index = 1
-position = Vector2(90, 226.5)
-scale = Vector2(4, 4)
+position = Vector2(14, 38)
+scale = Vector2(2.275, 2.23771)
 texture = ExtResource("36_giktf")
 region_enabled = true
 region_rect = Rect2(23, 1, 20, 20)
@@ -705,8 +859,7 @@ offset_right = -10.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_mdy11")
-theme_type_variation = &"x"
+theme_override_icons/icon = SubResource("CanvasTexture_rxwuh")
 metadata/_edit_use_anchors_ = true
 
 [node name="PopUp" type="Label" parent="PlayerGUI"]
@@ -736,6 +889,7 @@ unique_name_in_owner = true
 [node name="PanelContainer" type="PanelContainer" parent="PlayerGUI/PopUp"]
 unique_name_in_owner = true
 visible = false
+material = ExtResource("62_k3h2b")
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 1
 anchors_preset = 8
@@ -754,15 +908,16 @@ mouse_filter = 2
 [node name="Settings" type="Panel" parent="PlayerGUI"]
 unique_name_in_owner = true
 visible = false
-anchors_preset = -1
-anchor_left = 0.396
-anchor_top = 0.415
-anchor_right = 0.563
-anchor_bottom = 0.573
-offset_left = -274.88
-offset_top = -188.8
-offset_right = 327.36
-offset_bottom = 197.44
+z_index = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -447.5
+offset_top = -271.0
+offset_right = 447.5
+offset_bottom = 271.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("21_pkn5o")
@@ -780,21 +935,25 @@ offset_bottom = -21.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="PlayerGUI/Settings/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Music Volume"
-label_settings = ExtResource("23_j66g3")
-
 [node name="BGMVolumeSlider" type="HSlider" parent="PlayerGUI/Settings/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.58
 theme = ExtResource("21_pkn5o")
 max_value = 1.0
 step = 0.01
 value = 0.5
 script = ExtResource("55_1net0")
+
+[node name="SFXVolumeSlider" type="HSlider" parent="PlayerGUI/Settings/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+script = ExtResource("65_k3h2b")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerGUI/Settings/VBoxContainer/SFXVolumeSlider"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="OpenScreenshots" type="Button" parent="PlayerGUI/Settings/VBoxContainer"]
 layout_mode = 2
@@ -812,24 +971,64 @@ icon_alignment = 1
 expand_icon = true
 script = ExtResource("54_1net0")
 
+[node name="PhotoMode" type="Button" parent="PlayerGUI/Settings/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "PhotoMode(Broken)"
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("67_bo8ak")
+
 [node name="SettingExit" parent="PlayerGUI/Settings" instance=ExtResource("41_ujtds")]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 715.0
-offset_top = 402.0
-offset_right = 737.0
-offset_bottom = 424.0
+offset_left = 735.5
+offset_top = 390.0
+offset_right = 776.5
+offset_bottom = 429.0
 scale = Vector2(3, 3)
+ignore_texture_size = true
+stretch_mode = 4
 
-[node name="CameraButton" type="Button" parent="PlayerGUI"]
-offset_left = 571.0
-offset_top = 616.0
-offset_right = 679.0
-offset_bottom = 699.0
+[node name="Label" type="Label" parent="PlayerGUI/Settings"]
+layout_mode = 2
+offset_left = 49.5
+offset_top = 24.0
+offset_right = 356.5
+offset_bottom = 68.0
+size_flags_horizontal = 4
+text = "Music Volume"
+label_settings = ExtResource("23_j66g3")
+
+[node name="Label2" type="Label" parent="PlayerGUI/Settings"]
+layout_mode = 0
+offset_left = 52.5
+offset_top = 116.0
+offset_right = 308.5
+offset_bottom = 160.0
+theme = ExtResource("21_pkn5o")
+text = "SFX Volume"
+label_settings = ExtResource("23_j66g3")
+
+[node name="CameraButton" type="TextureButton" parent="PlayerGUI"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -629.0
+offset_top = -525.0
+offset_right = -498.0
+offset_bottom = -407.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("64_lawr0")
+texture_pressed = ExtResource("65_nclkr")
+texture_hover = ExtResource("66_7id3m")
+texture_disabled = ExtResource("65_nclkr")
+texture_focused = ExtResource("66_7id3m")
+stretch_mode = 4
 script = ExtResource("56_ujtds")
-color_normal = Color(0.756863, 0.384314, 0.733333, 1)
-color_pressed = Color(0.631373, 0.643137, 1, 1)
-focus_color = Color(0.909804, 0.776471, 1, 1)
 
 [node name="MiniBbGacha100SpriteSheet" type="AnimatedSprite2D" parent="PlayerGUI"]
 position = Vector2(1063, 104)
@@ -862,3 +1061,7 @@ stream = SubResource("AudioStreamOggVorbis_30ic5")
 [node name="SFX" parent="." instance=ExtResource("37_mf1sy")]
 stream = ExtResource("39_jv8m2")
 sfx_pool = Array[AudioStream]([ExtResource("40_eylua"), ExtResource("41_giktf"), ExtResource("42_y0hbx"), ExtResource("43_6fm05"), ExtResource("44_3628t"), ExtResource("45_uwunu"), ExtResource("46_j66g3"), ExtResource("47_tjfcu"), ExtResource("39_jv8m2"), ExtResource("48_mdy11"), ExtResource("49_jqpsy")])
+
+[node name="PhotoHUD" parent="." instance=ExtResource("88_rxwuh")]
+unique_name_in_owner = true
+visible = false

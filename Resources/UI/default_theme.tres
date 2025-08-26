@@ -1,11 +1,12 @@
-[gd_resource type="Theme" load_steps=14 format=3 uid="uid://cthsnn82p74vp"]
+[gd_resource type="Theme" load_steps=15 format=3 uid="uid://cthsnn82p74vp"]
 
 [ext_resource type="Texture2D" uid="uid://kr4gf33v2psy" path="res://Assets/Buttons/button 3.png" id="1_3aapj"]
 [ext_resource type="Texture2D" uid="uid://jeb8nscm8hb8" path="res://Assets/PNG/UI/large panel.png" id="1_76a3c"]
-[ext_resource type="StyleBox" uid="uid://qredtc0mntgm" path="res://Resources/box2.tres" id="2_0ts44"]
-[ext_resource type="StyleBox" uid="uid://b2b06d7yg6jqo" path="res://Resources/box3.tres" id="2_h4onc"]
+[ext_resource type="StyleBox" uid="uid://qredtc0mntgm" path="res://Resources/UI/box2.tres" id="2_0ts44"]
+[ext_resource type="StyleBox" uid="uid://b2b06d7yg6jqo" path="res://Resources/UI/box3.tres" id="2_h4onc"]
+[ext_resource type="Texture2D" uid="uid://dl1fsse0uvuot" path="res://Assets/Screens + Panels/GotchaPond 1-2-6.png" id="4_avaao"]
 [ext_resource type="Texture2D" uid="uid://dedm0cbjsvvhc" path="res://Assets/Screens + Panels/large panel.png" id="4_h4onc"]
-[ext_resource type="Texture2D" uid="uid://kjuh8xipcp7i" path="res://Assets/Buttons/4.png" id="4_rjo7g"]
+[ext_resource type="Texture2D" uid="uid://p6thfxolrlki" path="res://Assets/Stickers/gacha.png" id="4_vmt60"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3aapj"]
 
@@ -13,15 +14,15 @@
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_vmt60"]
 color = Color(0.0392157, 0.34902, 0.372549, 1)
-thickness = 20
+thickness = 10
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_avaao"]
 color = Color(0.0431373, 0.466667, 0.254902, 1)
-thickness = 20
+thickness = 10
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_dx04i"]
 color = Color(0, 0.231373, 0.133333, 1)
-thickness = 20
+thickness = 10
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h4onc"]
 texture = ExtResource("4_h4onc")
@@ -51,9 +52,9 @@ Button/styles/hover = ExtResource("2_h4onc")
 Button/styles/normal = SubResource("StyleBoxEmpty_2xo0k")
 Button/styles/pressed = ExtResource("2_0ts44")
 HSlider/constants/center_grabber = 1
-HSlider/icons/grabber = ExtResource("4_rjo7g")
-HSlider/icons/grabber_disabled = ExtResource("4_rjo7g")
-HSlider/icons/grabber_highlight = ExtResource("4_rjo7g")
+HSlider/icons/grabber = ExtResource("4_avaao")
+HSlider/icons/grabber_disabled = ExtResource("4_vmt60")
+HSlider/icons/grabber_highlight = ExtResource("4_vmt60")
 HSlider/styles/grabber_area = SubResource("StyleBoxLine_vmt60")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxLine_avaao")
 HSlider/styles/slider = SubResource("StyleBoxLine_dx04i")

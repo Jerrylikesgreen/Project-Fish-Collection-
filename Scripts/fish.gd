@@ -24,7 +24,7 @@ const FISH_RARITY_MULTS := [
 const BUBBLE := preload("res://Scenes/bubble.tscn")
 @onready var fish_sfx: AudioStreamPlayer = %FishSFX
 @onready var fish_sprite: Fish_Sprite = %FishSprite
-
+@export var fish_sell_value: int = 3
 @export var species_id: String = ""      # e.g. "Clownfish"
 @export var display_name: String = ""    # e.g. "Clownfish"
 @onready var bubble_spawner: Timer = %BubbleSpawner
@@ -90,7 +90,7 @@ func _spawn_one() -> void:
 	# Build weights from evolution + fish rarity
 	var evolved := (fish_body != null and fish_body._evolved)
 	var weights := _build_bubble_weights(evolved, rarity)  # rarity is your 0..3 enum
-
+	
 	var tier := _pick_by_weights(weights)   # 0..3
 	var value = BUBBLE_VALUES[tier]        # 1,2,3,5
 
@@ -114,6 +114,7 @@ func _pick_random_rarity_index() -> int:
 
 func _apply_rarity_to_sprite() -> void:
 	fish_sprite.add_rarity(rarity)
+	fish_sell_value = rarity * rarity + 3
 
 func _on_selling_fish_signal(enabled: bool) -> void:
 	sell_button.visible = enabled
@@ -123,7 +124,7 @@ func _on_sell_button_pressed() -> void:
 		return
 	fish_sfx.set_stream(fish_sfx.track_pool[2])
 	fish_sfx.play()
-	Events.bubble_count_changed(3)
+	Events.bubble_count_changed(fish_sell_value)
 	Events.fish_sold()
 	await fish_sfx.finished
 	queue_free()

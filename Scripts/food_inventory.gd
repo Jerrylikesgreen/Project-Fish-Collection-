@@ -1,75 +1,113 @@
 class_name Collection
 extends ItemList
 
+const SAVE_PATH := "user://collection.save"
 @export var icon_px: Vector2i = Vector2i(48, 48)
 @export var placeholder_icon: Texture2D
 @export var undiscovered_label: String = "????"
+@onready var collections: VBoxContainer = %Collections
 
 # species_id -> Texture2D (thumbnails)
 var _thumb_cache: Dictionary[String, Texture2D] = {}
+const RARITIES := ["Base","Gold","Green","Pink"]
+const RARITY_COLORS := { # optional, for icon tint
+	0: Color(1,1,1,1),       # Base
+	1: Color(1.00,0.90,0.30,1), # Gold
+	2: Color(0.50,1.00,0.60,1), # Green
+	3: Color(1.00,0.55,0.85,1), # Pink
+}
+
+func _rarity_label(idx: int) -> String:
+	return RARITIES[idx] if idx >= 0 and idx < RARITIES.size() else "Base"
+
 
 # Simple entry container
 class Entry:
 	var name: String
 	var icon: Texture2D
-	var count: int = 0
 	var revealed: bool = false
-
+	var rarity_idx: int = 0
+	var rarity_name: String = "Base"
 # species_id -> Entry
 var _entries: Dictionary[String, Entry] = {}
 
 func _ready() -> void:
 	fixed_icon_size = icon_px
 	select_mode = ItemList.SELECT_SINGLE
-	print("[Collection] _ready: fixed_icon_size=%s select_mode=%d" % [str(fixed_icon_size), select_mode])
 
-	# Show/hide via Events
+	_seed_all_species_from_registry()
+	_load_discoveries()  # persistence (see below)
+
+	# Connect events AFTER seeding & loading
 	if "open_collections_screen" in Events:
 		Events.open_collections_screen.connect(_on_button_set_visible)
-
-	# Reveal handler (evolution moment)
 	if "collection_discover" in Events:
 		Events.collection_discover.connect(_on_discover)
-	else:
-		push_warning("[Collection] Events lacks collection_discover signal")
-
-	# Spawn handler: create/update placeholder entries until revealed
 	if "fish_spawned" in Events:
 		Events.fish_spawned.connect(_on_spawned)
 
 	_refresh_list()
 	_debug_dump("after _ready")
 
+
+func _seed_all_species_from_registry() -> void:
+	for id in SpeciesRegistry.ALL_SPECIES.keys():
+		if not _entries.has(id):
+			var data = SpeciesRegistry.ALL_SPECIES[id]
+			var e := Entry.new()
+			e.revealed = false
+			e.name = undiscovered_label
+			e.icon = _get_or_make_thumb(id, data["silhouette"])  # species-specific silhouette
+			e.rarity_idx = 0
+			e.rarity_name = "Base"
+			_entries[id] = e
+
 # --------- Event handlers ---------
 
 # Spawned fish: ensure placeholder entry exists and bump count.
 # No species/name/icon reveal here.
 func _on_spawned(fish: Node) -> void:
-	if fish == null:
-		push_warning("[Collection] _on_spawned got null fish")
-		return
+	if fish == null: return
 
 	var id := ""
 	if fish.has_method("get_collection_key"):
 		id = String(fish.call("get_collection_key"))
+	if id == "": return
 
-	if id == "":
-		push_warning("[Collection] Spawned fish missing id; skipping")
-		return
+	var r_idx := 0
+	var v = fish.get("rarity")
+	if v is int: r_idx = v
 
 	var e: Entry = _entries.get(id)
 	if e == null:
 		e = Entry.new()
-		e.revealed = false
-		e.name = undiscovered_label
-		e.icon = _get_or_make_thumb(id, placeholder_icon)  # placeholder art
-		e.count = 0
 		_entries[id] = e
 
-	e.count += 1
-	print("[Collection] spawn -> id=%s placeholder count=%d" % [id, e.count])
+	# If not revealed yet, flip name & icon
+	if not e.revealed:
+		e.revealed = true
+		e.name = (fish.get_collection_name() if fish.has_method("get_collection_name") else id)
+		# Try to pull a real icon from the fish
+		var icon_tex: Texture2D = null
+		if fish.has_method("get_icon_texture"):
+			icon_tex = fish.call("get_icon_texture")
+		if icon_tex == null:
+			# fallback to whatever the anim has, or keep silhouette
+			var data = SpeciesRegistry.ALL_SPECIES.get(id, null)
+			icon_tex = (data and data.get("silhouette"))  # last resort
+		if icon_tex != null:
+			if _thumb_cache.has(id): _thumb_cache.erase(id)
+			e.icon = _get_or_make_thumb(id, icon_tex)
+
+	# track best rarity seen
+	if r_idx > e.rarity_idx:
+		e.rarity_idx = r_idx
+		e.rarity_name = _rarity_label(r_idx)
 
 	_refresh_list()
+	_save_discoveries()
+
+
 
 # Evolution reveal: swap placeholder to real name/icon, and recount
 func _on_discover(species_id: String, f_name: String, icon: Texture2D) -> void:
@@ -86,60 +124,61 @@ func _on_discover(species_id: String, f_name: String, icon: Texture2D) -> void:
 	e.revealed = true
 	e.name = (f_name if f_name != "" else species_id)
 
-	# IMPORTANT: drop any placeholder thumb so we rebuild with the real icon
 	if _thumb_cache.has(species_id):
 		_thumb_cache.erase(species_id)
-
 	e.icon = _get_or_make_thumb(species_id, icon)
-	e.count = _recount_species(species_id)
 
 	_refresh_list()
 	_debug_dump("_on_discover")
 
 
+
 # Explicit visibility toggle
 func _on_button_set_visible(enabled: bool) -> void:
-	visible = enabled
+	collections.visible = enabled
 	print("[Collection] visible -> %s" % str(visible))
 
 # --------- Internal UI/util ---------
 func _refresh_list() -> void:
 	clear()
-
-	# Sort by display name (revealed entries use real name, hidden use undiscovered_label)
 	var keys := _entries.keys()
 	keys.sort_custom(func(a, b):
-		var na := _entries[a].name
-		var nb := _entries[b].name
-		return na.nocasecmp_to(nb) < 0
+		var ea := _entries[a]
+		var eb := _entries[b]
+		# revealed first, then name
+		if ea.revealed != eb.revealed:
+			return ea.revealed and not eb.revealed
+		return ea.name.nocasecmp_to(eb.name) < 0
 	)
 
 	for key in keys:
 		var e: Entry = _entries[key]
-		var label := e.name + " ×" + str(e.count)
+		var label := e.name
+		if e.revealed:
+			label += " [" + e.rarity_name + "]"
 		var idx := add_item(label, e.icon)
 		set_item_metadata(idx, key)
+		# subtle tint: gray-out unrevealed
+		set_item_icon_modulate(idx, Color(1,1,1,1) if e.revealed else Color(0.7,0.7,0.7,1))
+		set_item_tooltip(idx, "Rarity: %s" % e.rarity_name if e.revealed else "Unseen")
+
+
+
+
 
 func _get_or_make_thumb(species_id: String, tex: Texture2D) -> Texture2D:
 	if _thumb_cache.has(species_id):
-		var cached := _thumb_cache[species_id]
-		print("[Collection] thumb cache hit id=%s icon=%s" % [species_id, str(cached)])
-		return cached
+		return _thumb_cache[species_id]
 
 	var result: Texture2D = tex
-	if tex == null:
-		print("[Collection] _get_or_make_thumb: NULL texture for id=%s; leaving NULL" % species_id)
-	else:
+	if tex != null:
 		var img := tex.get_image()
 		if img != null:
-			img.resize(icon_px.x, icon_px.y, Image.INTERPOLATE_LANCZOS)
+			img.flip_x()
 			result = ImageTexture.create_from_image(img)
-			print("[Collection] built thumb id=%s from=%s -> thumb=%s" % [species_id, str(tex), str(result)])
-		else:
-			print("[Collection] get_image() was NULL for id=%s; using original texture=%s" % [species_id, str(tex)])
-
 	_thumb_cache[species_id] = result
 	return result
+
 
 func _recount_species(species_id: String) -> int:
 	var n := 0
@@ -152,10 +191,35 @@ func _recount_species(species_id: String) -> int:
 	print("[Collection] recount id=%s -> %d" % [species_id, n])
 	return n
 
+
+
+func _save_discoveries() -> void:
+	var cfg := ConfigFile.new()
+	for id in _entries.keys():
+		var e: Entry = _entries[id]
+		cfg.set_value("collection", id + ":revealed", e.revealed)
+		cfg.set_value("collection", id + ":rarity_idx", e.rarity_idx)
+	cfg.save(SAVE_PATH)
+
+func _load_discoveries() -> void:
+	var cfg := ConfigFile.new()
+	var err := cfg.load(SAVE_PATH)
+	if err != OK: return
+	for id in SpeciesRegistry.ALL_SPECIES.keys():
+		var e: Entry = _entries.get(id)
+		if e == null:
+			e = Entry.new()
+			_entries[id] = e
+		e.revealed = bool(cfg.get_value("collection", id + ":revealed", false))
+		e.rarity_idx = int(cfg.get_value("collection", id + ":rarity_idx", 0))
+		e.rarity_name = _rarity_label(e.rarity_idx)
+		# If revealed but still showing silhouette, try to create a real icon from cache or leave as-is (it'll update on next spawn/discover)
+
+
 func _debug_dump(tag: String) -> void:
 	print("[Collection] DEBUG DUMP (%s)" % tag)
 	print("  entries.size=%d  cache.size=%d  item_count=%d" % [_entries.size(), _thumb_cache.size(), item_count])
 	for id in _entries.keys():
 		var e: Entry = _entries[id]
-		print("   • id=%s name=%s count=%d revealed=%s icon=%s (cached=%s)" %
-			[id, e.name, e.count, str(e.revealed), str(e.icon), str(_thumb_cache.get(id))])
+		print("   • id=%s name=%s revealed=%s icon=%s (cached=%s)" %
+			[id, e.name,  str(e.revealed), str(e.icon), str(_thumb_cache.get(id))])

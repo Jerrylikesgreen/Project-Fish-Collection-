@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://u3g5os6o6o2o"
-path="res://.godot/imported/title screen base.png-037d5b7b2b8c8cd1d816130b08057df7.ctex"
+uid="uid://cqilx6o6tswrn"
+path="res://.godot/imported/screnshot button sprite sheet.png-e1e16cb36e54329f0365f0f8cf4f11ea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Screens + Panels/title screen base.png"
-dest_files=["res://.godot/imported/title screen base.png-037d5b7b2b8c8cd1d816130b08057df7.ctex"]
+source_file="res://Assets/PNG/UI/screnshot button sprite sheet.png"
+dest_files=["res://.godot/imported/screnshot button sprite sheet.png-e1e16cb36e54329f0365f0f8cf4f11ea.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dc2meyqrbsics"
-path="res://.godot/imported/fish tank v1.png-c4551c8e0910b1207ea9401fad070e23.ctex"
+uid="uid://b7o0pjkyjuf7x"
+path="res://.godot/imported/betta_sil.png-4e3a6fe700bccc94c6927d2a421183e3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/PNG/FishTank/fish tank v1.png"
-dest_files=["res://.godot/imported/fish tank v1.png-c4551c8e0910b1207ea9401fad070e23.ctex"]
+source_file="res://Resources/CollectionSilhouettes/betta_sil.png"
+dest_files=["res://.godot/imported/betta_sil.png-4e3a6fe700bccc94c6927d2a421183e3.ctex"]
 
 [params]
 

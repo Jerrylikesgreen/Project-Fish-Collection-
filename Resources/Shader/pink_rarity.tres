@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dxh1vmoehjm6v"]
 
-[ext_resource type="Shader" uid="uid://d4c5lyffn1qtv" path="res://Resources/Shader/fish_rarity_shader.gdshader" id="1_0n4rl"]
+[ext_resource type="Shader" uid="uid://d4c5lyffn1qtv" path="res://Shaders/fish_rarity_shader.gdshader" id="1_0n4rl"]
 [ext_resource type="Texture2D" uid="uid://bp2rvtfi23vx1" path="res://Assets/PNG/Fish/glitter_3.png" id="2_cen5k"]
 
 [resource]

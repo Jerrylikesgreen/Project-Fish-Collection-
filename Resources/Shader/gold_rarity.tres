@@ -1,12 +1,12 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://c3q6aaqt4pny4"]
 
-[ext_resource type="Shader" uid="uid://d4c5lyffn1qtv" path="res://Resources/Shader/fish_rarity_shader.gdshader" id="1_yqeoj"]
+[ext_resource type="Shader" uid="uid://d4c5lyffn1qtv" path="res://Shaders/fish_rarity_shader.gdshader" id="1_yqeoj"]
 [ext_resource type="Texture2D" uid="uid://bp2rvtfi23vx1" path="res://Assets/PNG/Fish/glitter_3.png" id="2_xa3il"]
 
 [resource]
 shader = ExtResource("1_yqeoj")
-shader_parameter/use_texture = true
-shader_parameter/base_color = Color(1, 1, 1, 1)
+shader_parameter/use_texture = false
+shader_parameter/base_color = Color(1, 0.203922, 1, 1)
 shader_parameter/glitter_color = Color(0.965127, 0.957542, 7.70092e-07, 1)
 shader_parameter/glitter_density = 17.833
 shader_parameter/sparkle_intensity = 2.383

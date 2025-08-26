@@ -22,12 +22,17 @@ config/icon="uid://bj0j1x0ytnjh5"
 config/macos_native_icon="uid://bj0j1x0ytnjh5"
 config/windows_native_icon="uid://bj0j1x0ytnjh5"
 
+[audio]
+
+sfx_volume=0.87
+
 [autoload]
 
 Events="*res://Autoloads/events.gd"
 Globals="*res://Autoloads/globals.gd"
 ScreenshotManager="*res://Autoloads/screenshot_manager.gd"
 TintUtil="*res://Scripts/tint_util.gd"
+SpeciesRegistry="*res://Autoloads/species_registry.gd"
 
 [display]
 
@@ -55,6 +60,7 @@ ui="UI "
 
 [gui]
 
+theme/custom="uid://cthsnn82p74vp"
 theme/custom_font="uid://b0pnvxy3ibar"
 
 [input]
