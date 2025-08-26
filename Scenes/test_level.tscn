@@ -1,9 +1,10 @@
-[gd_scene load_steps=133 format=4 uid="uid://0epxcm5d0bqp"]
+[gd_scene load_steps=134 format=4 uid="uid://0epxcm5d0bqp"]
 
 [ext_resource type="Script" uid="uid://cyqiplgu6dlnn" path="res://Scripts/food_spawner.gd" id="1_2yvf5"]
 [ext_resource type="Script" uid="uid://c1ubmt1jik6qq" path="res://Scripts/fish_spawner.gd" id="1_8v7by"]
 [ext_resource type="Script" uid="uid://b6yvkgbh8t8bo" path="res://Scripts/test_level.gd" id="1_260qw"]
 [ext_resource type="Script" uid="uid://c48pwl472ti4m" path="res://Scripts/food_button.gd" id="2_3ihge"]
+[ext_resource type="PackedScene" uid="uid://cu3h8r4da4y8" path="res://Scenes/bubble.tscn" id="2_ri05m"]
 [ext_resource type="Script" uid="uid://cdgj263ww2sy7" path="res://Scripts/fish_gacha.gd" id="3_8v7by"]
 [ext_resource type="Script" uid="uid://bogxsy2tcltcy" path="res://Scripts/food_inventory.gd" id="4_8v7by"]
 [ext_resource type="Script" uid="uid://c2frm46fryv2j" path="res://Scripts/pop_up.gd" id="5_1rqgg"]
@@ -444,6 +445,9 @@ mouse_filter = 2
 unique_name_in_owner = true
 layer = 10
 
+[node name="Bubble" parent="Bubbles" instance=ExtResource("2_ri05m")]
+bubble_value = 100
+
 [node name="FishSpawner" type="Node2D" parent="."]
 position = Vector2(431, 190)
 script = ExtResource("1_8v7by")
@@ -451,7 +455,7 @@ fish_scene = ExtResource("8_sw8nc")
 
 [node name="FoodSpawner" type="Node2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(1076, 577)
+position = Vector2(1001, 630)
 script = ExtResource("1_2yvf5")
 
 [node name="Tank" type="CanvasLayer" parent="."]

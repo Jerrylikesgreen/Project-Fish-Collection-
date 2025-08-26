@@ -60,6 +60,44 @@ const LINES_TANK_FULL: Array[String] = [
 ]
 
 
+func _ready() -> void:
+	print("[%s] _ready" % _dbg_id)
+	print("[%s] config: pool_size=%d  costs={entry:%d, A:%d, B:%d, C:%d}  path{from:%f,to:%f,dur:%f}  limits live<=%d" %
+		[_dbg_id, fish_pack_pool.size(), entry_cost, cost_pack_a, cost_pack_b, cost_pack_c, from_ratio, to_ratio, path_duration, Globals.max_fish_count])
+
+	pressed.connect(_on_pressed)
+	print("[%s] connected: Button.pressed -> _on_pressed" % _dbg_id)
+
+	Events.fish_pack_selected_signal.connect(_on_fish_pack_selected)
+	print("[%s] connected: Events.fish_pack_selected_signal -> _on_fish_pack_selected" % _dbg_id)
+
+func _on_pressed() -> void:
+	var live := get_tree().get_nodes_in_group("fish").size()
+	print("[%s] _on_pressed: bubbles=%d  live=%d/%d  disabled=%s" %
+		[_dbg_id, Globals.current_bubble_count, live, Globals.max_fish_count, str(disabled)])
+
+	if Globals.current_bubble_count < entry_cost:
+		var short := entry_cost - Globals.current_bubble_count
+		Events.display_player_message(_pick_line(LINES_NEED_ENTRY, [short]))
+		print("[%s][BLOCK] entry gate failed: have=%d need=%d" %
+			[_dbg_id, Globals.current_bubble_count, entry_cost])
+		return
+	
+	if live >= Globals.max_fish_count:
+		Events.display_player_message(_pick_line(LINES_TANK_FULL, [live, Globals.max_fish_count]))
+		print("[%s][BLOCK] max_fish_count reached (%d/%d)" % [_dbg_id, live, Globals.max_fish_count])
+		return
+	
+
+	Events._on_button_signal.emit()
+	Events.display_player_message(_pick_line(LINES_GACHA_PRESS))
+	print("[%s] opening pack menu (quiet)" % _dbg_id)
+	Events.emit_signal("fish_pack_button_pressed")
+	pods.play()
+	knob.play()
+	disabled = true
+
+
 # Lightweight copy system (no emojis, no spoilers)
 func _pick(lines: Array[String]) -> String:
 	return lines[randi() % lines.size()]
@@ -153,41 +191,6 @@ func _apply_pod_tint_strong(pod: Node, tint_col: Color) -> ShaderMaterial:
 	return mat
 # ----------------------------------------------------------------------
 
-func _ready() -> void:
-	print("[%s] _ready" % _dbg_id)
-	print("[%s] config: pool_size=%d  costs={entry:%d, A:%d, B:%d, C:%d}  path{from:%f,to:%f,dur:%f}  limits live<=%d" %
-		[_dbg_id, fish_pack_pool.size(), entry_cost, cost_pack_a, cost_pack_b, cost_pack_c, from_ratio, to_ratio, path_duration, Globals.max_fish_count])
-
-	pressed.connect(_on_pressed)
-	print("[%s] connected: Button.pressed -> _on_pressed" % _dbg_id)
-
-	Events.fish_pack_selected_signal.connect(_on_fish_pack_selected)
-	print("[%s] connected: Events.fish_pack_selected_signal -> _on_fish_pack_selected" % _dbg_id)
-
-func _on_pressed() -> void:
-	var live := get_tree().get_nodes_in_group("fish").size()
-	print("[%s] _on_pressed: bubbles=%d  live=%d/%d  disabled=%s" %
-		[_dbg_id, Globals.current_bubble_count, live, Globals.max_fish_count, str(disabled)])
-
-	if Globals.current_bubble_count < entry_cost:
-		var short := entry_cost - Globals.current_bubble_count
-		Events.display_player_message(_pick_line(LINES_NEED_ENTRY, [short]))
-		print("[%s][BLOCK] entry gate failed: have=%d need=%d" %
-			[_dbg_id, Globals.current_bubble_count, entry_cost])
-		return
-	
-	if live >= Globals.max_fish_count:
-		Events.display_player_message(_pick_line(LINES_TANK_FULL, [live, Globals.max_fish_count]))
-		print("[%s][BLOCK] max_fish_count reached (%d/%d)" % [_dbg_id, live, Globals.max_fish_count])
-		return
-	
-
-	Events._on_button_signal.emit()
-	Events.display_player_message(_pick_line(LINES_GACHA_PRESS))
-	print("[%s] opening pack menu (quiet)" % _dbg_id)
-	Events.emit_signal("fish_pack_button_pressed")
-	pods.play()
-	knob.play()
 
 
 
