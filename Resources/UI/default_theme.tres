@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=15 format=3 uid="uid://cthsnn82p74vp"]
+[gd_resource type="Theme" load_steps=16 format=3 uid="uid://cthsnn82p74vp"]
 
 [ext_resource type="Texture2D" uid="uid://kr4gf33v2psy" path="res://Assets/Buttons/button 3.png" id="1_3aapj"]
 [ext_resource type="Texture2D" uid="uid://jeb8nscm8hb8" path="res://Assets/PNG/UI/large panel.png" id="1_76a3c"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dl1fsse0uvuot" path="res://Assets/Screens + Panels/GotchaPond 1-2-6.png" id="4_avaao"]
 [ext_resource type="Texture2D" uid="uid://dedm0cbjsvvhc" path="res://Assets/Screens + Panels/large panel.png" id="4_h4onc"]
 [ext_resource type="Texture2D" uid="uid://p6thfxolrlki" path="res://Assets/Stickers/gacha.png" id="4_vmt60"]
+[ext_resource type="StyleBox" uid="uid://guxa4gayog2b" path="res://Resources/UI/large_panel.tres" id="8_avaao"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3aapj"]
 
@@ -60,3 +61,4 @@ HSlider/styles/grabber_area_highlight = SubResource("StyleBoxLine_avaao")
 HSlider/styles/slider = SubResource("StyleBoxLine_dx04i")
 ItemList/styles/panel = SubResource("StyleBoxTexture_h4onc")
 Panel/styles/panel = SubResource("StyleBoxTexture_ot8jh")
+PanelContainer/styles/panel = ExtResource("8_avaao")

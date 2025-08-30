@@ -1,6 +1,7 @@
 class_name FishBody
 extends CharacterBody2D
 
+signal _is_hungry_signal
 signal evolution_signal
 signal fish_ate(r:int)
 
@@ -36,7 +37,7 @@ var target_direction: Vector2 = Vector2.RIGHT
 var change_timer: float = 0.0
 var _consumed_food_value: int = 0
 var _evolved: bool = false
-
+var hunger_cost: int = 20
 func _ready() -> void:
 	randomize()
 	_set_new_direction()
@@ -52,6 +53,8 @@ func _physics_process(delta: float) -> void:
 	# --- random wander if not evading and timer elapsed ---
 	if change_timer <= 0.0 and not evading:
 		_set_new_direction()
+
+
 
 	# --- seek food if hungry (overrides target) ---
 	if _is_hungry and not evading and fish_sensor:
@@ -187,14 +190,18 @@ func _eat_fish() -> void:
 			emit_signal("fish_ate", hit._rarity)
 			fish_sprite.play("Eat")
 			_is_hungry = false
+			speed = speed + hunger_cost
+			
 			_check_hunger_value()
 			if fish_sfx and "track_pool" in fish_sfx and fish_sfx.track_pool.size() > 8:
 				fish_sfx.set_stream(fish_sfx.track_pool[8])
+	
 
 func _on_hunger_tick() -> void:
 	if not _is_hungry:
 		_is_hungry = true
 		fish_sprite.play("Cry")
+		speed = speed - hunger_cost
 
 func _check_hunger_value() -> void:
 	if _evolved:

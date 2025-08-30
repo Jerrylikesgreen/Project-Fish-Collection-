@@ -22,6 +22,8 @@ signal global_sfx_signal(sfx: AudioStream)
 signal open_collections_screen(enabled: bool)
 signal update_ui
 signal upgrade
+signal collection_completed(value:int)
+signal BGMVolume_changed(v:float)
 # ───── Message throttle config ─────────────────────────────────────────
 const MSG_MIN_GAP := 0.9            # seconds between visible messages
 const MSG_WINDOW := 3.0             # burst window size (seconds)

@@ -36,14 +36,14 @@ const BUBBLE := preload("res://Scenes/bubble.tscn")
 @export var rare_spawn_sfx: AudioStream       # optional direct stream fallback
 @onready var anim: Fish_Sprite = %FishSprite
 @export var evolution_sprites: SpriteFrames
-@export var spawn_every: float = 1.0
+@export var spawn_every: float = 3.0
 @export var shiny_shader_pool:Array[ShaderMaterial]
 
 @export_enum("Base", "Gold", "Green", "Pink") var rarity: int 
 
 
 
-
+var hunger_bubble_cost: int = 3
 var _rarity: int = 0
 const RARITY_WEIGHTS := [55, 25, 15, 5]
 const RARITIES := ["Base","Gold","Green","Pink"]
@@ -52,6 +52,7 @@ var _rng := RandomNumberGenerator.new()
 var style_material: ShaderMaterial = null
 
 func _ready() -> void:
+	fish_body._is_hungry_signal.connect(_on_is_hungry)
 	add_to_group("fish")
 	sell_button.pressed.connect(_on_sell_button_pressed)
 	_rng.randomize()
@@ -74,7 +75,10 @@ func _ready() -> void:
 
 func _on_evolved()->void:
 	fish_sprite.set_sprite_frames(evolution_sprites)
+	fish_sell_value = fish_sell_value * 10 * _rarity
 
+func _on_is_hungry()->void:
+	spawn_every = spawn_every  - hunger_bubble_cost
 
 func _spawn_one() -> void:
 	var bubble: RigidBody2D = BUBBLE.instantiate()
@@ -163,6 +167,7 @@ func get_icon_texture() -> Texture2D:
 	return null
 	
 func _on_fish_ate(r: int) -> void:
+	spawn_every = spawn_every + hunger_bubble_cost
 
 	var spawn_counts := [1, 2, 5, 10] 
 

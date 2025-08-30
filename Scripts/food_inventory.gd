@@ -6,6 +6,10 @@ const SAVE_PATH := "user://collection.save"
 @export var placeholder_icon: Texture2D
 @export var undiscovered_label: String = "????"
 @onready var collections: VBoxContainer = %Collections
+signal collection_completed(total:int)
+signal collection_progress(revealed:int, total:int) # optional, handy for UI
+
+var _completion_emitted := false
 
 # species_id -> Texture2D (thumbnails)
 var _thumb_cache: Dictionary[String, Texture2D] = {}
@@ -114,6 +118,7 @@ func _on_spawned(fish: Node) -> void:
 
 	_refresh_list()
 	_save_discoveries()
+	_revealed_count()
 
 
 
@@ -232,6 +237,33 @@ func _load_discoveries() -> void:
 		e.rarity_idx = int(cfg.get_value("collection", id + ":rarity_idx", 0))
 		e.rarity_name = _rarity_label(e.rarity_idx)
 		# If revealed but still showing silhouette, try to create a real icon from cache or leave as-is (it'll update on next spawn/discover)
+
+func _revealed_count() -> int:
+	var n := 0
+	for id in SpeciesRegistry.ALL_SPECIES.keys():
+		var e: Entry = _entries.get(id)
+		if e != null and e.revealed:
+			n += 1
+	return n
+
+func _is_complete() -> bool:
+	for id in SpeciesRegistry.ALL_SPECIES.keys():
+		var e: Entry = _entries.get(id)
+		if e == null or not e.revealed:
+			return false
+	return true
+
+func _maybe_emit_completion() -> void:
+	# progress ping (optional)
+	var revealed := _revealed_count()
+	var total := SpeciesRegistry.ALL_SPECIES.size()
+	emit_signal("collection_progress", revealed, total)
+
+	if not _completion_emitted and _is_complete():
+		_completion_emitted = true
+		emit_signal("collection_completed", total)
+		if "collection_completed" in Events:
+			Events.collection_completed.emit(total)
 
 
 func _debug_dump(tag: String) -> void:

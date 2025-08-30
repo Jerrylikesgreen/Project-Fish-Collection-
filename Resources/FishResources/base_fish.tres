@@ -1,14 +1,15 @@
-[gd_resource type="SpriteFrames" load_steps=14 format=3 uid="uid://d04n5or4127m4"]
+[gd_resource type="SpriteFrames" load_steps=15 format=3 uid="uid://d04n5or4127m4"]
 
+[ext_resource type="Texture2D" uid="uid://d0xko0kkaloxx" path="res://Assets/PNG/Fish/BaseFish/BB Hungry Updated (1).PNG" id="1_5dfoy"]
 [ext_resource type="Texture2D" uid="uid://cofwfo2oe1eb2" path="res://Assets/PNG/Fish/BaseFish/RED Compacted.png" id="1_igec5"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5dfoy"]
-atlas = ExtResource("1_igec5")
-region = Rect2(156, 104, 52, 52)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_hjgov"]
-atlas = ExtResource("1_igec5")
-region = Rect2(0, 156, 52, 52)
+atlas = ExtResource("1_5dfoy")
+region = Rect2(3, 0, 26, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kof6n"]
+atlas = ExtResource("1_5dfoy")
+region = Rect2(35, 0, 26, 30)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qboim"]
 atlas = ExtResource("1_igec5")
@@ -54,10 +55,10 @@ region = Rect2(156, 52, 52, 52)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5dfoy")
+"texture": SubResource("AtlasTexture_hjgov")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hjgov")
+"texture": SubResource("AtlasTexture_kof6n")
 }],
 "loop": true,
 "name": &"Cry",
