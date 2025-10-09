@@ -27,7 +27,6 @@ var _tw_bus:  Tween    = null  # for bus volume fades (slider moves)
 
 func _ready() -> void:
 	bus = "BGM"
-
 	_bus_idx = AudioServer.get_bus_index("BGM")
 	if _bus_idx < 0:
 		push_warning("Audio bus 'BGM' not found; falling back to Master.")
@@ -36,6 +35,7 @@ func _ready() -> void:
 	bgm_volume_slider.value_changed.connect(_on_volume_changed)
 	Events.game_started.connect(_on_game_start)
 	_on_volume_changed(bgm_volume_slider.value)
+	play()
 
 
 func set_fade_enabled(enabled: bool) -> void:

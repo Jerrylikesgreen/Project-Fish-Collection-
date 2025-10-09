@@ -9,3 +9,4 @@ func _ready() -> void:
 
 func _on_pressed()->void:
 	Events.upgrade_button_pressed()
+	Events._on_button_signal.emit()

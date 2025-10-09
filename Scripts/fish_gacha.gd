@@ -147,7 +147,7 @@ const PACK_TINTS := {
 	"B": Color(1.00, 0.60, 0.10, 1.00),  # orange
 	"C": Color(1.00, 0.20, 0.20, 1.00),  # red
 }
-const POD_TINT_SPARKLE := Color(0.55, 0.45, 1.00, 1.00)
+const POD_TINT_SPARKLE := Color(0.689, 0.652, 1.0, 1.0)
 
 const SHADER_PATH := "res://shaders/highlight_tint.gdshader"
 const SHADER_MODE := 1  # 1 = HSV replace, 2 = grayscale colorize
@@ -403,7 +403,7 @@ func _pop_out(node: Node, to_s: float = 0.6, fade: bool = true, t: float = 0.18,
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 	tw.tween_property(node, "scale", Vector2(to_s, to_s), t)\
 		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
-	await tw.finished
+	#await tw.finished
 	print("[%s] pop_out: finished for node=%s" % [_dbg_id, node])
 	if free_on_end and is_instance_valid(node):
 		node.queue_free()

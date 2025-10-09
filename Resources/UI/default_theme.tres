@@ -1,17 +1,29 @@
-[gd_resource type="Theme" load_steps=16 format=3 uid="uid://cthsnn82p74vp"]
+[gd_resource type="Theme" load_steps=22 format=3 uid="uid://cthsnn82p74vp"]
 
-[ext_resource type="Texture2D" uid="uid://kr4gf33v2psy" path="res://Assets/Buttons/button 3.png" id="1_3aapj"]
-[ext_resource type="Texture2D" uid="uid://jeb8nscm8hb8" path="res://Assets/PNG/UI/large panel.png" id="1_76a3c"]
+[ext_resource type="Texture2D" uid="uid://dadyimmasv0bg" path="res://Assets/PNG/UI/small panel.png" id="1_rjo7g"]
 [ext_resource type="StyleBox" uid="uid://qredtc0mntgm" path="res://Resources/UI/box2.tres" id="2_0ts44"]
 [ext_resource type="StyleBox" uid="uid://b2b06d7yg6jqo" path="res://Resources/UI/box3.tres" id="2_h4onc"]
-[ext_resource type="Texture2D" uid="uid://dl1fsse0uvuot" path="res://Assets/Screens + Panels/GotchaPond 1-2-6.png" id="4_avaao"]
+[ext_resource type="Texture2D" uid="uid://d4kf80jc506cr" path="res://Assets/PNG/UI/Marker.png" id="4_avaao"]
 [ext_resource type="Texture2D" uid="uid://dedm0cbjsvvhc" path="res://Assets/Screens + Panels/large panel.png" id="4_h4onc"]
-[ext_resource type="Texture2D" uid="uid://p6thfxolrlki" path="res://Assets/Stickers/gacha.png" id="4_vmt60"]
 [ext_resource type="StyleBox" uid="uid://guxa4gayog2b" path="res://Resources/UI/large_panel.tres" id="8_avaao"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3aapj"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rjo7g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vmt60"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_avaao"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dx04i"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a6pap"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2xo0k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1kgoj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_823wv"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_vmt60"]
 color = Color(0.0392157, 0.34902, 0.372549, 1)
@@ -32,8 +44,25 @@ texture_margin_top = 8.0
 texture_margin_right = 25.0
 texture_margin_bottom = 3.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rjo7g"]
+bg_color = Color(0.678431, 0.647059, 0.94902, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 0.8352941)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 3
+expand_margin_left = 5.0
+expand_margin_top = 2.0
+expand_margin_right = 5.0
+shadow_color = Color(0, 0.176471, 0.231373, 1)
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ot8jh"]
-texture = ExtResource("1_76a3c")
+texture = ExtResource("4_h4onc")
 expand_margin_left = 60.0
 expand_margin_top = 30.0
 expand_margin_right = 30.0
@@ -42,23 +71,29 @@ region_rect = Rect2(0, 0, 187, 129)
 [resource]
 Button/colors/font_color = Color(0.984314, 0.776471, 0.854902, 0.901961)
 Button/colors/font_outline_color = Color(0, 0, 0.282353, 0.878431)
-Button/constants/align_to_largest_stylebox = -3
-Button/constants/h_separation = 10
-Button/constants/line_spacing = 10
-Button/constants/outline_size = 10
-Button/font_sizes/font_size = 19
-Button/icons/icon = ExtResource("1_3aapj")
+Button/constants/line_spacing = 4
+Button/constants/outline_size = 21
+Button/font_sizes/font_size = 21
+Button/icons/icon = ExtResource("1_rjo7g")
 Button/styles/disabled = SubResource("StyleBoxEmpty_3aapj")
+Button/styles/disabled_mirrored = SubResource("StyleBoxEmpty_rjo7g")
+Button/styles/focus = SubResource("StyleBoxEmpty_vmt60")
 Button/styles/hover = ExtResource("2_h4onc")
+Button/styles/hover_mirrored = SubResource("StyleBoxEmpty_avaao")
+Button/styles/hover_pressed = SubResource("StyleBoxEmpty_dx04i")
+Button/styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_a6pap")
 Button/styles/normal = SubResource("StyleBoxEmpty_2xo0k")
+Button/styles/normal_mirrored = SubResource("StyleBoxEmpty_1kgoj")
 Button/styles/pressed = ExtResource("2_0ts44")
+Button/styles/pressed_mirrored = SubResource("StyleBoxEmpty_823wv")
 HSlider/constants/center_grabber = 1
 HSlider/icons/grabber = ExtResource("4_avaao")
-HSlider/icons/grabber_disabled = ExtResource("4_vmt60")
-HSlider/icons/grabber_highlight = ExtResource("4_vmt60")
+HSlider/icons/grabber_disabled = ExtResource("4_avaao")
+HSlider/icons/grabber_highlight = ExtResource("4_avaao")
 HSlider/styles/grabber_area = SubResource("StyleBoxLine_vmt60")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxLine_avaao")
 HSlider/styles/slider = SubResource("StyleBoxLine_dx04i")
 ItemList/styles/panel = SubResource("StyleBoxTexture_h4onc")
+Label/styles/normal = SubResource("StyleBoxFlat_rjo7g")
 Panel/styles/panel = SubResource("StyleBoxTexture_ot8jh")
 PanelContainer/styles/panel = ExtResource("8_avaao")

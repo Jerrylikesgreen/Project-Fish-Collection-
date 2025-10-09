@@ -1,0 +1,104 @@
+[gd_resource type="SpriteFrames" load_steps=14 format=3 uid="uid://cd2j5ai6urk5e"]
+
+[ext_resource type="Texture2D" uid="uid://1m75rnyhlt03" path="res://Assets/PNG/Fish/Jeevee Fish/Jeevee fish hungry.png" id="1_oa0r8"]
+[ext_resource type="Texture2D" uid="uid://b36s7n2x7fm28" path="res://Assets/PNG/Fish/Jeevee Fish/Jeevee fish swim.png" id="2_ijgaj"]
+[ext_resource type="Texture2D" uid="uid://dmqghcfn2rn4h" path="res://Assets/PNG/Fish/Jeevee Fish/Pod 2 Jeevee fish.png" id="3_i1efw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nr1o1"]
+atlas = ExtResource("1_oa0r8")
+region = Rect2(0, 0, 44, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_prr5x"]
+atlas = ExtResource("1_oa0r8")
+region = Rect2(44, 0, 44, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k14k5"]
+atlas = ExtResource("2_ijgaj")
+region = Rect2(0, 0, 42, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mknun"]
+atlas = ExtResource("2_ijgaj")
+region = Rect2(42, 0, 42, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hunds"]
+atlas = ExtResource("3_i1efw")
+region = Rect2(14, 0, 32, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1mnvu"]
+atlas = ExtResource("3_i1efw")
+region = Rect2(95, 0, 32, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aw0hm"]
+atlas = ExtResource("3_i1efw")
+region = Rect2(176, 0, 32, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjagq"]
+atlas = ExtResource("3_i1efw")
+region = Rect2(257, 0, 32, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1keq"]
+atlas = ExtResource("3_i1efw")
+region = Rect2(338, 0, 32, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_81nv1"]
+atlas = ExtResource("3_i1efw")
+region = Rect2(419, 0, 32, 60)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nr1o1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_prr5x")
+}],
+"loop": true,
+"name": &"Cry",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k14k5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mknun")
+}],
+"loop": false,
+"name": &"Eat",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hunds")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1mnvu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aw0hm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pjagq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1keq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_81nv1")
+}],
+"loop": false,
+"name": &"Evolve",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k14k5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mknun")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 2.0
+}]

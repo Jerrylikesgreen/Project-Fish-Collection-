@@ -2,7 +2,7 @@ extends Node
 
 const SIL_DIR := "res://Resources/CollectionSilhouettes"
 
-# ✅ Put at least the species you showed in logs:
+
 const SIL_FILES := [
 	"starter_sil.png",
 	"blob_sil.png",
@@ -15,7 +15,6 @@ const SIL_FILES := [
 	"eelton_john_sil.png",
 	"marge_shrimpson_sil.png",
 	"princess_peach_sil.png",
-	
 	
 	
 ]

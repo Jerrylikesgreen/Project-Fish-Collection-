@@ -16,7 +16,6 @@ var _sticker_names: PackedStringArray = []
 
 func _ready() -> void:
 
-	# populate stickers (add "None" at top)
 	_sticker_names.clear()
 	_sticker_names.append("None")
 	for k in ScreenshotManager.sticker_assets.keys():

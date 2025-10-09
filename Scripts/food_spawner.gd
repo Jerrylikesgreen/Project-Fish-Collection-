@@ -62,25 +62,7 @@ func spawn_fish_food() -> void:
 	_apply_rarity_frame(food, r)
 	food._rarity = r
 
-	_announce_food(r)
 
-# ---------- helpers ----------
-
-func _announce_food(r: int) -> void:
-	# Light touch for common/uncommon, always announce rare/ultra.
-	match r:
-		0:
-			if randf() < 0.25:
-				Events.say_once("food_common", LINES_COMMON.pick_random(), "ACTION", 5.0)
-		1:
-			if randf() < 0.40:
-				Events.say_once("food_uncommon", LINES_UNCOMMON.pick_random(), "ACTION", 6.0)
-		2:
-			Events.say_once("food_rare", LINES_RARE.pick_random(), "SUCCESS", 8.0)
-		3:
-			Events.say_once("food_ultra", LINES_ULTRA.pick_random(), "SUCCESS", 12.0)
-		_:
-			pass
 
 func _spawn_pos() -> Vector2:
 	if spawn_marker and is_instance_valid(spawn_marker):

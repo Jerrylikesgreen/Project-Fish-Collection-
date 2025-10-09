@@ -75,7 +75,9 @@ func _ready() -> void:
 
 func _on_evolved()->void:
 	fish_sprite.set_sprite_frames(evolution_sprites)
-	fish_sell_value = fish_sell_value * 10 * _rarity
+	var fish_sell_value = fish_sell_value * 10 
+	fish_sell_value = fish_sell_value * _rarity
+	
 
 func _on_is_hungry()->void:
 	spawn_every = spawn_every  - hunger_bubble_cost

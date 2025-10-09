@@ -1,0 +1,75 @@
+[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://cckuqa8s7vmme"]
+
+[ext_resource type="Texture2D" uid="uid://0a6d5t37qafs" path="res://Assets/PNG/Fish/OctoDusa/OctoDusa Hungry.png" id="1_gcm6e"]
+[ext_resource type="Texture2D" uid="uid://bsw4tpr2dffv7" path="res://Assets/PNG/Fish/OctoDusa/OctoDusa Swim.png" id="2_qddlg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gn1mp"]
+atlas = ExtResource("1_gcm6e")
+region = Rect2(0, 0, 42, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1212d"]
+atlas = ExtResource("1_gcm6e")
+region = Rect2(82, 0, 42, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkdvh"]
+atlas = ExtResource("2_qddlg")
+region = Rect2(0, 0, 46, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mnr8x"]
+atlas = ExtResource("2_qddlg")
+region = Rect2(81, 0, 46, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lqetk"]
+atlas = ExtResource("2_qddlg")
+region = Rect2(0, 0, 46, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5w1v1"]
+atlas = ExtResource("2_qddlg")
+region = Rect2(81, 0, 46, 40)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gn1mp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1212d")
+}],
+"loop": true,
+"name": &"Cry",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rkdvh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mnr8x")
+}],
+"loop": false,
+"name": &"Eat",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lqetk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5w1v1")
+}],
+"loop": false,
+"name": &"Evolve",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lqetk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5w1v1")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 2.0
+}]

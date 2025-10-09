@@ -15,16 +15,16 @@ config/description="Gacha-Pond is a gacha-themed aquarium simulator where you fe
 
 Spin the gacha. Hatch a fish. Raise it. Pop bubbles for profit. Repeat until your tank is swimming with shiny, quirky, and metallic fish variants!"
 run/main_scene="uid://0epxcm5d0bqp"
-config/features=PackedStringArray("4.4", "GL Compatibility")
+config/features=PackedStringArray("4.5", "GL Compatibility")
 boot_splash/bg_color=Color(0.388235, 0.545098, 0.588235, 1)
-boot_splash/image="uid://bj0j1x0ytnjh5"
+boot_splash/image="uid://frsyqxp1i4r0"
 config/icon="uid://bj0j1x0ytnjh5"
 config/macos_native_icon="uid://bj0j1x0ytnjh5"
 config/windows_native_icon="uid://bj0j1x0ytnjh5"
 
 [audio]
 
-sfx_volume=0.47
+sfx_volume=0.49
 
 [autoload]
 

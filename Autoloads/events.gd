@@ -68,6 +68,18 @@ var _bubble_print_verbosity: int = BUBBLE_PRINT_VERBOSITY_DEFAULT
 var _bubble_batch_accum: int = 0
 var _bubble_batch_timer: Timer = null
 
+const FOOD_BATCH_WINDOW_DEFAULT := 0.6        # seconds to coalesce gains
+const FOOD_GAIN_ANNOUNCE_THRESHOLD_DEFAULT := 5
+const FOOD_PRINT_VERBOSITY_DEFAULT := 1       # 0=silent, 1=summary, 2=verbose
+
+var _food_batch_window: float = FOOD_BATCH_WINDOW_DEFAULT
+var _food_gain_announce_threshold: int = FOOD_GAIN_ANNOUNCE_THRESHOLD_DEFAULT
+var _food_print_verbosity: int = FOOD_PRINT_VERBOSITY_DEFAULT
+
+var _food_batch_accum: int = 0
+var _food_batch_timer: Timer = null
+
+
 
 
 # ───── State ───────────────────────────────────────────────────────────────────
@@ -83,20 +95,18 @@ var next_fish_sparkle: bool = false
 
 
 func _ready() -> void:
-	# Optional: allow tuning via ProjectSettings (Project > Project Settings > General)
-	if ProjectSettings.has_setting("events/bubbles/batch_window"):
-		_bubble_batch_window = float(ProjectSettings.get_setting("events/bubbles/batch_window"))
-	if ProjectSettings.has_setting("events/bubbles/gain_announce_threshold"):
-		_bubble_gain_announce_threshold = int(ProjectSettings.get_setting("events/bubbles/gain_announce_threshold"))
-	if ProjectSettings.has_setting("events/bubbles/print_verbosity"):
-		_bubble_print_verbosity = int(ProjectSettings.get_setting("events/bubbles/print_verbosity"))
-
 	if _bubble_batch_timer == null:
 		_bubble_batch_timer = Timer.new()
 		_bubble_batch_timer.one_shot = true
 		_bubble_batch_timer.wait_time = _bubble_batch_window
 		add_child(_bubble_batch_timer)
 		_bubble_batch_timer.timeout.connect(_flush_bubble_batch)
+	if _food_batch_timer == null:
+		_food_batch_timer = Timer.new()
+		_food_batch_timer.one_shot = true
+		_food_batch_timer.wait_time = _bubble_batch_window
+		add_child(_food_batch_timer)
+		_food_batch_timer.timeout.connect(_flush_bubble_batch)
 		# Message pump (drains queue at a controlled pace)
 	_msg_tick = Timer.new()
 	_msg_tick.one_shot = true
@@ -133,6 +143,10 @@ func display_player_message(new_message: String, cooldown: float = -1.0) -> void
 		if _bubble_print_verbosity >= 2:
 			print("[EVENTS:MSG] (suppressed) ", new_message)
 		return
+		if _food_print_verbosity >= 2:
+			print("[EVENTS:MSG] (suppressed) ", new_message)
+		return
+
 
 	_msg_last_until[new_message] = n + cd
 	emit_signal("player_message", new_message)
@@ -348,6 +362,21 @@ func _flush_bubble_batch() -> void:
 
 	_bubble_batch_accum = 0
 
+func _flush_food_batch() -> void:
+	if _food_batch_accum <= 0:
+		return
+
+	if _food_batch_accum >= _food_gain_announce_threshold:
+		display_player_message("+%d fish food!%s" % [_food_batch_accum])
+
+		if _food_print_verbosity >= 1:
+			print("[EVENTS] flushed food batch: +", _food_batch_accum,)
+	else:
+		if _food_print_verbosity >= 2:
+			print("[EVENTS] silent flush: +", _food_batch_accum)
+
+	_food_batch_accum = 0
+
 
 func configure_bubble_batch(window: float, threshold: int, verbosity: int) -> void:
 	if window > 0.0:
@@ -403,7 +432,7 @@ func _queue_msg(text: String, tag: String = "GEN") -> void:
 	# Reserve the cooldown immediately so same-frame spam can't enqueue duplicates
 	_msg_recent_text_until[text] = n + MSG_SAME_TEXT_COOLDOWN
 
-	# Optional: cap queue length so it can’t balloon
+	#capped queue length so it can’t balloon
 	if _msg_queue.size() >= 10:
 		_msg_queue.pop_front()
 
@@ -416,6 +445,8 @@ func _queue_msg(text: String, tag: String = "GEN") -> void:
 
 func _pump_messages() -> void:
 	if _msg_queue.is_empty():
+		return
+	if _msg_queue.size() > 3:
 		return
 
 	var n := _now()
@@ -475,6 +506,7 @@ func say_once(key: String, text: String, tag: String = "GEN", cooldown: float = 
 	if n >= float(_msg_recent_text_until.get(k, 0.0)):
 		_msg_recent_text_until[k] = n + cooldown
 		_queue_msg(text, tag)
+		
 func _normalize_key(text: String) -> String:
 	# Normalize for dedupe: trim + lowercase + collapse inner whitespace
 	var t := text.strip_edges().to_lower()

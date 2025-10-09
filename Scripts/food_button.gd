@@ -13,4 +13,4 @@ func _on_button_pressed() -> void:
 		return
 	food_gacha_sprite.play("Spawn")
 	Events.spawn_food_button_pressed()
-	
+	Events._on_button_signal.emit()

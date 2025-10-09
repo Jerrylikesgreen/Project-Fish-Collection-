@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dsp6pyx71vaj4"]
+[gd_scene load_steps=27 format=3 uid="uid://dsp6pyx71vaj4"]
 
 [ext_resource type="Script" uid="uid://c37wotvnystf1" path="res://Scripts/fish_body.gd" id="1_hgn23"]
 [ext_resource type="Script" uid="uid://lggwoh4bq3qj" path="res://Scripts/fish.gd" id="1_jdl8t"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" uid="uid://ib6ko08ss8v1" path="res://Scripts/fish_sprite.gd" id="6_csmc7"]
 [ext_resource type="Material" uid="uid://cjdp5n0gwwarp" path="res://Resources/Shader/green_rarity.tres" id="7_fl3e6"]
 [ext_resource type="Material" uid="uid://dxh1vmoehjm6v" path="res://Resources/Shader/pink_rarity.tres" id="8_clm4a"]
-[ext_resource type="FontFile" uid="uid://b0pnvxy3ibar" path="res://Assets/Font/Better VCR 9.0.1.ttf" id="10_sd48r"]
 [ext_resource type="Script" uid="uid://75m2s85mdg00" path="res://Scripts/fish_sfx.gd" id="11_sd48r"]
 [ext_resource type="AudioStream" uid="uid://b3h8ki2hwmy32" path="res://Assets/OGG/SFX/fish click.ogg" id="13_dtff2"]
 [ext_resource type="AudioStream" uid="uid://cvkyitysdqtg0" path="res://Assets/OGG/coin.ogg" id="13_v5k5h"]
@@ -30,28 +29,7 @@ radius = 12.1655
 [sub_resource type="CircleShape2D" id="CircleShape2D_21uvr"]
 radius = 250.144
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vgji2"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wwu4r"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_clm4a"]
-content_margin_left = 5.0
-content_margin_top = 5.0
-content_margin_right = 5.0
-content_margin_bottom = 5.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_clm4a"]
-bg_color = Color(0.945098, 0.333333, 0.67451, 0.0470588)
-
-[sub_resource type="Theme" id="Theme_dtff2"]
-default_font = ExtResource("10_sd48r")
-default_font_size = 10
-Button/colors/font_color = Color(0, 0, 0, 1)
-Button/colors/font_pressed_color = Color(1, 0, 1, 1)
-Button/styles/focus = SubResource("StyleBoxEmpty_vgji2")
-Button/styles/hover = SubResource("StyleBoxEmpty_wwu4r")
-Button/styles/normal = SubResource("StyleBoxEmpty_clm4a")
-Button/styles/pressed = SubResource("StyleBoxFlat_clm4a")
+[sub_resource type="ImageTexture" id="ImageTexture_2p554"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_fll1f"]
 font_color = Color(0, 0.00613519, 0.126417, 1)
@@ -133,14 +111,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -8.25
-offset_top = -27.25
-offset_right = 6.75
-offset_bottom = -13.25
+offset_left = -5.5
+offset_top = -28.0
+offset_right = 9.5
+offset_bottom = -14.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_dtff2")
+theme_override_icons/icon = SubResource("ImageTexture_2p554")
 action_mode = 0
+flat = true
 icon_alignment = 1
 expand_icon = true
 
@@ -151,12 +130,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -19.25
-offset_top = -9.5
-offset_right = 20.75
-offset_bottom = 10.5
+offset_left = -4.25
+offset_top = -5.75
+offset_right = 13.75
+offset_bottom = 20.25
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.5, 0.5)
 text = "$"
 label_settings = SubResource("LabelSettings_fll1f")
 horizontal_alignment = 1

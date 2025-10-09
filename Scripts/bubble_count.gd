@@ -8,5 +8,4 @@ func _ready() -> void:
 
 func _on_bubble_count(new_bubble_count:int)->void:
 	bubble_count = new_bubble_count
-	var new_text = str(bubble_count)
-	set_text(new_text)
+	set_text(str(new_bubble_count))

@@ -7,8 +7,8 @@
 shader = ExtResource("1_0n4rl")
 shader_parameter/use_texture = true
 shader_parameter/base_color = Color(1, 1, 1, 1)
-shader_parameter/glitter_color = Color(1, 0.308147, 0.88317, 1)
-shader_parameter/glitter_density = 17.833
+shader_parameter/glitter_color = Color(1, 0.462745, 0.831373, 1)
+shader_parameter/glitter_density = 18.151
 shader_parameter/sparkle_intensity = 4.0
 shader_parameter/edge_boost = 0.3
 shader_parameter/fall_speed_uv = 0.0090001

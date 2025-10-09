@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="FishPackResource" load_steps=5 format=3 uid="uid://bdqmy0hu5r4c"]
+[gd_resource type="Resource" script_class="FishPackResource" load_steps=6 format=3 uid="uid://bdqmy0hu5r4c"]
 
 [ext_resource type="Script" uid="uid://bv67m0lje1mhq" path="res://Scripts/fish_pack_resource_script.gd" id="1_cskt0"]
-[ext_resource type="SpriteFrames" uid="uid://dtu8k7xa4dat2" path="res://Resources/FishResources/betta.tres" id="1_mrf80"]
+[ext_resource type="SpriteFrames" uid="uid://cd2j5ai6urk5e" path="res://Resources/FishResources/jeevee_fish.tres" id="1_wfg8s"]
 [ext_resource type="SpriteFrames" uid="uid://dg3s2rwm2bkfc" path="res://Resources/FishResources/marge_shrimpson.tres" id="2_xyogr"]
 [ext_resource type="SpriteFrames" uid="uid://dibnsbmgufxhv" path="res://Resources/FishResources/master_sword_fish.tres" id="3_wfg8s"]
+[ext_resource type="SpriteFrames" uid="uid://u0m6fcvdbr7l" path="res://Resources/FishResources/jojo_starfish.tres" id="4_mefnv"]
 
 [resource]
 script = ExtResource("1_cskt0")
 pack_name = "B Pack"
 fish_pool = Dictionary[String, SpriteFrames]({
-"Betta": ExtResource("1_mrf80"),
+"Betta": ExtResource("1_wfg8s"),
+"JOJO Starfish": ExtResource("4_mefnv"),
 "Marge Shrimpson": ExtResource("2_xyogr"),
 "Master Swordfish": ExtResource("3_wfg8s")
 })
