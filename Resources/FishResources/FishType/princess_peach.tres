@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="FishResource" load_steps=3 format=3 uid="uid://jh6xy7nyxh1r"]
+
+[ext_resource type="Script" uid="uid://dsrw0gmu4w172" path="res://Scripts/base_fish_resource_script.gd" id="1_cjdyr"]
+[ext_resource type="SpriteFrames" uid="uid://tes7dgaru5m4" path="res://Resources/FishResources/Frames/princess_peach.tres" id="2_cjdyr"]
+
+[resource]
+script = ExtResource("1_cjdyr")
+sprite = ExtResource("2_cjdyr")
+display_name = "Princes Fish"
+metadata/_custom_type_script = "uid://dsrw0gmu4w172"

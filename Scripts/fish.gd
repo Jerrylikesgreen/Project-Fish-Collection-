@@ -1,46 +1,33 @@
 class_name Fish
 extends Node2D
 
-# Bubble tier -> value granted
-const BUBBLE_VALUES := [1, 2, 3, 5]  # Normal, Uncommon, Rare, Ultra
-
-# Baseline odds (weights). Tweak to taste.
-const BUBBLE_WEIGHTS_BASE := [75, 20, 4, 1]
-
-# When evolved, shift away from Common toward higher tiers.
-# Index order: [Common, Uncommon, Rare, Ultra]
-const EVOLVED_MULT := [0.8, 1.3, 2.0, 2.5]
-
-# Extra bias by fish rarity (your RARITIES order: Base, Gold, Green, Pink).
-# Each row multiplies the 4 bubble tiers respectively.
-const FISH_RARITY_MULTS := [
-	[1.00, 1.00, 1.00, 1.00],  # Base fish
-	[0.85, 1.20, 1.60, 2.00],  # Gold
-	[0.75, 1.30, 1.90, 2.40],  # Green
-	[0.60, 1.40, 2.20, 3.00],  # Pink
-]
 
 
-const BUBBLE := preload("res://Scenes/bubble.tscn")
+@onready var fish_effect_node: FishEffectNode = %FishEffectNode
 @onready var fish_sfx: AudioStreamPlayer = %FishSFX
 @onready var fish_sprite: Fish_Sprite = %FishSprite
-@export var fish_sell_value: int = 3
-@export var species_id: String = ""      # e.g. "Clownfish"
-@export var display_name: String = ""    # e.g. "Clownfish"
 @onready var bubble_spawner: Timer = %BubbleSpawner
 @onready var fish_body: FishBody = $FishBody
 @onready var mouth: Marker2D = %Marker2D
 @onready var sell_button: Button = %SellButton
-@export var icon_override: Texture2D
-@export var rare_spawn_sfx_index: int = 6     # index in fish_sfx.track_pool (set what you use)
-@export var rare_spawn_sfx: AudioStream       # optional direct stream fallback
 @onready var anim: Fish_Sprite = %FishSprite
+
+
+@export_group("Identifiers")
+@export var fish_resource: Resource
+@export var species_id: String = ""      # e.g. "Clownfish"
+@export var display_name: String = ""    # e.g. "Clownfish" - can be modified by Player
+@export_group("Visuals")
+@export var icon_override: Texture2D
 @export var evolution_sprites: SpriteFrames
 @export var spawn_every: float = 3.0
 @export var shiny_shader_pool:Array[ShaderMaterial]
-
-@export_enum("Base", "Gold", "Green", "Pink") var rarity: int 
-
+@export_group("Stats")
+@export_enum("Base", "Gold", "Green", "Pink") var rarity 
+@export var fish_sell_value: int = 3
+@export_group("Audio")
+@export var rare_spawn_sfx_index: int = 6     # index in fish_sfx.track_pool (set what you use)
+@export var rare_spawn_sfx: AudioStream       # optional direct stream fallback
 
 
 var hunger_bubble_cost: int = 3
@@ -50,8 +37,26 @@ const RARITIES := ["Base","Gold","Green","Pink"]
 var _rare_chimed: bool = false                # guard so it plays once
 var _rng := RandomNumberGenerator.new()
 var style_material: ShaderMaterial = null
+const BUBBLE := preload("res://Scenes/bubble.tscn")
+const BUBBLE_VALUES := [1, 2, 3, 5]  # Normal, Uncommon, Rare, Ultra
+## Baseline odds (weights). 
+
+const BUBBLE_WEIGHTS_BASE := [75, 20, 4, 1]
+## Index order: [Common, Uncommon, Rare, Ultra]
+
+const EVOLVED_MULT := [0.8, 1.3, 2.0, 2.5]
+
+## Each row multiplies the 4 bubble tiers respectively.
+const FISH_RARITY_MULTS := [
+	[1.00, 1.00, 1.00, 1.00],  # Base fish
+	[0.85, 1.20, 1.60, 2.00],  # Gold
+	[0.75, 1.30, 1.90, 2.40],  # Green
+	[0.60, 1.40, 2.20, 3.00],  # Pink
+]
+
 
 func _ready() -> void:
+	evolution_sprites = fish_resource.sprite
 	fish_body._is_hungry_signal.connect(_on_is_hungry)
 	add_to_group("fish")
 	sell_button.pressed.connect(_on_sell_button_pressed)
@@ -72,11 +77,20 @@ func _ready() -> void:
 	_apply_rarity_to_sprite()
 	print("[Fish] Assigned evolution_frames for species=%s | evolution_sprites=%s"
 		% [species_id, str(evolution_sprites)])
+	_apply_fish_resource()
+
+
+func _apply_fish_resource()->void:
+	var fish_effects = fish_resource.fish_effect.has_effect
+	fish_effect_node.apply_fish_effect(fish_effects)
+	
+	print( "[",fish_resource.display_name, "] ->"  ,  "Fish Effect: ", fish_effects)
+
 
 func _on_evolved()->void:
 	fish_sprite.set_sprite_frames(evolution_sprites)
-	var fish_sell_value = fish_sell_value * 10 
-	fish_sell_value = fish_sell_value * _rarity
+	var new_fish_sell_value = fish_sell_value * 10 
+	fish_sell_value = new_fish_sell_value * _rarity
 	
 
 func _on_is_hungry()->void:
@@ -86,7 +100,6 @@ func _spawn_one() -> void:
 	var bubble: RigidBody2D = BUBBLE.instantiate()
 	get_tree().current_scene.get_child(1).add_child(bubble)
 
-	# SFX (keep what you had)
 	if fish_sfx and "track_pool" in fish_sfx and fish_sfx.track_pool.size() > 5:
 		fish_sfx.set_stream(fish_sfx.track_pool[5])
 		fish_sfx.play()
@@ -209,13 +222,11 @@ func _maybe_play_rare_chime() -> void:
 
 
 func get_evolution_icon_texture() -> Texture2D:
-	# Prefer FishBody.evolution_frames if available
 	var evo_frames: SpriteFrames = null
 	if has_node("FishBody"):
 		var fb := get_node("FishBody")
 		if fb:
 			evo_frames = fb.get("evolution_frames")
-	# Fallback to a copy cached on the Fish root (if you mirror it there)
 	if evo_frames == null:
 		evo_frames = self.get("evolution_sprites")
 
@@ -228,7 +239,6 @@ func get_evolution_icon_texture() -> Texture2D:
 		print("[Fish] get_evolution_icon_texture: evo_frames has no animations → NULL")
 		return null
 
-	# Prefer an idle-like animation but fall back to first with frames
 	var pick := ""
 	for n in ["Idle", "idle"]:
 		if evo_frames.has_animation(n):

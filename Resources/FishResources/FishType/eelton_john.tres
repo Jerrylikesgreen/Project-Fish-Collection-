@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FishResource" load_steps=3 format=3 uid="uid://brwqh4d85bhho"]
+
+[ext_resource type="Script" uid="uid://dsrw0gmu4w172" path="res://Scripts/base_fish_resource_script.gd" id="1_q6ch2"]
+[ext_resource type="SpriteFrames" uid="uid://bwnl3nm1w30ro" path="res://Resources/FishResources/Frames/eelton_john.tres" id="2_ymci4"]
+
+[resource]
+script = ExtResource("1_q6ch2")
+sprite = ExtResource("2_ymci4")
+display_name = "Eelton Jhon"

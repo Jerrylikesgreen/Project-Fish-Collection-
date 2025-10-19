@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="FishResource" load_steps=3 format=3 uid="uid://bmstsgfarm6s6"]
+
+[ext_resource type="Script" uid="uid://dsrw0gmu4w172" path="res://Scripts/base_fish_resource_script.gd" id="1_mqyt5"]
+[ext_resource type="SpriteFrames" uid="uid://dble86scfuhx8" path="res://Resources/FishResources/Frames/blob.tres" id="2_7j67n"]
+
+[resource]
+script = ExtResource("1_mqyt5")
+sprite = ExtResource("2_7j67n")
+display_name = "Blob Fish"
+metadata/_custom_type_script = "uid://dsrw0gmu4w172"

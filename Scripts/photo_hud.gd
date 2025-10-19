@@ -45,12 +45,12 @@ func _ready() -> void:
 	visible = false  # open via your input or a button
 
 func _on_frame_changed(_idx: int) -> void:
-	var name := frame_opt.get_item_text(frame_opt.get_selected_id())
+	var name_p := frame_opt.get_item_text(frame_opt.get_selected_id())
 	# guard: if key not in dict, preview none
-	if not ScreenshotManager.frame_assets.has(name):
+	if not ScreenshotManager.frame_assets.has(name_p):
 		ScreenshotManager.preview_frame("none")
 	else:
-		ScreenshotManager.preview_frame(name)
+		ScreenshotManager.preview_frame(name_p)
 
 func _on_stickers_changed(_idx: int) -> void:
 	var stickers := _collect_sticker_list()
@@ -76,9 +76,9 @@ func _on_take_photo() -> void:
 
 	# apply current preview to be safe, then shoot
 	ScreenshotManager.preview_stickers(stickers)
-	var name := frame_opt.get_item_text(frame_opt.get_selected_id())
-	if ScreenshotManager.frame_assets.has(name):
-		ScreenshotManager.preview_frame(name)
+	var name_p := frame_opt.get_item_text(frame_opt.get_selected_id())
+	if ScreenshotManager.frame_assets.has(name_p):
+		ScreenshotManager.preview_frame(name_p)
 	else:
 		ScreenshotManager.preview_frame("none")
 

@@ -1,14 +1,16 @@
-[gd_scene load_steps=27 format=3 uid="uid://dsp6pyx71vaj4"]
+[gd_scene load_steps=29 format=3 uid="uid://dsp6pyx71vaj4"]
 
 [ext_resource type="Script" uid="uid://c37wotvnystf1" path="res://Scripts/fish_body.gd" id="1_hgn23"]
 [ext_resource type="Script" uid="uid://lggwoh4bq3qj" path="res://Scripts/fish.gd" id="1_jdl8t"]
-[ext_resource type="SpriteFrames" uid="uid://d04n5or4127m4" path="res://Resources/FishResources/base_fish.tres" id="4_21uvr"]
-[ext_resource type="SpriteFrames" uid="uid://dble86scfuhx8" path="res://Resources/FishResources/blob.tres" id="4_csmc7"]
+[ext_resource type="SpriteFrames" uid="uid://dtu8k7xa4dat2" path="res://Resources/FishResources/Frames/betta.tres" id="2_dtff2"]
+[ext_resource type="SpriteFrames" uid="uid://d04n5or4127m4" path="res://Resources/FishResources/Frames/base_fish.tres" id="4_21uvr"]
+[ext_resource type="SpriteFrames" uid="uid://dble86scfuhx8" path="res://Resources/FishResources/Frames/blob.tres" id="4_csmc7"]
 [ext_resource type="Material" uid="uid://c3q6aaqt4pny4" path="res://Resources/Shader/gold_rarity.tres" id="5_csmc7"]
 [ext_resource type="Script" uid="uid://c6v32cq3nqm46" path="res://Scripts/fish_sensor.gd" id="6_21uvr"]
 [ext_resource type="Script" uid="uid://ib6ko08ss8v1" path="res://Scripts/fish_sprite.gd" id="6_csmc7"]
 [ext_resource type="Material" uid="uid://cjdp5n0gwwarp" path="res://Resources/Shader/green_rarity.tres" id="7_fl3e6"]
 [ext_resource type="Material" uid="uid://dxh1vmoehjm6v" path="res://Resources/Shader/pink_rarity.tres" id="8_clm4a"]
+[ext_resource type="Script" uid="uid://ewcl84wfk0vd" path="res://Scenes/fish_effect.gd" id="11_62nyy"]
 [ext_resource type="Script" uid="uid://75m2s85mdg00" path="res://Scripts/fish_sfx.gd" id="11_sd48r"]
 [ext_resource type="AudioStream" uid="uid://b3h8ki2hwmy32" path="res://Assets/OGG/SFX/fish click.ogg" id="13_dtff2"]
 [ext_resource type="AudioStream" uid="uid://cvkyitysdqtg0" path="res://Assets/OGG/coin.ogg" id="13_v5k5h"]
@@ -41,8 +43,12 @@ shadow_offset = Vector2(0.5, 0.5)
 [node name="Fish" type="Node2D"]
 scale = Vector2(4, 4)
 script = ExtResource("1_jdl8t")
-fish_sell_value = 4
+fish_resource = ExtResource("2_dtff2")
 shiny_shader_pool = Array[ShaderMaterial]([null, ExtResource("5_csmc7"), ExtResource("7_fl3e6"), ExtResource("8_clm4a")])
+
+[node name="FishEffectNode" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("11_62nyy")
 
 [node name="FishBody" type="CharacterBody2D" parent="."]
 unique_name_in_owner = true

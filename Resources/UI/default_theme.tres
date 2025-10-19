@@ -1,11 +1,11 @@
 [gd_resource type="Theme" load_steps=22 format=3 uid="uid://cthsnn82p74vp"]
 
 [ext_resource type="Texture2D" uid="uid://dadyimmasv0bg" path="res://Assets/PNG/UI/small panel.png" id="1_rjo7g"]
-[ext_resource type="StyleBox" uid="uid://qredtc0mntgm" path="res://Resources/UI/box2.tres" id="2_0ts44"]
-[ext_resource type="StyleBox" uid="uid://b2b06d7yg6jqo" path="res://Resources/UI/box3.tres" id="2_h4onc"]
+[ext_resource type="StyleBox" uid="uid://qredtc0mntgm" path="res://Resources/UI/Box/box2.tres" id="2_0ts44"]
+[ext_resource type="StyleBox" uid="uid://b2b06d7yg6jqo" path="res://Resources/UI/Box/box3.tres" id="2_h4onc"]
 [ext_resource type="Texture2D" uid="uid://d4kf80jc506cr" path="res://Assets/PNG/UI/Marker.png" id="4_avaao"]
 [ext_resource type="Texture2D" uid="uid://dedm0cbjsvvhc" path="res://Assets/Screens + Panels/large panel.png" id="4_h4onc"]
-[ext_resource type="StyleBox" uid="uid://guxa4gayog2b" path="res://Resources/UI/large_panel.tres" id="8_avaao"]
+[ext_resource type="StyleBox" uid="uid://guxa4gayog2b" path="res://Resources/UI/Panels/large_panel.tres" id="8_avaao"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3aapj"]
 

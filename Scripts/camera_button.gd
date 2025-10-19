@@ -1,8 +1,7 @@
 extends TextureButton
 
 
-var _hover := false
-var _pressing := false
+
 
 func _ready() -> void:
 	pressed.connect(_on_left_click)

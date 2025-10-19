@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c6x3tgkvj7n1h"]
 
-[ext_resource type="Script" uid="uid://df32u8rud88ov" path="res://Scenes/photo_hud.gd" id="1_veyj3"]
+[ext_resource type="Script" uid="uid://df32u8rud88ov" path="res://Scripts/photo_hud.gd" id="1_veyj3"]
 
 [node name="PhotoHUD" type="Control"]
 layout_mode = 3

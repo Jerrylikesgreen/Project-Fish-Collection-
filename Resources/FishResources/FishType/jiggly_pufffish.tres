@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="FishResource" load_steps=2 format=3 uid="uid://bs08sjpiahvp6"]
+
+[ext_resource type="Script" uid="uid://dsrw0gmu4w172" path="res://Scripts/base_fish_resource_script.gd" id="1_7h0kw"]
+
+[resource]
+script = ExtResource("1_7h0kw")
+display_name = "Jiggly Puffish"

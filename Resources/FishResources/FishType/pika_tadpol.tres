@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FishResource" load_steps=3 format=3 uid="uid://bc7aokdwb1d8r"]
+
+[ext_resource type="Script" uid="uid://dsrw0gmu4w172" path="res://Scripts/base_fish_resource_script.gd" id="1_jl1ax"]
+[ext_resource type="SpriteFrames" uid="uid://otlu2migh4ql" path="res://Resources/FishResources/Frames/pika_tadpol.tres" id="2_1h20i"]
+
+[resource]
+script = ExtResource("1_jl1ax")
+sprite = ExtResource("2_1h20i")
+display_name = "Pika Tadpol"

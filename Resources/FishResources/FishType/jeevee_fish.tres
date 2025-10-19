@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FishResource" load_steps=3 format=3 uid="uid://c76xkt2tk8rq5"]
+
+[ext_resource type="Script" uid="uid://dsrw0gmu4w172" path="res://Scripts/base_fish_resource_script.gd" id="1_kxb4o"]
+[ext_resource type="SpriteFrames" uid="uid://cd2j5ai6urk5e" path="res://Resources/FishResources/Frames/jeevee_fish.tres" id="2_755w5"]
+
+[resource]
+script = ExtResource("1_kxb4o")
+sprite = ExtResource("2_755w5")
+display_name = "Jeevee Fish"

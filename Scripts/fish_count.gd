@@ -22,13 +22,15 @@ func _on_fish_sold() -> void:
 func _on_signal()->void:
 
 	text = "%d / %d" % [tank_count, Globals.max_fish_count]
-	print("[TankLabel] %s -> live=%d / %d" % [tank_count, Globals.max_fish_count])
+	print("[TankLabel] %d -> live=%d / %d" % [tank_count, Globals.max_fish_count])
 
 
 func _refresh_from_world(reason: String) -> void:
-	print("Reff")
-	var live := get_tree().get_nodes_in_group("fish").size()
-	tank_count = clampi(live, 0, Globals.max_fish_count)
+	print("Tank Lable Reset")
 
+	var live := get_tree().get_nodes_in_group("fish").size()
+	if reason == "sold":
+		live = live - 1
+	tank_count = clampi(live, 0, Globals.max_fish_count)
 	text = "%d / %d" % [tank_count, Globals.max_fish_count]
 	print("[TankLabel] %s -> live=%d / %d" % [reason, tank_count, Globals.max_fish_count])

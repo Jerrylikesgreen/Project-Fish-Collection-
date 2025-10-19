@@ -1,20 +1,19 @@
 [gd_resource type="Resource" script_class="FishPackResource" load_steps=7 format=3 uid="uid://sd2s2lgpqgit"]
 
+[ext_resource type="Script" uid="uid://dsrw0gmu4w172" path="res://Scripts/base_fish_resource_script.gd" id="1_5jr2u"]
 [ext_resource type="Script" uid="uid://bv67m0lje1mhq" path="res://Scripts/fish_pack_resource_script.gd" id="1_awhad"]
-[ext_resource type="SpriteFrames" uid="uid://dble86scfuhx8" path="res://Resources/FishResources/blob.tres" id="1_o45s8"]
-[ext_resource type="SpriteFrames" uid="uid://otlu2migh4ql" path="res://Resources/FishResources/pika_tadpol.tres" id="2_o45s8"]
-[ext_resource type="SpriteFrames" uid="uid://bvrqlu7dvpi2g" path="res://Resources/FishResources/jiggly_puffish.tres" id="3_n3881"]
-[ext_resource type="SpriteFrames" uid="uid://c1kq6x3tm0dbe" path="res://Resources/FishResources/hello_catfish.tres" id="4_vwkx2"]
-[ext_resource type="SpriteFrames" uid="uid://cd2j5ai6urk5e" path="res://Resources/FishResources/jeevee_fish.tres" id="5_vvnvg"]
+[ext_resource type="SpriteFrames" uid="uid://dtu8k7xa4dat2" path="res://Resources/FishResources/Frames/betta.tres" id="2_vwkx2"]
+[ext_resource type="Resource" uid="uid://bmstsgfarm6s6" path="res://Resources/FishResources/FishType/blob_fish.tres" id="3_vvnvg"]
+[ext_resource type="Resource" uid="uid://bjyb17pn0r6b1" path="res://Resources/FishResources/FishType/c_hourse.tres" id="4_8jrsx"]
+[ext_resource type="Resource" uid="uid://c76xkt2tk8rq5" path="res://Resources/FishResources/FishType/jeevee_fish.tres" id="5_vvnvg"]
 
 [resource]
 script = ExtResource("1_awhad")
-pack_name = "A Pack"
-fish_pool = Dictionary[String, SpriteFrames]({
-"Blob": ExtResource("1_o45s8"),
-"Hello Catfish": ExtResource("4_vwkx2"),
+pack_name = "Pack A "
+fish_pool = Dictionary[String, ExtResource("1_5jr2u")]({
+"Betta Fish": ExtResource("2_vwkx2"),
+"Blob Fish": ExtResource("3_vvnvg"),
 "Jeevee Fish": ExtResource("5_vvnvg"),
-"JigglyPuff": ExtResource("3_n3881"),
-"Pike Tadpol": ExtResource("2_o45s8")
+"See Horsefish": ExtResource("4_8jrsx")
 })
 metadata/_custom_type_script = "uid://bv67m0lje1mhq"

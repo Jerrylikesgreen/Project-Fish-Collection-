@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FishResource" load_steps=3 format=3 uid="uid://sxhb1hjt4fkh"]
+
+[ext_resource type="Script" uid="uid://dsrw0gmu4w172" path="res://Scripts/base_fish_resource_script.gd" id="1_wkptq"]
+[ext_resource type="SpriteFrames" uid="uid://dibnsbmgufxhv" path="res://Resources/FishResources/Frames/master_sword_fish.tres" id="2_h76li"]
+
+[resource]
+script = ExtResource("1_wkptq")
+sprite = ExtResource("2_h76li")
+display_name = "Master Swordfish"

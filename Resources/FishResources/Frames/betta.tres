@@ -1,9 +1,11 @@
-[gd_resource type="SpriteFrames" load_steps=19 format=3 uid="uid://dtu8k7xa4dat2"]
+[gd_resource type="SpriteFrames" script_class="FishResource" load_steps=21 format=3 uid="uid://dtu8k7xa4dat2"]
 
 [ext_resource type="Texture2D" uid="uid://d0yqlx6vabnin" path="res://Assets/PNG/Fish/Betta/Betta hungry.png" id="1_fa3m2"]
 [ext_resource type="Texture2D" uid="uid://btgcgne1ksilu" path="res://Assets/PNG/Fish/Betta/Betta Nom.png" id="2_20uv5"]
 [ext_resource type="Texture2D" uid="uid://hqnlgv0l58uo" path="res://Assets/PNG/Fish/Betta/Pod 2 Betta.png" id="3_sps4o"]
 [ext_resource type="Texture2D" uid="uid://bgjfo4krvms43" path="res://Assets/PNG/Fish/Betta/Betta Swim.png" id="4_hqbyf"]
+[ext_resource type="Script" uid="uid://dsrw0gmu4w172" path="res://Scripts/base_fish_resource_script.gd" id="5_ox7u1"]
+[ext_resource type="SpriteFrames" uid="uid://ckhrh5xptqqdq" path="res://Resources/FishResources/Frames/blue_fish.tres" id="6_ux3bt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_26mg5"]
 atlas = ExtResource("1_fa3m2")
@@ -125,3 +127,5 @@ animations = [{
 "name": &"Idle",
 "speed": 2.0
 }]
+script = ExtResource("5_ox7u1")
+sprite = ExtResource("6_ux3bt")

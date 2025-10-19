@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FishResource" load_steps=3 format=3 uid="uid://pccgu7hs1fjg"]
+
+[ext_resource type="Script" uid="uid://dsrw0gmu4w172" path="res://Scripts/base_fish_resource_script.gd" id="1_10w65"]
+[ext_resource type="SpriteFrames" uid="uid://u0m6fcvdbr7l" path="res://Resources/FishResources/Frames/jojo_starfish.tres" id="2_hn0yl"]
+
+[resource]
+script = ExtResource("1_10w65")
+sprite = ExtResource("2_hn0yl")
+display_name = "Jojo Starfish"

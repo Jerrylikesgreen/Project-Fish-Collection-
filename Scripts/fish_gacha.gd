@@ -275,8 +275,9 @@ func _on_fish_pack_selected(fish_pack: String) -> void:
 		disabled = false
 		return
 
-	var evolution_frames: SpriteFrames = fpr.fish_pool[species_id]
+	var evolution_frames: SpriteFrames = fpr.fish_pool[species_id].sprite
 	var frames_path := (evolution_frames.resource_path if evolution_frames else "")
+	var fish_resource: FishResource = fpr.fish_pool[species_id]
 	print("[%s] frames resolved: %s  path=%s" %
 		[_dbg_id, str(evolution_frames), frames_path])
 	if evolution_frames == null:
@@ -344,11 +345,11 @@ func _on_fish_pack_selected(fish_pack: String) -> void:
 	print("[%s] pod animation finished" % _dbg_id)
 
 	# emit + spawn fish
-	print("[%s] EMIT: fish_rolled_signal + spawn_fish | species=%s | evo_frames=%s" %
-		[_dbg_id, species_id, str(evolution_frames)])
-	Events.fish_rolled_signal.emit(fish_pack, species_id, evolution_frames)
+	print("[%s] EMIT: fish_rolled_signal + spawn_fish | species=%s  | fish_resource=%s" %
+		[_dbg_id, species_id, str(fish_resource)], )
+	Events.fish_rolled_signal.emit(fish_pack, species_id, evolution_frames, fish_resource )
 	var display_name := species_id
-	Events.spawn_fish(null, species_id, display_name, evolution_frames)
+	Events.spawn_fish(null, species_id, display_name, fish_resource, evolution_frames)
 
 	# pop out + cleanup
 	await _pop_out(pod, 0.6, true, 0.16)

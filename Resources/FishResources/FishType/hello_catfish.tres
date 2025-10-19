@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FishResource" load_steps=3 format=3 uid="uid://hjr8bgq126xg"]
+
+[ext_resource type="Script" uid="uid://dsrw0gmu4w172" path="res://Scripts/base_fish_resource_script.gd" id="1_6u12w"]
+[ext_resource type="SpriteFrames" uid="uid://c1kq6x3tm0dbe" path="res://Resources/FishResources/Frames/hello_catfish.tres" id="2_f58j8"]
+
+[resource]
+script = ExtResource("1_6u12w")
+sprite = ExtResource("2_f58j8")
+display_name = "Hello Catfish"

@@ -4,7 +4,7 @@ extends Node
 signal spawn_fish_food
 signal player_message(new_message: String)
 signal bubble_count_changed_signal(bubble_count: int)
-signal spawn_fish_signal(base_frames: SpriteFrames, evo_frames: SpriteFrames, species_id: String, display_name: String)
+signal spawn_fish_signal(base_frames: SpriteFrames, evo_frames: SpriteFrames, species_id: String,resource:FishResource, display_name: String)
 signal fish_spawned(fish: Fish)
 signal fish_sold_signal
 signal fish_pack_button_pressed
@@ -277,8 +277,8 @@ func upgrade_button_pressed() -> void:
 	_log("Upgrade: cap %d->%d | cost %d->%d | bubbles now=%d",
 		[old_cap, new_cap, old_cost, new_cost, Globals.current_bubble_count])
 
-func spawn_fish(base_frames: SpriteFrames, species_id: String, display_name: String, evo_frames: SpriteFrames = null) -> void:
-	emit_signal("spawn_fish_signal", base_frames, evo_frames, species_id, display_name)
+func spawn_fish(base_frames: SpriteFrames, species_id: String, display_name: String, resource: FishResource, evo_frames: SpriteFrames = null) -> void:
+	emit_signal("spawn_fish_signal", base_frames, evo_frames, species_id, resource , display_name)
 
 	Globals.current_number_of_fish_in_tank += 1
 

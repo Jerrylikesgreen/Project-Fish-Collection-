@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="FishResource" load_steps=3 format=3 uid="uid://co8mf5esbgcft"]
+
+[ext_resource type="Script" uid="uid://dsrw0gmu4w172" path="res://Scripts/base_fish_resource_script.gd" id="1_1r3ma"]
+[ext_resource type="SpriteFrames" uid="uid://ckdrxtmwldf2b" path="res://Resources/FishResources/Frames/killer_clown_fish.tres" id="2_gb7qs"]
+
+[resource]
+script = ExtResource("1_1r3ma")
+sprite = ExtResource("2_gb7qs")
+display_name = "Killer Clownfish"
+fish_effect = 288

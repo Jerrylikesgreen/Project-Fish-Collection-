@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="FishResource" load_steps=3 format=3 uid="uid://dkcfyxce54kmm"]
+
+[ext_resource type="Script" uid="uid://dsrw0gmu4w172" path="res://Scripts/base_fish_resource_script.gd" id="1_0ex5e"]
+[ext_resource type="SpriteFrames" uid="uid://dtu8k7xa4dat2" path="res://Resources/FishResources/Frames/betta.tres" id="2_ek7vp"]
+
+[resource]
+script = ExtResource("1_0ex5e")
+sprite = ExtResource("2_ek7vp")
+display_name = "Betta Fish"
+metadata/_custom_type_script = "uid://dsrw0gmu4w172"

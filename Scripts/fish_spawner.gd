@@ -11,7 +11,7 @@ extends Node2D
 
 @export var starter_species_id: String = "Starter"
 @export var starter_display_name: String = "Starter"
-
+@export var starter_resource: FishResource
 const FISH_BODY_PATH := "FishBody"  # adjust if your path differs
 # Paths to rarity materials (you can extend this if needed)
 const RARITY_MATERIALS := {
@@ -30,10 +30,10 @@ func _ready() -> void:
 	for i in range(autospawn_count):
 		var base := starter_base_frames
 		var evo  := starter_evo_frames
-		_on_spawn_fish(base, evo, starter_species_id, starter_display_name)
+		_on_spawn_fish(base, evo, starter_species_id, starter_resource, starter_display_name)
 
 
-func _on_spawn_fish(base_frames: SpriteFrames, evo_frames: SpriteFrames, species_id: String, display_name: String) -> void:
+func _on_spawn_fish(base_frames: SpriteFrames, evo_frames: SpriteFrames, species_id: String, resource: FishResource, display_name: String) -> void:
 	print("[SPAWNER] _on_spawn_fish species='%s' | base=%s | evo=%s"
 		% [species_id, str(base_frames), str(evo_frames)])
 
@@ -45,8 +45,10 @@ func _on_spawn_fish(base_frames: SpriteFrames, evo_frames: SpriteFrames, species
 	print("[SPAWNER] Instanced: %s" % fish)
 
 	fish.set("species_id", species_id)
+	fish.set("resource", resource)
 	fish.set("display_name", (display_name if display_name != "" else species_id))
 	fish.set("evolution_sprites", evo_frames)
+	
 
 	var fish_body := fish.get_node_or_null(FISH_BODY_PATH)
 	if fish_body:

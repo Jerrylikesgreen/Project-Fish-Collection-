@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://1kvgsv7lj50b"]
 
-[ext_resource type="SpriteFrames" uid="uid://cckuqa8s7vmme" path="res://Resources/FishResources/octo_dusa.tres" id="1_8m2tk"]
+[ext_resource type="SpriteFrames" uid="uid://cckuqa8s7vmme" path="res://Resources/FishResources/Frames/octo_dusa.tres" id="1_8m2tk"]
 
 [node name="Node2D" type="AnimatedSprite2D"]
 sprite_frames = ExtResource("1_8m2tk")

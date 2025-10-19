@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="FishResource" load_steps=3 format=3 uid="uid://cuwh0quft34ij"]
+
+[ext_resource type="Script" uid="uid://dsrw0gmu4w172" path="res://Scripts/base_fish_resource_script.gd" id="1_h8tva"]
+[ext_resource type="SpriteFrames" uid="uid://cckuqa8s7vmme" path="res://Resources/FishResources/Frames/octo_dusa.tres" id="2_h8tva"]
+
+[resource]
+script = ExtResource("1_h8tva")
+sprite = ExtResource("2_h8tva")
+display_name = "Octo Dusa"
+metadata/_custom_type_script = "uid://dsrw0gmu4w172"

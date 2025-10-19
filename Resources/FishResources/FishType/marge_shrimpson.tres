@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FishResource" load_steps=3 format=3 uid="uid://b1eu17sop4rv0"]
+
+[ext_resource type="Script" uid="uid://dsrw0gmu4w172" path="res://Scripts/base_fish_resource_script.gd" id="1_2dce2"]
+[ext_resource type="SpriteFrames" uid="uid://dg3s2rwm2bkfc" path="res://Resources/FishResources/Frames/marge_shrimpson.tres" id="2_m2wt6"]
+
+[resource]
+script = ExtResource("1_2dce2")
+sprite = ExtResource("2_m2wt6")
+display_name = "Marge Shrimpson"

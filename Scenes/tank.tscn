@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dhjcycauy7mci"]
+[gd_scene load_steps=8 format=3 uid="uid://3v0xljqduvxa"]
 
 [ext_resource type="PackedScene" uid="uid://dsp6pyx71vaj4" path="res://Scenes/fish.tscn" id="1_6lwfj"]
 [ext_resource type="Script" uid="uid://b0mig54hhns30" path="res://Scripts/error.gd" id="2_1ealj"]

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="FishResource" load_steps=3 format=3 uid="uid://bjyb17pn0r6b1"]
+
+[ext_resource type="Script" uid="uid://dsrw0gmu4w172" path="res://Scripts/base_fish_resource_script.gd" id="1_h0bst"]
+[ext_resource type="SpriteFrames" uid="uid://dv1t38ero7a13" path="res://Resources/FishResources/Frames/c_hourse.tres" id="2_jya11"]
+
+[resource]
+script = ExtResource("1_h0bst")
+sprite = ExtResource("2_jya11")
+display_name = "Sea Horse"
+metadata/_custom_type_script = "uid://dsrw0gmu4w172"
